@@ -10,6 +10,7 @@ src/*/__build__/
 
 # Typings
 typings/
+!src/typings/
 
 # Docs
 doc/
@@ -21,7 +22,7 @@ lib-cov/
 coverage/
 
 # Logs
-logs
+./logs/
 *.log
 
 # Node

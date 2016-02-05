@@ -16,12 +16,15 @@ A Webpack Starter kit featuring:
 * TsLint
 * Typings
 
-And a complete build based on Webpack/npm scripts with:
+... and a complete build based on Webpack/npm scripts with:
 * unit and e2e tests
-* test coverage
+* test coverage reports
 * TS to ES5 transpilation
 * SASS to CSS transpilation
+* TS quality/style checks
+* TS code documentation generation
 * development and production configurations
+* 
 * ...
 
 Check out the [change log](CHANGELOG.md)

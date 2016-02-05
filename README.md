@@ -70,18 +70,21 @@ Check out the [upgrade](UPGRADE.md) page
 * npm publish
 
 ## TODO
-* load immutable
 * add Redux import (vendor.ts)
-* initialize Redux store
-* add jsdata
-* add SASS/PostCSS support to production build
+* initialize Redux store (use Immutable.JS)
+* add jsdata and jsdata typings
+  * doc JSData
+* add coverage reports
 * fix e2e: https://github.com/AngularClass/angular2-webpack-starter/issues/264
+  * once solution known, put back that or something similar: ``"e2e": "ts-node node_modules/.bin/protractor",`
 * fix docs task exclude (should exclude unit & e2e tests): https://github.com/sebastian-lenz/typedoc/issues/170
 * put back require.d.ts and remove custom one once that is merged: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/7049
 * fix production build
   * https://github.com/erm0l0v/webpack-md5-hash/issues/1
   * TypeError: Reduce of empty array with no initial value 
+* fix issue with rimraf, sometimes fail
 * extract build to a separate project
+* add SASS/PostCSS support to production build
 * create a yeoman generator
 * finalize readme
   * add installation notes

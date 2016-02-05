@@ -104,9 +104,10 @@
         "npm": ">=3.7.1"
     },
     "scripts": {
-        "typings": "typings",
         "tsc": "tsc",
+        "typings": "typings",
         "typings-install": "typings install",
+        "protractor": "protractor",
         "postinstall": "npm run typings-install",
         "clean": "rimraf node_modules doc typings coverage .tmp build dist && npm cache clean",
         "preclean:install": "npm run clean",

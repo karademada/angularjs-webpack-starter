@@ -1,32 +1,32 @@
-// @AngularClass
 
 exports.config = {
-    baseUrl: 'http://localhost:3000/',
+    baseUrl: "http://localhost:3000/",
 
     // use `npm run e2e`
     specs: [
-        'src/**/**.e2e.ts',
-        'src/**/*.e2e.ts'
+        "src/**/**.e2e.ts",
+        "src/**/*.e2e.ts"
     ],
     exclude: [],
-
-    framework: 'jasmine',
-
+    
     allScriptsTimeout: 110000,
 
+    framework: "jasmine",
+
     jasmineNodeOpts: {
+        defaultTimeoutInterval: 600000,
         showTiming: true,
         showColors: true,
         isVerbose: false,
-        includeStackTrace: false,
-        defaultTimeoutInterval: 400000
+        includeStackTrace: false
     },
-    directConnect: true,
 
     capabilities: {
-        'browserName': 'chrome',
-        'chromeOptions': {
-            'args': ['show-fps-counter=true']
+        "browserName": "chrome",
+        "chromeOptions": {
+            "args": [
+                "show-fps-counter=true"
+            ]
         }
     },
 
@@ -34,14 +34,7 @@ exports.config = {
         browser.ignoreSynchronization = true;
     },
 
-    seleniumServerJar: "node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar",
+    directConnect: true,
 
-    /**
-     * Angular 2 configuration
-     *
-     * useAllAngular2AppRoots: tells Protractor to wait for any angular2 apps on the page instead of just the one matching
-     * `rootEl`
-     *
-     */
-    useAllAngular2AppRoots: false
+    seleniumServerJar: "node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar"
 };

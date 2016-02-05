@@ -48,7 +48,8 @@ module.exports = function (config) {
             reporters: [
                 {type: "text-summary"},
                 {type: "json"},
-                {type: "html"}
+                {type: "html"},
+                {type: "lcov"} // format supported by Sonar
             ]
         },
 
@@ -61,7 +62,7 @@ module.exports = function (config) {
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         // https://www.npmjs.com/package/karma-junit-reporter
         // https://www.npmjs.com/package/karma-spec-reporter
-        reporters: ["spec", "progress", "coverage"],
+        reporters: ["spec", "progress", "coverage", "junit"],
 
         // web server port
         port: 9876,
@@ -87,9 +88,10 @@ module.exports = function (config) {
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
         singleRun: false,
-
+        
         junitReporter: {
-            outputFile: "target/reports/tests-unit/unit.xml",
+            outputDir: "coverage/",
+            outputFile: "tests-unit/unit.xml",
             suite: "unit"
         },
     });

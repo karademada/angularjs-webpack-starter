@@ -1,10 +1,10 @@
 "use strict";
 
-let fs = require("fs");
-let path = require("path");
+const fs = require("fs");
+const path = require("path");
 
 const seleniumFolder = "node_modules/protractor/selenium";
-let seleniumFiles = fs.readdirSync(seleniumFolder);
+const seleniumFiles = fs.readdirSync(seleniumFolder);
 let seleniumJarFile = "";
 for(let i in seleniumFiles) {
     if(path.extname(seleniumFiles[i]) === ".jar") {
@@ -15,7 +15,6 @@ for(let i in seleniumFiles) {
 if(seleniumJarFile === null || seleniumJarFile === "") {
     throw new Error("The Selenium jar file could not be located in ["+seleniumFolder+"]. Please make sure that Protactor is correctly installed!");
 }
-
 
 exports.config = {
     baseUrl: "http://localhost:3000/",

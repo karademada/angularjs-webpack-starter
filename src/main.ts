@@ -14,6 +14,6 @@ import "./app/css/main.scss";
  * our Services and Providers into Angular's dependency injection system
  */
 document.addEventListener("DOMContentLoaded", function main() {
-	console.log("Bootstrapping the App");
-	App.bootstrap();
+    console.log("Bootstrapping the App");
+    App.bootstrap();
 });

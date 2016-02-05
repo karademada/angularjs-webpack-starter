@@ -2,7 +2,7 @@
 
 // controller
 export class AppController {
-	constructor() {
-		console.log("Application bootstrapped!");
-	}
+    constructor() {
+        console.log("Application bootstrapped!");
+    }
 }

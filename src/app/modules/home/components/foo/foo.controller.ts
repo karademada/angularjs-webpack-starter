@@ -1,7 +1,7 @@
 "use strict";
 
 export class FooController {
-	constructor() {
-		console.log("Foo component loaded");
-	}
+    constructor() {
+        console.log("Foo component loaded");
+    }
 }

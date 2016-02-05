@@ -1,26 +1,26 @@
 {
-  "compilerOptions": {
-	"target": "es5",
-	"module": "commonjs",
-	"declaration": false,
-	"noImplicitAny": true,
-	"suppressImplicitAnyIndexErrors": true,
-	"suppressExcessPropertyErrors": true,
-	"removeComments": false,
-	"emitDecoratorMetadata": true,
-	"experimentalDecorators": true,
-	"noEmitOnError": false,
-	"preserveConstEnums": true,
-	"inlineSources": false,
-	"sourceMap": true,
-	"outDir": "./.tmp",
-	"rootDir": "./src",
-	"moduleResolution": "node",
-	"listFiles": false
-  },
-  "exclude": [
-	"node_modules",
-	"typings/main",
-	"typings/main.d.ts"
-  ]
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "suppressExcessPropertyErrors": true,
+        "removeComments": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "noEmitOnError": false,
+        "preserveConstEnums": true,
+        "inlineSources": false,
+        "sourceMap": true,
+        "outDir": "./.tmp",
+        "rootDir": "./src",
+        "moduleResolution": "node",
+        "listFiles": false
+    },
+    "exclude": [
+        "node_modules",
+        "typings/main",
+        "typings/main.d.ts"
+    ]
 }

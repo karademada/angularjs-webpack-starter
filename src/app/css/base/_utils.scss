@@ -13,70 +13,67 @@
 // reference: https://github.com/suitcss/utils-display
 // ==========================================================================================
 .u-block {
-  display: block !important;
+    display: block !important;
 }
 
 .u-hidden {
-  display: none !important;
+    display: none !important;
 }
 
 // completely remove from the flow but leave available to screen readers.
 .u-hiddenVisually {
-  position: absolute !important;
-  overflow: hidden !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  border: 0 !important;
-  clip: rect(1px, 1px, 1px, 1px) !important;
+    position: absolute !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    clip: rect(1px, 1px, 1px, 1px) !important;
 }
 
 .u-inline {
-  display: inline !important;
+    display: inline !important;
 }
-
 
 // 1. Fix for Firefox bug: an image styled `max-width:100%` within an
 // inline-block will display at its default size, and not limit its width to
 // 100% of an ancestral container.
 .u-inlineBlock {
-  display: inline-block !important;
-  max-width: 100%; /* 1 */
+    display: inline-block !important;
+    max-width: 100%; /* 1 */
 }
 
 .u-table {
-  display: table !important;
+    display: table !important;
 }
 
 .u-tableCell {
-  display: table-cell !important;
+    display: table-cell !important;
 }
 
 .u-tableRow {
-  display: table-row !important;
+    display: table-row !important;
 }
-
 
 // Vertical alignment utilities
 // Depends on an appropriate `display` value.
 // reference: https://github.com/suitcss/utils-align
 // ==========================================================================================
 .u-alignBaseline {
-  vertical-align: baseline !important;
+    vertical-align: baseline !important;
 }
 
 .u-alignBottom {
-  vertical-align: bottom !important;
+    vertical-align: bottom !important;
 }
 
 .u-alignMiddle {
-  vertical-align: middle !important;
+    vertical-align: middle !important;
 }
 
 .u-alignTop {
-  vertical-align: top !important;
+    vertical-align: top !important;
 }
-
 
 /// Layout utilities
 // reference: https://github.com/suitcss/utils-layout
@@ -96,12 +93,12 @@
  */
 .u-cf:before,
 .u-cf:after {
-  content: " "; /* 1 */
-  display: table; /* 2 */
+    content: " "; /* 1 */
+    display: table; /* 2 */
 }
 
 .u-cf:after {
-  clear: both;
+    clear: both;
 }
 
 /**
@@ -113,7 +110,7 @@
  * problematic.
  */
 .u-nbfc {
-  overflow: hidden !important;
+    overflow: hidden !important;
 }
 
 /**
@@ -128,19 +125,18 @@
  * exceed its width.
  */
 .u-nbfcAlt {
-  display: table-cell !important; /* 1 */
-  width: 10000px !important; /* 2 */
+    display: table-cell !important; /* 1 */
+    width: 10000px !important; /* 2 */
 }
 
 // floats
 .u-floatLeft {
-  float: left !important;
+    float: left !important;
 }
 
 .u-floatRight {
-  float: right !important;
+    float: right !important;
 }
-
 
 // Links
 // reference: https://github.com/suitcss/utils-link
@@ -155,7 +151,7 @@
 .u-linkClean:hover,
 .u-linkClean:focus,
 .u-linkClean:active {
-  text-decoration: none !important;
+    text-decoration: none !important;
 }
 
 /**
@@ -176,13 +172,13 @@
 .u-linkComplex:hover,
 .u-linkComplex:focus,
 .u-linkComplex:active {
-  text-decoration: none !important;
+    text-decoration: none !important;
 }
 
 .u-linkComplex:hover .u-linkComplexTarget,
 .u-linkComplex:focus .u-linkComplexTarget,
 .u-linkComplex:active .u-linkComplexTarget {
-  text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 
 /**
@@ -194,15 +190,15 @@
 .u-linkBlock:hover,
 .u-linkBlock:focus,
 .u-linkBlock:active {
-  display: block !important;
-  text-decoration: none !important;
+    display: block !important;
+    text-decoration: none !important;
 }
 
 // Position
 // reference: https://github.com/suitcss/utils-position
 // ==========================================================================================
 .u-posAbsolute {
-  position: absolute !important;
+    position: absolute !important;
 }
 
 /**
@@ -211,12 +207,12 @@
  * ancestor.
  */
 .u-posAbsoluteCenter {
-  bottom: 0 !important;
-  left: 0 !important;
-  margin: auto !important;
-  position: absolute !important;
-  right: 0 !important;
-  top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    margin: auto !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
 }
 
 /**
@@ -225,18 +221,17 @@
  */
 
 .u-posFixed {
-  position: fixed !important;
-  backface-visibility: hidden; /* 1 */
+    position: fixed !important;
+    backface-visibility: hidden; /* 1 */
 }
 
 .u-posRelative {
-  position: relative !important;
+    position: relative !important;
 }
 
 .u-posStatic {
-  position: static !important;
+    position: static !important;
 }
-
 
 // Text
 // reference: https://github.com/suitcss/utils-text
@@ -248,29 +243,29 @@
  * Break strings when their length exceeds the width of their container.
  */
 .u-textBreak {
-  word-wrap: break-word !important;
+    word-wrap: break-word !important;
 }
 
 /**
  * Horizontal text alignment
  */
 .u-textCenter {
-  text-align: center !important;
+    text-align: center !important;
 }
 
 .u-textLeft {
-  text-align: left !important;
+    text-align: left !important;
 }
 
 .u-textRight {
-  text-align: right !important;
+    text-align: right !important;
 }
 
 /**
  * Inherit the ancestor's text color.
  */
 .u-textInheritColor {
-  color: inherit !important;
+    color: inherit !important;
 }
 
 /**
@@ -282,16 +277,16 @@
  * 3. Safari 7 and future browsers
  */
 .u-textKern {
-  text-rendering: optimizeLegibility; /* 1 */
-  font-feature-settings: "kern" 1; /* 2 */
-  font-kerning: normal; /* 3 */
+    text-rendering: optimizeLegibility; /* 1 */
+    font-feature-settings: "kern" 1; /* 2 */
+    font-kerning: normal; /* 3 */
 }
 
 /**
  * Prevent whitespace wrapping
  */
 .u-textNoWrap {
-  white-space: nowrap !important;
+    white-space: nowrap !important;
 }
 
 /**
@@ -306,9 +301,9 @@
  *    nodes.
  */
 .u-textTruncate {
-  max-width: 100%; /* 1 */
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-  word-wrap: normal !important; /* 2 */
+    max-width: 100%; /* 1 */
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    word-wrap: normal !important; /* 2 */
 }

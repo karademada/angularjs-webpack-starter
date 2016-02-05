@@ -1,7 +1,7 @@
 # AngularJS Webpack Starter
 
 ## About
-A Webpack Starter kit featuring:
+A modern AngularJS Webpack Starter kit featuring:
 * AngularJS (setup, angular-material, router, ...)
 * TypeScript
 * Redux

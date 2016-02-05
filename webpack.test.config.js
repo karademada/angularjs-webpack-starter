@@ -3,10 +3,6 @@
  */
 var path = require("path");
 
-// Webpack Plugins
-var ProvidePlugin = require("webpack/lib/ProvidePlugin");
-var DefinePlugin = require("webpack/lib/DefinePlugin");
-
 // Metadata
 var ENV = process.env.ENV = process.env.NODE_ENV = "test";
 
@@ -55,7 +51,7 @@ module.exports = {
     stats: {colors: true, reasons: true},
     debug: false,
     plugins: [
-        new DefinePlugin({
+        new webpack.DefinePlugin({
             // Environment helpers
             "process.env": {
                 "ENV": JSON.stringify(ENV),
@@ -66,7 +62,7 @@ module.exports = {
             "__metadata": "Reflect.metadata",
             "__decorate": "Reflect.decorate"
         }),
-        new ProvidePlugin({
+        new webpack.ProvidePlugin({
             "__awaiter": "ts-helper/awaiter",
             "__extends": "ts-helper/extends",
             "__param": "ts-helper/param",

@@ -7,8 +7,6 @@ var path = require("path");
 var zlib = require("zlib");
 // Webpack Plugins
 var webpack = require("webpack");
-var ProvidePlugin = require("webpack/lib/ProvidePlugin");
-var DefinePlugin = require("webpack/lib/DefinePlugin");
 var OccurenceOrderPlugin = require("webpack/lib/optimize/OccurenceOrderPlugin");
 var DedupePlugin = require("webpack/lib/optimize/DedupePlugin");
 var UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
@@ -144,14 +142,14 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "src/index.ejs" // renamed to avoid that the html loader interferes
         }),
-        new DefinePlugin({
+        new webpack.DefinePlugin({
             // Environment helpers
             "process.env": {
                 "ENV": JSON.stringify(metadata.ENV),
                 "NODE_ENV": JSON.stringify(metadata.ENV)
             }
         }),
-        new ProvidePlugin({
+        new webpack.ProvidePlugin({
             // TypeScript helpers
             "__metadata": "ts-helper/metadata",
             "__decorate": "ts-helper/decorate",

@@ -3,15 +3,20 @@
 
 # TEAM
 
-  <name> -- <role> -- <twitter>
+  nobody -- Project Lead -- https://twitter.com/dsebastien
 
 # THANKS
 
-  <name>
-  PatrickJS -- @gdi2290
-  AngularClass -- @AngularClass
+  Thanks for all the fish
 
 # TECHNOLOGY COLOPHON
 
   HTML5, CSS3
-  Angular2, TypeScript, Webpack
+  AngularJS
+  TypeScript
+  ES2015
+  Redux
+  RxJS
+  NodeJS
+  NPM
+  Webpack

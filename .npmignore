@@ -3,6 +3,7 @@ dist/
 build/
 __build__/
 src/*/__build__/
+.tmp/
 
 # Sourcemaps
 *.map

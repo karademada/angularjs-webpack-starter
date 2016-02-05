@@ -2,11 +2,15 @@
     "name": "template",
     "description": "template",
     "author": {
-        "email": "foo@bar.com",
-        "name": "nobody",
-        "url": ""
+        "email": "seb@dsebastien.net",
+        "name": "dSebastien",
+        "url": "https://www.dsebastien.net"
     },
-    "contributors": [],
+    "contributors": [{
+        "email": "foo@bar",
+        "name": "foo",
+        "url": "https://dev/null"
+    }],
     "homepage": "https://github.com/dsebastien/angularjs-webpack-template",
     "bugs": "https://github.com/dsebastien/angularjs-webpack-template/issues",
     "repository": {
@@ -119,7 +123,8 @@
         "prebuild:prod": "npm run clean:dist",
         "build:prod": "webpack --config webpack.prod.config.js --progress --profile --colors --display-error-details --display-cached",
         "server": "npm run server:dev",
-        "server:dev": "webpack-dev-server --progress --profile --colors --display-error-details --display-cached --history-api-fallback --open --hot --content-base src/",
+        "serve": "npm run server:dev",
+        "server:dev": "webpack-dev-server --progress --profile --colors --display-error-details --display-cached --history-api-fallback --open --hot --inline--content-base src/",
         "server:prod": "http-server dist --cors",
         "webdriver:update": "webdriver-manager update",
         "webdriver:start": "webdriver-manager start",
@@ -133,7 +138,6 @@
         "start": "npm run server:dev",
         "preversion": "npm test",
         "version": "npm run build",
-        "outdated": "npm outdated",
-        "serve": "npm run server:dev"
+        "outdated": "npm outdated"
     }
 }

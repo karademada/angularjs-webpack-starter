@@ -3,19 +3,22 @@
 ## About
 A Webpack Starter kit featuring:
 * AngularJS (setup, angular-material, router, ...)
-* TypeScript
-* Redux
-* Immutable.js
-* RxJS
-* Lodash
-* SASS, PostCSS and Autoprefixer
-* Karma
-* Protractor
-* Jasmine
-* Istanbul
-* TSLint
-* Typings
-* TSDoc
+* [TypeScript](http://www.typescriptlang.org/)
+* [Redux](https://github.com/rackt/redux)
+* [Immutable.js](https://facebook.github.io/immutable-js/)
+* [JSData](http://www.js-data.io/)
+* [RxJS](https://github.com/Reactive-Extensions/RxJS)
+* [Lodash](https://lodash.com/)
+* [SASS](http://sass-lang.com/)
+* [PostCSS](https://github.com/postcss/postcss)
+* [Autoprefixer](https://github.com/postcss/autoprefixer)
+* [Karma](http://karma-runner.github.io/)
+* [Protractor](https://angular.github.io/protractor/#/)
+* [Jasmine](http://jasmine.github.io/)
+* [Istanbul](https://gotwarlost.github.io/istanbul/)
+* [TSLint](https://www.npmjs.com/package/tslint)
+* [Typings](https://github.com/typings/typings)
+* [TSDoc](https://www.npmjs.com/package/tsdoc)
 
 ... and a complete build based on Webpack/npm scripts with:
 * hot module replacement (HMR): https://webpack.github.io/docs/hot-module-replacement.html
@@ -53,7 +56,7 @@ Check out the [upgrade](UPGRADE.md) page
 ## Links
 * https://github.com/karma-runner/karma-junit-reporter
 * https://www.npmjs.com/package/karma-istanbul-reporter
-
+* https://www.npmjs.com/package/karma-mocha-reporter
 
 ## Contributing
 * Fork the project

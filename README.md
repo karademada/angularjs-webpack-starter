@@ -1,4 +1,4 @@
-# AngularJS Webpack Template
+# AngularJS Webpack Starter
 
 ## About
 A Webpack Starter kit featuring:

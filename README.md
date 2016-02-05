@@ -22,6 +22,7 @@ A Webpack Starter kit featuring:
 * unit tests (Karma & Jasmine)
 * end to end tests (Protractor)
 * test coverage reports (Istanbul)
+  * html, lcov, junit
 * TS to ES5 transpilation (TypeScript)
 * SASS to CSS transpilation
 * TS quality/style checks (TSLint)
@@ -49,6 +50,11 @@ Check out the [upgrade](UPGRADE.md) page
 ## Frequently Asked Questions (FAQ)
 ...
 
+## Links
+* https://github.com/karma-runner/karma-junit-reporter
+* https://www.npmjs.com/package/karma-istanbul-reporter
+
+
 ## Contributing
 * Fork the project
 * Create a feature branch in your fork
@@ -70,31 +76,7 @@ Check out the [upgrade](UPGRADE.md) page
 * npm publish
 
 ## TODO
-* add Redux import (vendor.ts)
-* initialize Redux store (use Immutable.JS)
-* add jsdata and jsdata typings
-  * doc JSData
-* add coverage reports
-* fix e2e: https://github.com/AngularClass/angular2-webpack-starter/issues/264
-  * once solution known, put back that or something similar: ``"e2e": "ts-node node_modules/.bin/protractor",`
-* fix docs task exclude (should exclude unit & e2e tests): https://github.com/sebastian-lenz/typedoc/issues/170
-* put back require.d.ts and remove custom one once that is merged: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/7049
-* fix production build
-  * https://github.com/erm0l0v/webpack-md5-hash/issues/1
-  * TypeError: Reduce of empty array with no initial value 
-* fix issue with rimraf, sometimes fail
-* extract build to a separate project
-* add SASS/PostCSS support to production build
-* create a yeoman generator
-* finalize readme
-  * add installation notes
-  * add explanations of the setup
-  * add commands
-  * list & explain dependencies
-  * add badges
-* upgrade to webpack 2 a webpack-dev-server 2
-  * https://gist.github.com/sokra/27b24881210b56bbaff7
-  * should allow to automatically open the browser when the server starts
+See the [project issues](https://github.com/dsebastien/angularjs-webpack-starter/issues/)
 
 ## License
 This project and all associated source code is licensed under the terms of the [MIT License](https://en.wikipedia.org/wiki/MIT_License).

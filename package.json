@@ -36,6 +36,7 @@
         "es6-promise": "3.0.x",
         "es6-shim": "0.34.x",
         "es7-reflect-metadata": "1.5.x",
+        "immutable": "3.7.6",
         "lodash": "4.2.x",
         "redux": "3.2.x",
         "rxjs": "5.0.0-beta.1"

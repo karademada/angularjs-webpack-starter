@@ -70,7 +70,10 @@ module.exports = {
             {
                 test: /\.ts$/,
                 loader: "ts-loader",
-                exclude: [/\.(spec|e2e)\.ts$/]
+                exclude: [
+                    /\.e2e\.ts$/,
+                    /\.spec\.ts$/,
+                ]
             }
 
             // if you add a loader include the resolve file extension above

@@ -83,7 +83,10 @@ module.exports = {
             {
                 test: /\.async\.ts$/,
                 loaders: ["es6-promise-loader", "ts-loader"],
-                exclude: [/\.(spec|e2e)\.ts$/]
+                exclude: [
+                    /\.e2e\.ts$/,
+                    /\.spec\.ts$/,
+                ]
             },
             // Support for .ts files.
             {
@@ -96,7 +99,11 @@ module.exports = {
                         "noEmitHelpers": true,
                     }
                 },
-                exclude: [/\.(spec|e2e|async)\.ts$/]
+                exclude: [
+                    /\.e2e\.ts$/,
+                    /\.spec\.ts$/,
+                    /\.async\.ts$/,
+                ]
             },
 
             // Support for *.json files.

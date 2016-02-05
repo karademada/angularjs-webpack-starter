@@ -1,18 +1,17 @@
-/*
- * Helper: root(), and rootDir() are defined at the bottom
- */
-var path = require("path");
-var webpack = require("webpack");
-var autoprefixer = require("autoprefixer");
-var CopyWebpackPlugin = require("copy-webpack-plugin");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
-var WebpackMd5Hash = require('webpack-md5-hash');
+"use strict";
+
+const path = require("path");
+const webpack = require("webpack");
+const autoprefixer = require("autoprefixer");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+const WebpackMd5Hash = require('webpack-md5-hash');
 
 // Metadata
 var ENV = process.env.ENV = process.env.NODE_ENV = "development";
 
-var metadata = {
+const metadata = {
     title: "AngularJS Webpack Starter",
     baseUrl: "/",
     host: "localhost",

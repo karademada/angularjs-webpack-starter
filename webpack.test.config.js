@@ -1,11 +1,11 @@
 /*
  * Helper: root(), and rootDir() are defined at the bottom
  */
-var path = require("path");
-var webpack = require("webpack");
+const path = require("path");
+const webpack = require("webpack");
 
 // Metadata
-var ENV = process.env.ENV = process.env.NODE_ENV = "test";
+let ENV = process.env.ENV = process.env.NODE_ENV = "test";
 
 /*
  * Config
@@ -49,7 +49,10 @@ module.exports = {
         ],
         noParse: []
     },
-    stats: {colors: true, reasons: true},
+    stats: {
+        colors: true,
+        reasons: true
+    },
     debug: false,
     plugins: [
         new webpack.DefinePlugin({

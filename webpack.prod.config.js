@@ -1,28 +1,25 @@
-// @AngularClass
+"use strict";
 
-/*
- * Helper: root(), and rootDir() are defined at the bottom
- */
-var path = require("path");
-var zlib = require("zlib");
+const path = require("path");
+const zlib = require("zlib");
 // Webpack Plugins
-var webpack = require("webpack");
-var OccurenceOrderPlugin = require("webpack/lib/optimize/OccurenceOrderPlugin");
-var DedupePlugin = require("webpack/lib/optimize/DedupePlugin");
-var UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
-var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
-var CompressionPlugin = require("compression-webpack-plugin");
-var CopyWebpackPlugin = require("copy-webpack-plugin");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
-var WebpackMd5Hash = require("webpack-md5-hash");
+const webpack = require("webpack");
+const OccurenceOrderPlugin = require("webpack/lib/optimize/OccurenceOrderPlugin");
+const DedupePlugin = require("webpack/lib/optimize/DedupePlugin");
+const UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
+const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
+const CompressionPlugin = require("compression-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+const WebpackMd5Hash = require("webpack-md5-hash");
 
 // Metadata
 var ENV = process.env.NODE_ENV = process.env.ENV = "production";
 var HOST = process.env.HOST || "localhost";
 var PORT = process.env.PORT || 8080;
 
-var metadata = {
+const metadata = {
     title: "AngularJS Webpack Starter",
     baseUrl: "/",
     host: HOST,

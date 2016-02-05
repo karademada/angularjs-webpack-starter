@@ -6,11 +6,13 @@
         "name": "dSebastien",
         "url": "https://www.dsebastien.net"
     },
-    "contributors": [{
-        "email": "foo@bar",
-        "name": "foo",
-        "url": "https://dev/null"
-    }],
+    "contributors": [
+        {
+            "email": "foo@bar",
+            "name": "foo",
+            "url": "https://dev/null"
+        }
+    ],
     "homepage": "https://github.com/dsebastien/angularjs-webpack-template",
     "bugs": "https://github.com/dsebastien/angularjs-webpack-template/issues",
     "repository": {
@@ -40,7 +42,8 @@
         "es6-promise": "3.0.x",
         "es6-shim": "0.34.x",
         "es7-reflect-metadata": "1.5.x",
-        "immutable": "3.7.6",
+        "immutable": "3.7.x",
+        "js-data": "2.8.x",
         "lodash": "4.2.x",
         "redux": "3.2.x",
         "rxjs": "5.0.0-beta.1"

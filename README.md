@@ -1,7 +1,7 @@
-# AngularJS Webpack Starter
+# AngularJS Webpack Template
 
 ## About
-A modern AngularJS Webpack Starter kit featuring:
+A Webpack Starter kit featuring:
 * AngularJS (setup, angular-material, router, ...)
 * TypeScript
 * Redux
@@ -24,12 +24,43 @@ And a complete build based on Webpack/npm scripts with:
 * development and production configurations
 * ...
 
+Check out the [change log](CHANGELOG.md)
+
 ## Angular 2
 As you might know, Angular 2 is right around the corner. Be aware that this starter kit will soon be deprecated.
 
 Note that this starter kit is derived from the Angular 2 Starter Kit: https://github.com/AngularClass/angular2-webpack-starter
 
+## Status & roadmap
+Check out the issues & labels to get an idea of what's next. For existing features, refer to the previous section.
+
+## Installation
+...
+
+## Upgrade
+Check out the [upgrade](UPGRADE.md) page
+
+## Contributing
+* Fork the project
+* Create a feature branch in your fork
+* Rebase  if needed to keep the project history clean
+* Commit your changes & push to GitHub
+* Try and flood me with pull requests :)
+
+## Releasing a version
+
+* commit all changes to include in the release
+* edit the version in package.json
+* respect semver
+* update CHANGELOG.MD
+* commit
+* git tag
+* git push --tags
+* draft the release on GitHub (add description, etc)
+* npm publish
+
 ## TODO
+* load immutable
 * fix interpolation in index.html
   * probably due to a dependency upgrade
   * that should fix the app e2e test
@@ -44,3 +75,13 @@ Note that this starter kit is derived from the Angular 2 Starter Kit: https://gi
 * find how to get hot module reloading (hmr) with the webpack-dev-server
 * find how to automatically open the browser when the server starts
 * finalize readme
+  * add installation notes
+  * add explanations of the setup
+  * add commands
+  * add faq
+  * list & explain dependencies
+  * add badges
+
+
+## License
+This project and all associated source code is licensed under the terms of the [MIT License](https://en.wikipedia.org/wiki/MIT_License).

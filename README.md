@@ -13,16 +13,19 @@ A Webpack Starter kit featuring:
 * Protractor
 * Jasmine
 * Istanbul
-* TsLint
+* TSLint
 * Typings
+* TSDoc
 
 ... and a complete build based on Webpack/npm scripts with:
-* unit and e2e tests
-* test coverage reports
-* TS to ES5 transpilation
+* hot module replacement (HMR): https://webpack.github.io/docs/hot-module-replacement.html
+* unit tests (Karma & Jasmine)
+* end to end tests (Protractor)
+* test coverage reports (Istanbul)
+* TS to ES5 transpilation (TypeScript)
 * SASS to CSS transpilation
-* TS quality/style checks
-* TS code documentation generation
+* TS quality/style checks (TSLint)
+* TS code documentation generation (TSDoc)
 * development and production configurations
 * 
 * ...
@@ -64,9 +67,6 @@ Check out the [upgrade](UPGRADE.md) page
 
 ## TODO
 * load immutable
-* fix interpolation in index.html
-  * probably due to a dependency upgrade
-  * that should fix the app e2e test
 * fix e2e: https://github.com/AngularClass/angular2-webpack-starter/issues/264
 * add SASS/PostCSS support to production build
 * fix TypeError: Reduce of empty array with no initial value with npm run build:prod

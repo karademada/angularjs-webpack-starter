@@ -91,13 +91,21 @@ module.exports = {
             minChunks: Infinity
         }),
         // static assets
-        new CopyWebpackPlugin([{from: "src/assets", to: "assets"}]),
+        new CopyWebpackPlugin([{
+            from: "src/assets",
+            to: "assets"
+        }]),
         // Extract css files
         // Reference: https://github.com/webpack/extract-text-webpack-plugin
-        new ExtractTextWebpackPlugin("[name].[hash].css", {disable: false}),
+        new ExtractTextWebpackPlugin("[name].[hash].css", {
+            disable: false}
+        ),
         // generating html
         // Reference: https://github.com/ampedandwired/html-webpack-plugin
-        new HtmlWebpackPlugin({template: "src/index.html", inject: "body"}),
+        new HtmlWebpackPlugin({
+            template: "src/index.html",
+            inject: "body"
+        }),
         // replace
         new webpack.DefinePlugin({
             "process.env": {

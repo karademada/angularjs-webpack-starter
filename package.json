@@ -95,6 +95,7 @@
         "karma-firefox-launcher": "0.1.x",
         "karma-junit-reporter": "0.3.x",
         "karma-spec-reporter": "0.0.x",
+        "karma-mocha-reporter": "1.1.x",
         "karma-ie-launcher": "0.2.x",
         "remap-istanbul": "0.5.x",
         "protractor": "3.0.x"

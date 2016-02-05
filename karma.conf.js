@@ -58,11 +58,11 @@ module.exports = function (config) {
 
 
         // test results reporter to use
-        // possible values: "dots", "progress", "spec", "junit"
+        // possible values: "dots", "progress", "spec", "junit", "mocha", "coverage" (others if you import reporters)
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         // https://www.npmjs.com/package/karma-junit-reporter
         // https://www.npmjs.com/package/karma-spec-reporter
-        reporters: ["spec", "progress", "coverage", "junit"],
+        reporters: ["mocha", "progress", "coverage", "junit"],
 
         // web server port
         port: 9876,

@@ -66,6 +66,9 @@ Check out the [upgrade](UPGRADE.md) page
 * npm publish
 
 ## TODO
+* upgrade webpack-dev-server to 2.0.0-beta
+  * test HMR
+  * should allow to automatically open the browser when the server starts
 * load immutable
 * fix e2e: https://github.com/AngularClass/angular2-webpack-starter/issues/264
 * add SASS/PostCSS support to production build
@@ -75,8 +78,10 @@ Check out the [upgrade](UPGRADE.md) page
 * add Lodash import (vendor.ts)
 * initialize Redux store
 * put back require.d.ts and remove custom one once that is merged: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/7049
-* find how to get hot module reloading (hmr) with the webpack-dev-server
-* find how to automatically open the browser when the server starts
+* fix production build
+  * https://github.com/erm0l0v/webpack-md5-hash/issues/1
+* extract build to a separate project
+* create a yeoman generator
 * finalize readme
   * add installation notes
   * add explanations of the setup

@@ -103,8 +103,7 @@ module.exports = {
         // generating html
         // Reference: https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
-            template: "src/index.html",
-            inject: "body"
+            template: "src/index.ejs" // renamed to avoid that the html loader interferes
         }),
         // replace
         new webpack.DefinePlugin({

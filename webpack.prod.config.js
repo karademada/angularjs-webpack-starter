@@ -123,7 +123,9 @@ module.exports = {
     },
 
     plugins: [
+        // md5 content hashes
         new WebpackMd5Hash(),
+        // optimization
         new DedupePlugin(),
         new OccurenceOrderPlugin(true),
         new CommonsChunkPlugin({
@@ -140,7 +142,7 @@ module.exports = {
         ]),
         // generating html
         new HtmlWebpackPlugin({
-            template: "src/index.html"
+            template: "src/index.ejs" // renamed to avoid that the html loader interferes
         }),
         new DefinePlugin({
             // Environment helpers

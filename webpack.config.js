@@ -51,24 +51,24 @@ module.exports = {
 
     module: {
         preLoaders: [
-            {test: /\.ts$/, loader: "tslint-loader", exclude: [/node_modules/]}],
+            {test: /\.ts$/, loader: "tslint", exclude: [/node_modules/]}],
         loaders: [
             // Support for *.json files.
-            {test: /\.json$/, loader: "json-loader"},
+            {test: /\.json$/, loader: "json"},
 
             // Support for CSS as raw text
-            {test: /\.css$/, loader: "raw-loader"},
+            {test: /\.css$/, loader: "raw"},
 
-            // Use style-loader in development for hot-loading
+            // Use style in development for hot-loading
             {test: /\.scss$/, loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss!sass")},
 
             // Support for .html as raw text
-            {test: /\.html$/, loader: "raw-loader"},
+            {test: /\.html$/, loader: "raw", exclude: [ root("src/index.html") ]},
 
             // Support for .ts files.
             {
                 test: /\.ts$/,
-                loader: "ts-loader",
+                loader: "ts",
                 exclude: [
                     /\.e2e\.ts$/,
                     /\.spec\.ts$/,
@@ -102,7 +102,7 @@ module.exports = {
         // generating html
         // Reference: https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
-            template: "src/index.ejs" // renamed to avoid that the html loader interferes
+            template: "src/index.html"
         }),
         // replace
         new webpack.DefinePlugin({

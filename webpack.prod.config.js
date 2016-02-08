@@ -60,14 +60,14 @@ module.exports = {
         preLoaders: [
             {
                 test: /\.ts$/,
-                loader: "tslint-loader",
+                loader: "tslint",
                 exclude: [
                     root("node_modules")
                 ]
             },
             {
                 test: /\.js$/,
-                loader: "source-map-loader",
+                loader: "source-map",
                 exclude: [
                     root("node_modules/rxjs")
                 ]
@@ -77,7 +77,7 @@ module.exports = {
             // Support Angular 2 async routes via .async.ts
             {
                 test: /\.async\.ts$/,
-                loaders: ["es6-promise-loader", "ts-loader"],
+                loaders: ["es6-promise", "ts"],
                 exclude: [
                     /\.e2e\.ts$/,
                     /\.spec\.ts$/,
@@ -86,7 +86,7 @@ module.exports = {
             // Support for .ts files.
             {
                 test: /\.ts$/,
-                loader: "ts-loader",
+                loader: "ts",
                 query: {
                     // remove TypeScript helpers to be injected below by DefinePlugin
                     "compilerOptions": {
@@ -102,16 +102,16 @@ module.exports = {
             },
 
             // Support for *.json files.
-            {test: /\.json$/, loader: "json-loader"},
+            {test: /\.json$/, loader: "json"},
 
             // Support for CSS as raw text
-            {test: /\.css$/, loader: "raw-loader"},
+            {test: /\.css$/, loader: "raw"},
 
-            // Use style-loader in development for hot-loading
+            // Use style in development for hot-loading
             {test: /\.scss$/, loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss!sass")},
 
             // support for .html as raw text
-            {test: /\.html$/, loader: "raw-loader"}
+            {test: /\.html$/, loader: "raw", exclude: [ root("src/index.html") ]}
 
             // if you add a loader include the file extension
         ]
@@ -137,7 +137,7 @@ module.exports = {
         ]),
         // generating html
         new HtmlWebpackPlugin({
-            template: "src/index.ejs" // renamed to avoid that the html loader interferes
+            template: "src/index.html"
         }),
         new webpack.DefinePlugin({
             // Environment helpers

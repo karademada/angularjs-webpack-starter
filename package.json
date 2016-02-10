@@ -8,9 +8,9 @@
     },
     "contributors": [
         {
-            "email": "foo@bar",
-            "name": "foo",
-            "url": "https://dev/null"
+            "email": "cedric.namotte@gmail.com",
+            "name": "nCedric",
+            "url": "https://www.kixounet.net"
         }
     ],
     "homepage": "https://github.com/dsebastien/angularjs-webpack-template",
@@ -45,6 +45,7 @@
         "immutable": "3.7.x",
         "js-data": "2.8.x",
         "lodash": "4.2.x",
+        "moment": "2.11.x",
         "redux": "3.2.x",
         "rxjs": "5.0.0-beta.1"
     },

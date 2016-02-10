@@ -19,6 +19,7 @@ A Webpack Starter kit featuring:
 * [TSLint](https://www.npmjs.com/package/tslint)
 * [Typings](https://github.com/typings/typings)
 * [TSDoc](https://www.npmjs.com/package/tsdoc)
+* [moment](http://momentjs.com/)
 
 ... and a complete build based on Webpack/npm scripts with:
 * hot module replacement (HMR): https://webpack.github.io/docs/hot-module-replacement.html

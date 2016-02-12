@@ -105,8 +105,8 @@
         "protractor": "3.0.x"
     },
     "engines": {
-        "node": ">=4.2.6 <= 5",
-        "npm": ">=3.7.1"
+        "node": ">=4.3.0",
+        "npm": ">=3.7.3"
     },
     "scripts": {
         "tsc": "tsc",

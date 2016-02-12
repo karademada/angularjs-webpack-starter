@@ -5,7 +5,6 @@ const webpack = require("webpack");
 const autoprefixer = require("autoprefixer");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const WebpackSHAHash = require('webpack-sha-hash');
 
 // Metadata
@@ -50,20 +49,41 @@ module.exports = {
     },
 
     module: {
-        preLoaders: [
-            {test: /\.ts$/, loader: "tslint", exclude: [/node_modules/]}],
+        preLoaders: [{
+                test: /\.ts$/,
+                loader: "tslint",
+                exclude: [
+                    /node_modules/
+                ]
+        }],
         loaders: [
             // Support for *.json files.
-            {test: /\.json$/, loader: "json"},
+            {
+                test: /\.json$/,
+                loader: "json"
+            },
 
             // Support for CSS as raw text
-            {test: /\.css$/, loader: "raw"},
+            {
+                test: /\.css$/,
+                loader: "raw"
+            },
 
             // Use style in development for hot-loading
-            {test: /\.scss$/, loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss!sass")},
+            // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
+            {
+                test: /\.scss$/,
+                loaders: [ 'style', 'css?sourceMap', 'postcss?sourceMap', 'sass?sourceMap' ]
+            },
 
             // Support for .html as raw text
-            {test: /\.html$/, loader: "raw", exclude: [ root("src/index.html") ]},
+            {
+                test: /\.html$/,
+                loader: "raw",
+                exclude: [
+                    root("src/index.html")
+                ]
+            },
 
             // Support for .ts files.
             {
@@ -96,12 +116,6 @@ module.exports = {
             from: "src/assets",
             to: "assets"
         }]),
-        
-        // Extract css files
-        // Reference: https://github.com/webpack/extract-text-webpack-plugin
-        new ExtractTextWebpackPlugin("[name].[hash].css", {
-            disable: false}
-        ),
         
         // generating html
         // Reference: https://github.com/ampedandwired/html-webpack-plugin

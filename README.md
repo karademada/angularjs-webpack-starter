@@ -1,5 +1,9 @@
 # AngularJS Webpack Template
 
+[![Dependency Status](https://david-dm.org/dsebastien/angularjs-webpack-starter.svg?theme=shields.io&style=flat)](https://david-dm.org/dsebastien/modernWebDevBuild)
+[![devDependency Status](https://david-dm.org/dsebastien/angularjs-webpack-starter/dev-status.svg?theme=shields.io&style=flat)](https://david-dm.org/dsebastien/modernWebDevBuild#info=devDependencies)
+[![License](https://img.shields.io/cocoapods/l/AFNetworking.svg)](LICENSE.MD)
+
 ## About
 A Webpack Starter kit featuring:
 * AngularJS (setup, angular-material, router, ...)
@@ -32,7 +36,7 @@ A Webpack Starter kit featuring:
 * TS quality/style checks (TSLint)
 * TS code documentation generation (TSDoc)
 * development and production configurations
-* 
+*
 * ...
 
 Check out the [change log](CHANGELOG.md)
@@ -43,7 +47,7 @@ As you might know, Angular 2 is right around the corner. Be aware that this star
 Note that this starter kit is derived from the Angular 2 Starter Kit: https://github.com/AngularClass/angular2-webpack-starter
 
 ## Status & roadmap
-Check out the issues & labels to get an idea of what's next. For existing features, refer to the previous section.
+Check out the issues/labels & milestones to get an idea of what's next. For existing features, refer to the previous section.
 
 ## Installation
 ...

@@ -6,7 +6,7 @@ const autoprefixer = require("autoprefixer");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
-const WebpackMd5Hash = require('webpack-md5-hash');
+const WebpackSHAHash = require('webpack-sha-hash');
 
 // Metadata
 var ENV = process.env.ENV = process.env.NODE_ENV = "development";
@@ -80,8 +80,9 @@ module.exports = {
     },
 
     plugins: [
-        // md5 content hashes
-        new WebpackMd5Hash(),
+        // content hashes
+        new WebpackSHAHash(),
+        
         // optimization
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin({
@@ -89,21 +90,25 @@ module.exports = {
             filename: "vendor.[hash].bundle.js",
             minChunks: Infinity
         }),
+        
         // static assets
         new CopyWebpackPlugin([{
             from: "src/assets",
             to: "assets"
         }]),
+        
         // Extract css files
         // Reference: https://github.com/webpack/extract-text-webpack-plugin
         new ExtractTextWebpackPlugin("[name].[hash].css", {
             disable: false}
         ),
+        
         // generating html
         // Reference: https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             template: "src/index.html"
         }),
+        
         // replace
         new webpack.DefinePlugin({
             "process.env": {

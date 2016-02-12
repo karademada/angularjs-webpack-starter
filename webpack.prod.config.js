@@ -12,7 +12,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
-const WebpackMd5Hash = require("webpack-md5-hash");
+const WebpackSHAHash = require("webpack-sha-hash");
 
 // Metadata
 var ENV = process.env.NODE_ENV = process.env.ENV = "production";
@@ -118,8 +118,9 @@ module.exports = {
     },
 
     plugins: [
-        // md5 content hashes
-        new WebpackMd5Hash(),
+        // content hashes
+        new WebpackSHAHash(),
+        
         // optimization
         new DedupePlugin(),
         new OccurenceOrderPlugin(true),
@@ -128,6 +129,7 @@ module.exports = {
             filename: "polyfills.[chunkhash].bundle.js",
             chunks: Infinity
         }),
+        
         // static assets
         new CopyWebpackPlugin([
             {
@@ -135,6 +137,7 @@ module.exports = {
                 to: "assets"
             }
         ]),
+        
         // generating html
         new HtmlWebpackPlugin({
             template: "src/index.html"
@@ -146,8 +149,9 @@ module.exports = {
                 "NODE_ENV": JSON.stringify(metadata.ENV)
             }
         }),
+        
+        // TypeScript helpers
         new webpack.ProvidePlugin({
-            // TypeScript helpers
             "__metadata": "ts-helper/metadata",
             "__decorate": "ts-helper/decorate",
             "__awaiter": "ts-helper/awaiter",
@@ -155,6 +159,7 @@ module.exports = {
             "__param": "ts-helper/param",
             "Reflect": "es7-reflect-metadata/src/global/browser"
         }),
+        
         new UglifyJsPlugin({
             // to debug prod builds uncomment //debug lines and comment //prod lines
 
@@ -172,6 +177,7 @@ module.exports = {
             comments: false//prod
 
         }),
+        
         // include uglify in production
         new CompressionPlugin({
             algorithm: gzipMaxLevel,

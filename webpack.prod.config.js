@@ -12,6 +12,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+const autoprefixer = require("autoprefixer");
 const WebpackSHAHash = require("webpack-sha-hash");
 
 // Metadata
@@ -108,7 +109,7 @@ module.exports = {
             {test: /\.css$/, loader: "raw"},
 
             // Use style in development for hot-loading
-            {test: /\.scss$/, loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss!sass")},
+            {test: /\.scss$/, loader: ExtractTextWebpackPlugin.extract("style", "css!postcss!sass")},
 
             // support for .html as raw text
             {test: /\.html$/, loader: "raw", exclude: [ root("src/index.html") ]}
@@ -142,6 +143,14 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: "src/index.html"
         }),
+
+        // Extract css files
+        // Reference: https://github.com/webpack/extract-text-webpack-plugin
+        new ExtractTextWebpackPlugin("[name].[hash].css", {
+            disable: false}
+        ),
+        
+        // define vars
         new webpack.DefinePlugin({
             // Environment helpers
             "process.env": {
@@ -159,7 +168,8 @@ module.exports = {
             "__param": "ts-helper/param",
             "Reflect": "es7-reflect-metadata/src/global/browser"
         }),
-        
+
+        // Uglify
         new UglifyJsPlugin({
             // to debug prod builds uncomment //debug lines and comment //prod lines
 
@@ -185,6 +195,18 @@ module.exports = {
             threshold: 2 * 1024
         })
     ],
+
+    /**
+     * PostCSS
+     * Reference: https://github.com/postcss/autoprefixer
+     * Add vendor prefixes to css
+     */
+    postcss: [
+        autoprefixer({
+            browsers: ["last 2 versions"]
+        })
+    ],
+    
     // Other module loader config
     tslint: {
         emitErrors: true,

@@ -26,7 +26,10 @@ A Webpack Starter kit featuring:
 * [moment](http://momentjs.com/)
 
 ... and a complete build based on Webpack/npm scripts with:
-* hot module replacement (HMR): https://webpack.github.io/docs/hot-module-replacement.html
+* hot module replacement (HMR)
+  * https://webpack.github.io/docs/hot-module-replacement.html
+  * http://andrewhfarmer.com/understanding-hmr/
+  * http://andrewhfarmer.com/why-use-hmr/
 * unit tests (Karma & Jasmine)
 * end to end tests (Protractor)
 * test coverage reports (Istanbul)
@@ -46,7 +49,7 @@ As you might know, Angular 2 is right around the corner. Be aware that this star
 
 Note that this starter kit is derived from the Angular 2 Starter Kit: https://github.com/AngularClass/angular2-webpack-starter
 
-## Status & roadmap
+## Status and roadmap
 Check out the issues/labels & milestones to get an idea of what's next. For existing features, refer to the previous section.
 
 ## Installation

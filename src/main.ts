@@ -18,17 +18,23 @@ export function main() {
     App.bootstrap();
 };
 
+function bootstrapDomReady() {
+    // bootstrap after document is ready
+    return document.addEventListener("DOMContentLoaded", main);
+}
+
 if("development" === process.env.ENV) {
     // activate Hot Module Replacement (HMR)
-    if("hot" in module) {
+    if(process.env.HMR) {
         if(document.readyState === "complete") {
             main();
         }else {
-            document.addEventListener("DOMContentLoaded", main);
+            bootstrapDomReady();
         }
         module.hot.accept();
     }else {
-        document.addEventListener("DOMContentLoaded", main);
+        bootstrapDomReady();
     }
-
+}else {
+    bootstrapDomReady();
 }

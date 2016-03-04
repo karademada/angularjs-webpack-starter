@@ -8,14 +8,18 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackSHAHash = require('webpack-sha-hash');
 
 // Metadata
-var ENV = process.env.ENV = process.env.NODE_ENV = "development";
+const ENV = process.env.ENV = process.env.NODE_ENV = "development";
+
+// is Hot Module Replacement enabled?
+const HMR = process.argv.join("").indexOf("hot") > -1;
 
 const metadata = {
     title: "AngularJS Webpack Starter",
     baseUrl: "/",
     host: "localhost",
     port: 3000,
-    ENV: ENV
+    ENV: ENV,
+    HMR: HMR
 };
 
 /*
@@ -127,7 +131,8 @@ module.exports = {
         new webpack.DefinePlugin({
             "process.env": {
                 "ENV": JSON.stringify(metadata.ENV),
-                "NODE_ENV": JSON.stringify(metadata.ENV)
+                "NODE_ENV": JSON.stringify(metadata.ENV),
+                "HMR": HMR
             }
         })
     ],

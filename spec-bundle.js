@@ -8,10 +8,10 @@
  * all here! Crazy huh. So we need to do some setup
  */
 Error.stackTraceLimit = Infinity;
-require('phantomjs-polyfill');
-require('es6-promise');
-require('es6-shim');
-/*require('es7-reflect-metadata/dist/browser');*/
+require("phantomjs-polyfill");
+require("es6-promise");
+require("es6-shim");
+require("reflect-metadata")
 
 /*
  Ok, this is kinda crazy. We can use the the context method on

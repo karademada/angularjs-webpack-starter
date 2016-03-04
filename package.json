@@ -43,7 +43,7 @@
         "angular-ui-router": "0.2.x",
         "es6-promise": "3.1.x",
         "es6-shim": "0.35.x",
-        "es7-reflect-metadata": "1.6.x",
+        "reflect-metadata": "0.1.x",
         "immutable": "3.7.x",
         "immutable-angular": "0.1.x",
         "js-data": "2.9.x",

@@ -38,9 +38,10 @@ module.exports = {
     devtool: "source-map",
     debug: false,
 
+    // our angular app
     entry: {
         "vendor": "./src/vendor.ts",
-        "main": "./src/main.ts" // our angular app
+        "main": "./src/main.ts"
     },
 
     // Config for our build files
@@ -165,8 +166,7 @@ module.exports = {
             "__decorate": "ts-helper/decorate",
             "__awaiter": "ts-helper/awaiter",
             "__extends": "ts-helper/extends",
-            "__param": "ts-helper/param",
-            "Reflect": "es7-reflect-metadata/src/global/browser"
+            "__param": "ts-helper/param"
         }),
 
         // Uglify

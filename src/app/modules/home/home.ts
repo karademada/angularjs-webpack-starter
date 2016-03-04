@@ -1,3 +1,5 @@
+"use strict";
+
 import IStateService = angular.ui.IStateService;
 import IStateProvider = angular.ui.IStateProvider;
 import IStateParamsService = angular.ui.IStateParamsService;

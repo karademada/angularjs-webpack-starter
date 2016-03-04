@@ -210,9 +210,17 @@ module.exports = {
     // Other module loader config
     tslint: {
         emitErrors: true,
-        failOnHint: true
+        failOnHint: true,
+        resourcePath: "src"
     },
-    // don"t use devServer for production
+
+    htmlLoader: {
+        minimize: true,
+        removeAttributeQuotes: false,
+        caseSensitive: true,
+        customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
+        customAttrAssign: [ /\)?\]?=/ ]
+    },
 
     // we need this due to problems with es6-shim
     node: {

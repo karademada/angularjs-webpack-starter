@@ -1,8 +1,5 @@
 "use strict";
 
-// load all modules
-import "./modules/modules";
-
 declare const angular:any;
 declare const require:any;
 
@@ -18,6 +15,10 @@ import IUrlRouterProvider = ng.ui.IUrlRouterProvider;
 import IStateService = ng.ui.IStateService;
 import ITranslateProvider = angular.translate.ITranslateProvider;
 
+// load all modules
+import {ModuleRegistry} from "./modules/commons/modules/module.registry";
+const moduleRegistry:ModuleRegistry = require("./modules/modules").moduleRegistry;
+
 // application controller
 import {AppController} from "./app.controller";
 
@@ -26,7 +27,17 @@ import {AppController} from "./app.controller";
  */
 export class App {
     static bootstrap():void {
-        const appModule:IModule = angular.module("appModule", ["ui.router", "pascalprecht.translate", "immutable-angular", "ngMaterial", "homeModule"]);
+        const modules:any = [];
+        modules.push("ui.router");
+        modules.push("pascalprecht.translate");
+        modules.push("immutable-angular");
+        modules.push("ngMaterial");
+
+        moduleRegistry.getModuleNames().forEach((entry:string) => {
+           modules.push(entry);
+        });
+
+        const appModule:IModule = angular.module("appModule", modules);
 
         appModule.component("app", {
             controller: AppController,
@@ -60,8 +71,7 @@ export class App {
         appModule.run(["$state", "$log", ($state:IStateService, logger:ILogService) => {
             logger.debug("Bootstrapped the application...");
 
-            logger.debug("Registered UI-router states are : ");
-
+            logger.debug("Registered UI-router states: ");
             let index:number;
             let len:number;
             for (index = 0, len = $state.get().length; index < len; ++index) {

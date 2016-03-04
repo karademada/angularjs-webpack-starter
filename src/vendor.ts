@@ -19,6 +19,7 @@ if ("production" !== process.env.ENV) {
 // Polyfills
 import "es6-shim";
 import "es6-promise";
+import "es7-reflect-metadata";
 
 // AngularJS
 import "angular";

@@ -11,7 +11,7 @@ Error.stackTraceLimit = Infinity;
 require("phantomjs-polyfill");
 require("es6-promise");
 require("es6-shim");
-require("reflect-metadata")
+require("es7-reflect-metadata")
 
 /*
  Ok, this is kinda crazy. We can use the the context method on
@@ -22,9 +22,14 @@ require("reflect-metadata")
  any file that ends with spec.js and get its path. By passing in true
  we say do this recursively
  */
-var testContext = require.context('./src', true, /\.spec\.ts/);
+const testContext = require.context('./src', true, /\.spec\.ts/);
 
 // get all the files, for each file, call the context function
 // that will require the file and load it up here. Context will
 // loop and require those spec files here
-testContext.keys().forEach(testContext);
+function requireAll(requireContext) {
+    return requireContext.keys().map(requireContext);
+}
+
+const modules = requireAll(testContext);
+// requires and returns all modules that match

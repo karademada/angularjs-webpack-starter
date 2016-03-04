@@ -39,7 +39,7 @@ module.exports = {
     output: {
         path: root("dist"),
         filename: "[name].[hash].bundle.js",
-        //sourceMapFilename: "[name].[hash].map",
+        sourceMapFilename: "[name].[hash].map",
         chunkFilename: "[id].[hash].chunk.js"
     },
 
@@ -146,7 +146,8 @@ module.exports = {
     // Other module loader config
     tslint: {
         emitErrors: false,
-        failOnHint: false
+        failOnHint: false,
+        resourcePath: "src"
     },
     // our Webpack Development Server config
     devServer: {

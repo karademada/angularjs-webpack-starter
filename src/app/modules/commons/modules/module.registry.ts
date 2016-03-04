@@ -39,7 +39,7 @@ export class ModuleRegistry {
      * Register a module
      * @param module the module to register
      */
-    registerModule(module:IModule) {
+    registerModule(module:IModule):void {
         this.modules.push(module);
         this.moduleNames.push(module.name);
     }

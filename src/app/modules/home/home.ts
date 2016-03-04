@@ -1,10 +1,29 @@
-import {FooController} from "./components/foo/foo.controller";
+import IStateService = angular.ui.IStateService;
+import IStateProvider = angular.ui.IStateProvider;
+import IStateParamsService = angular.ui.IStateParamsService;
+import IModule = angular.IModule;
+import {HomeController} from "./home.controller";
 
-declare var angular:any;
+export const homeModule:IModule = angular.module("homeModule", []);
 
-const homeModule = angular.module("homeModule", []);
+// import all elements of the module
+import "./components/foo/foo";
 
-homeModule.component("foo", {
-    controller: FooController,
-    template: require("./components/foo/foo.template.html")
+homeModule.config(function($stateProvider:IStateProvider) {
+    $stateProvider
+        .state("home", {
+            parent: "appMain",
+            url: "/home",
+            views: {
+                "home@": {
+                    template: require("./home.template.html"),
+                    controller: HomeController,
+                    controllerAs: "vm"
+                }
+            }
+        });
 });
+
+homeModule.run([function() {
+    console.log("Home module loaded...");
+}]);

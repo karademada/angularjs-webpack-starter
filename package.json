@@ -142,7 +142,7 @@
         "server:prod": "http-server dist --cors",
         "webdriver:update": "webdriver-manager update",
         "webdriver:start": "webdriver-manager start",
-        "lint": "tsconfig-lint .",
+        "lint": "tslint \"./src/**/*.ts\"",
         "pree2e": "npm run webdriver:update -- --standalone",
         "e2e": "protractor",
         "e2e:live": "protractor --elementExplorer",

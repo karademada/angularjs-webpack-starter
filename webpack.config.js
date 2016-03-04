@@ -1,17 +1,20 @@
 "use strict";
 
-const path = require("path");
 const webpack = require("webpack");
-const autoprefixer = require("autoprefixer");
+
+// Helpers
+const helpers = require("./helpers");
+
+// Webpack Plugins
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const WebpackSHAHash = require('webpack-sha-hash');
+const WebpackSHAHash = require("webpack-sha-hash");
 
 // Metadata
 const ENV = process.env.ENV = process.env.NODE_ENV = "development";
 
 // is Hot Module Replacement enabled?
-const HMR = process.argv.join("").indexOf("hot") > -1;
+const HMR = helpers.hasProcessFlag("hot");
 
 const metadata = {
     title: "AngularJS Webpack Starter",
@@ -25,31 +28,20 @@ const metadata = {
 /*
  * Config
  */
-module.exports = {
+module.exports = helpers.defaults({ // notice that we start with the defaults and work upon that
     // static data for index.html
     metadata: metadata,
-    // for faster builds use "eval"
-    devtool: "source-map",
-    debug: true,
-
+    
     // our angular app
     entry: {
-        "vendor": "./src/vendor.ts",
-        "main": "./src/main.ts"
+        "vendor": helpers.root("src/vendor.ts"),
+        "main": helpers.root("src/main.ts")
     },
 
     // Config for our build files
     // Adding hashes to files for cache busting
     output: {
-        path: root("dist"),
-        filename: "[name].[hash].bundle.js",
-        sourceMapFilename: "[name].[hash].map",
-        chunkFilename: "[id].[hash].chunk.js"
-    },
-
-    resolve: {
-        // ensure loader extensions match
-        extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"]
+        path: helpers.root("dist")
     },
 
     module: {
@@ -57,7 +49,7 @@ module.exports = {
                 test: /\.ts$/,
                 loader: "tslint",
                 exclude: [
-                    /node_modules/
+                    helpers.root("node_modules")
                 ]
         }],
         loaders: [
@@ -77,7 +69,7 @@ module.exports = {
             // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
             {
                 test: /\.scss$/,
-                loaders: [ 'style', 'css?sourceMap', 'postcss?sourceMap', 'sass?sourceMap' ]
+                loaders: [ "style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap" ]
             },
 
             // Support for .html as raw text
@@ -85,7 +77,7 @@ module.exports = {
                 test: /\.html$/,
                 loader: "raw",
                 exclude: [
-                    root("src/index.html")
+                    helpers.root("src/index.html")
                 ]
             },
 
@@ -124,7 +116,7 @@ module.exports = {
         // generating html
         // Reference: https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
-            template: "src/index.html"
+            template: helpers.root("src/index.html")
         }),
         
         // replace
@@ -136,50 +128,10 @@ module.exports = {
             }
         })
     ],
-
-    /**
-     * PostCSS
-     * Reference: https://github.com/postcss/autoprefixer
-     * Add vendor prefixes to css
-     */
-    postcss: [
-        autoprefixer({
-            browsers: ["last 2 versions"]
-        })
-    ],
-
     // Other module loader config
-    tslint: {
-        emitErrors: false,
-        failOnHint: false,
-        resourcePath: "src"
-    },
     // our Webpack Development Server config
     devServer: {
         port: metadata.port,
-        host: metadata.host,
-        historyApiFallback: true,
-        watchOptions: {aggregateTimeout: 300, poll: 1000}
-    },
-    // we need this due to problems with es6-shim
-    node: {
-        global: "window",
-        progress: false,
-        crypto: "empty",
-        module: false,
-        clearImmediate: false,
-        setImmediate: false
+        host: metadata.host
     }
-};
-
-// Helper functions
-
-function root(args) {
-    args = Array.prototype.slice.call(arguments, 0);
-    return path.join.apply(path, [__dirname].concat(args));
-}
-
-function rootNode(args) {
-    args = Array.prototype.slice.call(arguments, 0);
-    return root.apply(path, ["node_modules"].concat(args));
-}
+});

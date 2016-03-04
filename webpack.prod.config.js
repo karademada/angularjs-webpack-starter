@@ -1,9 +1,11 @@
 "use strict";
 
-const path = require("path");
-const zlib = require("zlib");
-// Webpack Plugins
 const webpack = require("webpack");
+
+// Helpers
+const helpers = require("./helpers");
+
+// Webpack Plugins
 const OccurenceOrderPlugin = require("webpack/lib/optimize/OccurenceOrderPlugin");
 const DedupePlugin = require("webpack/lib/optimize/DedupePlugin");
 const UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
@@ -12,7 +14,6 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
-const autoprefixer = require("autoprefixer");
 const WebpackSHAHash = require("webpack-sha-hash");
 
 // Metadata
@@ -31,22 +32,22 @@ const metadata = {
 /*
  * Config
  */
-module.exports = {
+module.exports = helpers.defaults({ // notice that we start with the defaults and work upon that
     // static data for index.html
     metadata: metadata,
-    // for faster builds use "eval"
-    devtool: "source-map",
+    
+    // no debug in production
     debug: false,
 
     // our angular app
     entry: {
-        "vendor": "./src/vendor.ts",
-        "main": "./src/main.ts"
+        "vendor": helpers.root("src/vendor.ts"),
+        "main": helpers.root("src/main.ts")
     },
 
     // Config for our build files
     output: {
-        path: root("dist"),
+        path: helpers.root("dist"),
         filename: "[name].[chunkhash].bundle.js",
         sourceMapFilename: "[name].[chunkhash].bundle.map",
         chunkFilename: "[id].[chunkhash].chunk.js"
@@ -64,14 +65,14 @@ module.exports = {
                 test: /\.ts$/,
                 loader: "tslint",
                 exclude: [
-                    root("node_modules")
+                    helpers.root("node_modules")
                 ]
             },
             {
                 test: /\.js$/,
                 loader: "source-map",
                 exclude: [
-                    root("node_modules/rxjs")
+                    helpers.root("node_modules/rxjs")
                 ]
             }
         ],
@@ -104,16 +105,31 @@ module.exports = {
             },
 
             // Support for *.json files.
-            {test: /\.json$/, loader: "json"},
+            {
+                test: /\.json$/,
+                loader: "json"
+            },
 
             // Support for CSS as raw text
-            {test: /\.css$/, loader: "raw"},
+            {
+                test: /\.css$/,
+                loader: "raw"
+            },
 
             // Use style in development for hot-loading
-            {test: /\.scss$/, loader: ExtractTextWebpackPlugin.extract("style", "css!postcss!sass")},
+            {
+                test: /\.scss$/,
+                loader: ExtractTextWebpackPlugin.extract("style", "css!postcss!sass")
+            },
 
             // support for .html as raw text
-            {test: /\.html$/, loader: "raw", exclude: [ root("src/index.html") ]}
+            {
+                test: /\.html$/,
+                loader: "raw",
+                exclude: [ 
+                    helpers.root("src/index.html") 
+                ]
+            }
 
             // if you add a loader include the file extension
         ]
@@ -135,14 +151,14 @@ module.exports = {
         // static assets
         new CopyWebpackPlugin([
             {
-                from: "src/assets",
-                to: "assets"
+                from: helpers.root("src/assets"),
+                to: helpers.root("assets")
             }
         ]),
         
         // generating html
         new HtmlWebpackPlugin({
-            template: "src/index.html"
+            template: helpers.root("src/index.html")
         }),
 
         // Extract css files
@@ -190,72 +206,22 @@ module.exports = {
         
         // include uglify in production
         new CompressionPlugin({
-            algorithm: gzipMaxLevel,
+            algorithm: helpers.gzipMaxLevel,
             regExp: /\.css$|\.html$|\.js$|\.map$/,
             threshold: 2 * 1024
         })
     ],
-
-    /**
-     * PostCSS
-     * Reference: https://github.com/postcss/autoprefixer
-     * Add vendor prefixes to css
-     */
-    postcss: [
-        autoprefixer({
-            browsers: ["last 2 versions"]
-        })
-    ],
-    
     // Other module loader config
     tslint: {
         emitErrors: true,
-        failOnHint: true,
-        resourcePath: "src"
+        failOnHint: true
     },
-
+    // HTML minification
     htmlLoader: {
         minimize: true,
         removeAttributeQuotes: false,
         caseSensitive: true,
         customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
         customAttrAssign: [ /\)?\]?=/ ]
-    },
-
-    // we need this due to problems with es6-shim
-    node: {
-        global: "window",
-        progress: false,
-        crypto: "empty",
-        module: false,
-        clearImmediate: false,
-        setImmediate: false
     }
-};
-
-// Helper functions
-function gzipMaxLevel(buffer, callback) {
-    return zlib["gzip"](buffer, {level: 9}, callback)
-}
-
-function root(args) {
-    args = Array.prototype.slice.call(arguments, 0);
-    return path.join.apply(path, [__dirname].concat(args));
-}
-
-function rootNode(args) {
-    args = Array.prototype.slice.call(arguments, 0);
-    return root.apply(path, ["node_modules"].concat(args));
-}
-
-function prepend(extensions, args) {
-    args = args || [];
-    if (!Array.isArray(args)) {
-        args = [args]
-    }
-    return extensions.reduce(function (memo, val) {
-        return memo.concat(val, args.map(function (prefix) {
-            return prefix + val
-        }));
-    }, [""]);
-}
+});

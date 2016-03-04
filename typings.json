@@ -7,6 +7,7 @@
         "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#17ef40452039d19e06dc2a3815ea898c505860fa",
         "angular-material": "github:DefinitelyTyped/DefinitelyTyped/angular-material/angular-material-0.9.0.d.ts#1386ebca373368ddc149a389fe1973ceefe5c625",
         "angular-protractor": "github:DefinitelyTyped/DefinitelyTyped/angular-protractor/angular-protractor.d.ts#17fa1e5f269189f7f8e0f53f8c443e6c2eac562c",
+        "angular-translate": "github:DefinitelyTyped/DefinitelyTyped/angular-translate/angular-translate.d.ts#19850bf86c876e0c2544842114878ece4664941a",
         "angular-ui-router": "github:DefinitelyTyped/DefinitelyTyped/angular-ui-router/angular-ui-router.d.ts#655f8c1bf3c71b0e1ba415b36309604f79326ac8",
         "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#6697d6f7dadbf5773cb40ecda35a76027e0783b2",
         "immutable-js": "github:facebook/immutable-js/type-definitions/Immutable.d.ts#d94141223d56ac5bd6f541b06baa3161c4edd01b",

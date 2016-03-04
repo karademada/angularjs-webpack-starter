@@ -1,23 +1,28 @@
 "use strict";
 
 import IStateService = angular.ui.IStateService;
+import ILogService = angular.ILogService;
 
 export abstract class AbstractController {
-	$state:IStateService;
+    logger:ILogService;
+    $state:IStateService;
 
-	constructor($state:IStateService) {
-		this.$state = $state;
-	}
+    static $inject = ["$log", "$state"];
 
-	isCurrentState(stateName:string):boolean {
-		const currentIncludes = this.$state.includes(stateName);
-		const currentIs = this.$state.is(stateName);
-		const currentName = this.$state.current.name;
+    constructor(logger:ILogService, $state:IStateService) {
+        this.logger = logger;
+        this.$state = $state;
+    }
 
-		return currentName === stateName;
-	}
+    isCurrentState(stateName:string):boolean {
+        //const currentIncludes = this.$state.includes(stateName);
+        //const currentIs = this.$state.is(stateName);
+        const currentName = this.$state.current.name;
 
-	checkCurrentState() {
-		return this.$state.current.name;
-	}
+        return currentName === stateName;
+    }
+
+    checkCurrentState() {
+        return this.$state.current.name;
+    }
 }

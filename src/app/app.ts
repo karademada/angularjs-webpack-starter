@@ -1,9 +1,10 @@
 "use strict";
 
-declare const angular:any;
 declare const require:any;
 
 // Angular
+const angular = require("angular");
+
 import IRootScopeService = ng.IRootScopeService;
 import IModule = ng.IModule;
 import ILogService = ng.ILogService;
@@ -13,6 +14,8 @@ import IState = ng.ui.IState;
 import IStateProvider = ng.ui.IStateProvider;
 import IUrlRouterProvider = ng.ui.IUrlRouterProvider;
 import IStateService = ng.ui.IStateService;
+
+// i18n
 import ITranslateProvider = angular.translate.ITranslateProvider;
 
 // load all modules
@@ -56,7 +59,7 @@ export class App {
 
             // i18n
             $translateProvider.useStaticFilesLoader({
-                prefix: "app/translations/",
+                prefix: "assets/translations/",
                 suffix: ".json"
             });
 

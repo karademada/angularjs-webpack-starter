@@ -7,6 +7,7 @@ import ILogService = angular.ILogService;
 // controller
 export class AppController extends AbstractController {
 
+    // necessary to help AngularJS know about what to inject and in which order
     static $inject = ["$log", "$state"];
 
     constructor(logger:ILogService, $state:IStateService) {

@@ -1,5 +1,7 @@
 "use strict";
 
+const angular = require("angular");
+
 import IStateService = angular.ui.IStateService;
 import IStateProvider = angular.ui.IStateProvider;
 import IStateParamsService = angular.ui.IStateParamsService;
@@ -13,7 +15,7 @@ export const homeModule:IModule = angular.module("homeModule", []);
 // import all elements of the module
 import "./components/foo/foo";
 
-homeModule.config(($stateProvider:IStateProvider) => {
+homeModule.config(["$stateProvider", ($stateProvider:IStateProvider) => {
     $stateProvider
         .state("home", {
             parent: "appMain",
@@ -26,7 +28,7 @@ homeModule.config(($stateProvider:IStateProvider) => {
                 }
             }
         });
-});
+}]);
 
 homeModule.run(["$log", (logger:ILogService) => {
     logger.debug("Home module loaded...");

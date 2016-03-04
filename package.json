@@ -47,6 +47,7 @@
         "immutable": "3.7.x",
         "immutable-angular": "0.1.x",
         "js-data": "2.9.x",
+        "js-data-angular": "3.1.x",
         "lodash": "4.6.x",
         "moment": "2.11.x",
         "redux": "3.3.x",

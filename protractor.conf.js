@@ -16,6 +16,8 @@ if(seleniumJarFile === null || seleniumJarFile === "") {
     throw new Error("The Selenium jar file could not be located in ["+seleniumFolder+"]. Please make sure that Protactor is correctly installed!");
 }
 
+require('ts-node/register');
+
 exports.config = {
     baseUrl: "http://localhost:3000/",
 

@@ -56,7 +56,7 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
     resolve: {
         cache: false,
         // ensure loader extensions match
-        extensions: prepend([".ts", ".js", ".json", ".css", ".scss", ".html"], ".async") // ensure .async.ts etc also works
+        extensions: helpers.prepend([".ts", ".js", ".json", ".css", ".scss", ".html"], ".async") // ensure .async.ts etc also works
     },
 
     module: {

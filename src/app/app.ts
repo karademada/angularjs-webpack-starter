@@ -3,8 +3,8 @@
 // load all modules
 import "./modules/modules";
 
-declare var angular:any;
-declare var require:any;
+declare const angular:any;
+declare const require:any;
 
 import {AppController} from "./app.controller";
 import {IStateProvider} from "angular-ui-router";
@@ -22,7 +22,7 @@ export class App {
             controllerAs: "appCtrl",
             template: require("./app.template.html")
         });
-        
+
         appModule.config(function($stateProvider:IStateProvider, $urlRouterProvide:IUrlRouterProvider){
            $urlRouterProvide.otherwise("/home");
             $stateProvider

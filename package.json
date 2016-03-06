@@ -21,7 +21,7 @@
     },
     "private": true,
     "license": "MIT",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "keywords": [
         "web",
         "angular",
@@ -91,7 +91,7 @@
         "ts-loader": "0.8.x",
         "ts-node": "0.5.x",
         "source-map-loader": "0.1.x",
-        "tslint-loader": "2.1.x",
+        "tslint-loader": "^2.1.3",
         "istanbul-instrumenter-loader": "0.1.x",
         "jasmine-core": "2.4.x",
         "phantomjs-prebuilt": "2.1.x",

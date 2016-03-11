@@ -42,7 +42,7 @@ A Webpack Starter kit featuring:
 *
 * ...
 
-Check out the [change log](CHANGELOG.md)
+Check out the [change log](CHANGELOG.MD)
 
 ## Angular 2
 As you might know, Angular 2 is right around the corner. Be aware that this starter kit will soon be deprecated.
@@ -56,7 +56,7 @@ Check out the issues/labels & milestones to get an idea of what's next. For exis
 ...
 
 ## Upgrade
-Check out the [upgrade](UPGRADE.md) page
+Check out the [upgrade](UPGRADE.MD) page
 
 ## Frequently Asked Questions (FAQ)
 ### Proxy
@@ -91,8 +91,8 @@ If the above does not work in your case, then check to make sure that the user a
 * commit all changes to include in the release
 * edit the version in package.json
 * respect semver
-* update CHANGELOG.md
-* update UPGRADE.md
+* update CHANGELOG.MD
+* update UPGRADE.MD
 * commit
 * git tag
 * git push --tags

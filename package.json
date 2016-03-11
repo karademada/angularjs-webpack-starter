@@ -63,7 +63,7 @@
         "ts-helper": "0.0.x",
         "typedoc": "0.3.x",
         "http-server": "0.9.x",
-        "tsconfig-lint": "0.6.x",
+        "tsconfig-lint": "0.7.x",
         "autoprefixer": "6.3.x",
         "rimraf": "2.5.x",
         "ncp": "2.0.x",
@@ -145,7 +145,7 @@
         "server:prod": "http-server dist --cors",
         "webdriver:update": "webdriver-manager update",
         "webdriver:start": "webdriver-manager start",
-        "lint": "tslint \"./src/**/*.ts\"",
+        "lint": "tsconfig-lint .",
         "pree2e": "npm run webdriver:update -- --standalone",
         "e2e": "protractor",
         "e2e:live": "protractor --elementExplorer",
@@ -155,6 +155,7 @@
         "start": "npm run server",
         "preversion": "npm test",
         "version": "npm run build",
-        "outdated": "npm outdated"
+        "outdated": "npm outdated",
+        "setup": "npm install --no-optional"
     }
 }

@@ -175,15 +175,6 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
                 "NODE_ENV": JSON.stringify(metadata.ENV)
             }
         }),
-        
-        // TypeScript helpers
-        new webpack.ProvidePlugin({
-            "__metadata": "ts-helper/metadata",
-            "__decorate": "ts-helper/decorate",
-            "__awaiter": "ts-helper/awaiter",
-            "__extends": "ts-helper/extends",
-            "__param": "ts-helper/param"
-        }),
 
         // Uglify
         new UglifyJsPlugin({

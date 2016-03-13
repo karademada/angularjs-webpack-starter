@@ -89,9 +89,13 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
                     /\.e2e\.ts$/,
                     /\.spec\.ts$/,
                 ]
+            },
+            
+            // Sinon.js
+            {
+                test: /sinon\.js$/,
+                loader: "imports?define=>false,require=>false"
             }
-
-            // if you add a loader include the resolve file extension above
         ]
     },
 

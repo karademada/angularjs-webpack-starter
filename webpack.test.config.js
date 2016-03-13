@@ -44,6 +44,12 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
             {
                 test: /\.scss$/,
                 loader: "style!css!sass"
+            },
+
+            // Sinon.js
+            {
+                test: /sinon\.js$/,
+                loader: "imports?define=>false,require=>false"
             }
         ],
         postLoaders: [

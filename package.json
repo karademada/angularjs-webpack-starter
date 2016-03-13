@@ -109,7 +109,8 @@
         "karma-mocha-reporter": "1.1.x",
         "karma-ie-launcher": "0.2.x",
         "remap-istanbul": "0.5.x",
-        "protractor": "3.1.x"
+        "protractor": "3.1.x",
+        "sinon": "1.17.x"
     },
     "engines": {
         "node": ">=4.3.0",

@@ -24,9 +24,11 @@ A Webpack Starter kit featuring:
 * [Typings](https://github.com/typings/typings)
 * [TSDoc](https://www.npmjs.com/package/tsdoc)
 * [moment](http://momentjs.com/)
+* [Sinon.JS](http://sinonjs.org/)
 
 ... and a complete build based on Webpack/npm scripts with:
 * hot module replacement (HMR)
+  * https://webpack.github.io/docs/hot-module-replacement-with-webpack.html
   * https://webpack.github.io/docs/hot-module-replacement.html
   * http://andrewhfarmer.com/understanding-hmr/
   * http://andrewhfarmer.com/why-use-hmr/

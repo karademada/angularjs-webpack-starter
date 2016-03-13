@@ -24,6 +24,8 @@ function bootstrapDomReady() {
 }
 
 if("development" === ENV) {
+    console.log("Development environment");
+
     // activate Hot Module Replacement (HMR)
     if(HMR) {
         if(document.readyState === "complete") {

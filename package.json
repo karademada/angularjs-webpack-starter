@@ -56,6 +56,7 @@
         "rxjs": "5.0.0-beta.2"
     },
     "devDependencies": {
+        "awesome-typescript-loader": "^0.16.0-rc.0",
         "typescript": "1.8.x",
         "reflect-metadata": "0.1.x",
         "typings": "0.x",
@@ -74,7 +75,6 @@
         "html-webpack-plugin": "2.8.x",
         "compression-webpack-plugin": "0.3.x",
         "webpack-sha-hash": "1.x",
-        "webpack-merge": "0.8.x",
         "raw-loader": "0.5.x",
         "file-loader": "0.8.x",
         "url-loader": "0.5.x",
@@ -88,7 +88,6 @@
         "node-sass": "3.4.x",
         "postcss-loader": "0.8.x",
         "sass-loader": "3.1.x",
-        "ts-loader": "0.8.x",
         "ts-node": "0.5.x",
         "source-map-loader": "0.1.x",
         "tslint-loader": "^2.1.3",

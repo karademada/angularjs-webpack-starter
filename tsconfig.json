@@ -38,5 +38,11 @@
         "insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": false,
         "placeOpenBraceOnNewLineForFunctions": false,
         "placeOpenBraceOnNewLineForControlBlocks": false
+    },
+    "awesomeTypescriptLoaderOptions": {
+        "useCache": true,
+        "resolveGlobs": true,
+        "forkChecker": true,
+        "cacheDirectory": "node_modules/.awesome-typescript-loader-cache"
     }
 }

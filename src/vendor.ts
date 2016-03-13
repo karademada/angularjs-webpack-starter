@@ -1,22 +1,6 @@
 "use strict";
 
 // Load all third party dependencies
-if ("production" !== ENV) {
-    console.log("Development environment");
-
-    // Ensure that we get detailed stack trackes during development (useful with node & Webpack)
-    // Reference: http://stackoverflow.com/questions/7697038/more-than-10-lines-in-a-node-js-stack-error
-    Error.stackTraceLimit = Infinity;
-} else if ("production" === ENV) {
-    // ...
-} else {
-    console.log("Unknown environment: ", ENV);
-}
-
-// Polyfills
-import "es6-shim";
-import "es6-promise";
-import "es7-reflect-metadata";
 
 // AngularJS
 import "angular";
@@ -44,3 +28,11 @@ require("rxjs/add/operator/map");
 
 // 3rd party styles
 import "./app/css/vendor.scss";
+
+if ("development" === ENV) {
+    // ...
+} else if ("production" === ENV) {
+    // ...
+} else {
+    // ...
+}

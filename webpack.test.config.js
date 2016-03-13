@@ -1,6 +1,7 @@
 "use strict";
 
 const webpack = require("webpack");
+const autoprefixer = require("autoprefixer");
 
 // Helpers
 const helpers = require("./helpers");
@@ -11,26 +12,46 @@ let ENV = process.env.ENV = process.env.NODE_ENV = "test";
 /*
  * Config
  */
-module.exports = helpers.defaults({ // notice that we start with the defaults and work upon that
-    resolve: {
-        cache: false
-    },
+module.exports = {
     devtool: "inline-source-map",
+    debug: true,
+    stats: { colors: true, reasons: true },
+
+    resolve: {
+        extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"]
+    },
+    
     module: {
+        noParse: [
+            // things that should not be parsed
+        ],
+        preLoaders: [
+            {
+                test: /\.ts$/,
+                loader: "tslint",
+                exclude: [
+                    helpers.root("node_modules")
+                ]
+            },
+            {
+                test: /\.js$/,
+                loader: "source-map",
+                exclude: [
+                    helpers.root("node_modules/rxjs")
+                ]
+            }
+        ],
         loaders: [
             {
                 test: /\.ts$/,
-                loader: "ts-loader",
+                loader: "awesome-typescript-loader",
                 query: {
-                    // remove TypeScript helpers to be injected below by DefinePlugin
                     "compilerOptions": {
-                        "noEmitHelpers": true,
                         "removeComments": true,
                     }
                 },
                 exclude: [
-                    /\.e2e\.ts$/,
-                    helpers.root("node_modules")
+                    /\.e2e\.ts$/
                 ]
             },
             {
@@ -41,9 +62,14 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
                 test: /\.html$/,
                 loader: "raw-loader"
             },
+            // Support for CSS as raw text
+            {
+                test: /\.css$/,
+                loader: "raw"
+            },
             {
                 test: /\.scss$/,
-                loader: "style!css!sass"
+                loaders: [ "style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap" ]
             },
 
             // Sinon.js
@@ -64,24 +90,36 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
                     helpers.root("node_modules")
                 ]
             }
-        ],
-        noParse: []
+        ]
     },
     plugins: [
         new webpack.DefinePlugin({
             // Environment helpers
-            "process.env": {
-                "ENV": JSON.stringify(ENV),
-                "NODE_ENV": JSON.stringify(ENV)
-            }
-        }),
-        new webpack.ProvidePlugin({
-            // TypeScript helpers
-            "__metadata": "Reflect.metadata",
-            "__decorate": "Reflect.decorate",
-            "__awaiter": "ts-helper/awaiter",
-            "__extends": "ts-helper/extends",
-            "__param": "ts-helper/param"
+            "ENV": JSON.stringify(ENV),
+            "NODE_ENV": JSON.stringify(ENV)
+        })
+    ],
+    node: {
+        global: "window",
+        progress: false,
+        crypto: "empty",
+        module: false,
+        clearImmediate: false,
+        setImmediate: false
+    },
+    tslint: {
+        emitErrors: false,
+        failOnHint: false,
+        resourcePath: "src"
+    },
+    /**
+     * PostCSS
+     * Reference: https://github.com/postcss/autoprefixer
+     * Add vendor prefixes to css
+     */
+    postcss: [
+        autoprefixer({
+            browsers: ["last 2 versions"]
         })
     ]
-});
+};

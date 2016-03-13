@@ -1,6 +1,7 @@
 "use strict";
 
 const webpack = require("webpack");
+const autoprefixer = require("autoprefixer");
 
 // Helpers
 const helpers = require("./helpers");
@@ -15,6 +16,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const WebpackSHAHash = require("webpack-sha-hash");
+const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 // Metadata
 var ENV = process.env.NODE_ENV = process.env.ENV = "production";
@@ -32,15 +34,20 @@ const metadata = {
 /*
  * Config
  */
-module.exports = helpers.defaults({ // notice that we start with the defaults and work upon that
+module.exports = {
     // static data for index.html
     metadata: metadata,
+
+    devtool: "source-map",
     
     // no debug in production
     debug: false,
 
+    stats: { colors: true, reasons: true },
+
     // our angular app
     entry: {
+        "polyfills": helpers.root("src/polyfills.ts"),
         "vendor": helpers.root("src/vendor.ts"),
         "main": helpers.root("src/main.ts")
     },
@@ -54,12 +61,14 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
     },
 
     resolve: {
-        cache: false,
         // ensure loader extensions match
-        extensions: helpers.prepend([".ts", ".js", ".json", ".css", ".scss", ".html"], ".async") // ensure .async.ts etc also works
+        extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"]
     },
 
     module: {
+        noParse: [
+            // things that should not be parsed
+        ],
         preLoaders: [
             {
                 test: /\.ts$/,
@@ -77,30 +86,18 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
             }
         ],
         loaders: [
-            // Support Angular 2 async routes via .async.ts
-            {
-                test: /\.async\.ts$/,
-                loaders: ["es6-promise", "ts"],
-                exclude: [
-                    /\.e2e\.ts$/,
-                    /\.spec\.ts$/,
-                ]
-            },
             // Support for .ts files.
             {
                 test: /\.ts$/,
-                loader: "ts",
+                loader: "awesome-typescript-loader",
                 query: {
-                    // remove TypeScript helpers to be injected below by DefinePlugin
                     "compilerOptions": {
-                        "removeComments": true,
-                        "noEmitHelpers": true,
+                        "removeComments": true
                     }
                 },
                 exclude: [
                     /\.e2e\.ts$/,
-                    /\.spec\.ts$/,
-                    /\.async\.ts$/,
+                    /\.spec\.ts$/
                 ]
             },
 
@@ -130,12 +127,12 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
                     helpers.root("src/index.html") 
                 ]
             }
-
-            // if you add a loader include the file extension
         ]
     },
 
     plugins: [
+        new ForkCheckerPlugin(),
+        
         // content hashes
         new WebpackSHAHash(),
         
@@ -143,8 +140,8 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
         new DedupePlugin(),
         new OccurenceOrderPlugin(true),
         new CommonsChunkPlugin({
-            name: "polyfills",
-            filename: "polyfills.[chunkhash].bundle.js",
+            name: ["main", "vendor", "polyfills"],
+            filename: "[name].[chunkhash].bundle.js",
             chunks: Infinity
         }),
         
@@ -158,7 +155,8 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
         
         // generating html
         new HtmlWebpackPlugin({
-            template: helpers.root("src/index.html")
+            template: helpers.root("src/index.html"),
+            chunksSortMode: "none"
         }),
 
         // Extract css files
@@ -206,11 +204,34 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
             threshold: 2 * 1024
         })
     ],
+
+    node: {
+        global: "window",
+        progress: false,
+        crypto: "empty",
+        module: false,
+        clearImmediate: false,
+        setImmediate: false
+    },
+    
     // Other module loader config
     tslint: {
         emitErrors: true,
-        failOnHint: true
+        failOnHint: true,
+        resourcePath: "src"
     },
+
+    /**
+     * PostCSS
+     * Reference: https://github.com/postcss/autoprefixer
+     * Add vendor prefixes to css
+     */
+    postcss: [
+        autoprefixer({
+            browsers: ["last 2 versions"]
+        })
+    ],
+    
     // HTML minification
     htmlLoader: {
         minimize: true,
@@ -219,4 +240,4 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
         customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
         customAttrAssign: [ /\)?\]?=/ ]
     }
-});
+};

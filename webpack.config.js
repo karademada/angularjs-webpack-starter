@@ -1,6 +1,7 @@
 "use strict";
 
 const webpack = require("webpack");
+const autoprefixer = require("autoprefixer");
 
 // Helpers
 const helpers = require("./helpers");
@@ -9,31 +10,34 @@ const helpers = require("./helpers");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackSHAHash = require("webpack-sha-hash");
+const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 // Metadata
 const ENV = process.env.ENV = process.env.NODE_ENV = "development";
-
-// is Hot Module Replacement enabled?
-const HMR = helpers.hasProcessFlag("hot");
 
 const metadata = {
     title: "AngularJS Webpack Starter",
     baseUrl: "/",
     host: "localhost",
     port: 3000,
-    ENV: ENV,
-    HMR: HMR
+    ENV: ENV
 };
 
 /*
  * Config
  */
-module.exports = helpers.defaults({ // notice that we start with the defaults and work upon that
+module.exports = {
     // static data for index.html
     metadata: metadata,
-    
+
+    devtool: "cheap-module-eval-source-map", // source-map
+    //cache: true,
+    debug: true,
+    stats: {colors: true, reasons: true},
+
     // our angular app
     entry: {
+        "polyfills": helpers.root("src/polyfills.ts"),
         "vendor": helpers.root("src/vendor.ts"),
         "main": helpers.root("src/main.ts")
     },
@@ -41,17 +45,36 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
     // Config for our build files
     // Adding hashes to files for cache busting
     output: {
-        path: helpers.root("dist")
+        path: helpers.root("dist"),
+        filename: "[name].[hash].bundle.js",
+        sourceMapFilename: "[name].[hash].map",
+        chunkFilename: "[id].[hash].chunk.js"
+    },
+
+    resolve: {
+        extensions: [ "", ".ts", ".js", ".json", ".css", ".scss", ".html" ]
     },
 
     module: {
-        preLoaders: [{
+        noParse: [
+            // things that should not be parsed
+        ],
+        preLoaders: [
+            {
                 test: /\.ts$/,
                 loader: "tslint",
                 exclude: [
                     helpers.root("node_modules")
                 ]
-        }],
+            },
+            {
+                test: /\.js$/,
+                loader: "source-map",
+                exclude: [
+                    helpers.root("node_modules/rxjs")
+                ]
+            }
+        ],
         loaders: [
             // Support for *.json files.
             {
@@ -84,13 +107,13 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
             // Support for .ts files.
             {
                 test: /\.ts$/,
-                loader: "ts",
+                loader: "awesome-typescript-loader",
                 exclude: [
                     /\.e2e\.ts$/,
                     /\.spec\.ts$/,
                 ]
             },
-            
+
             // Sinon.js
             {
                 test: /sinon\.js$/,
@@ -100,40 +123,72 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
     },
 
     plugins: [
+        new ForkCheckerPlugin(),
+
         // content hashes
         new WebpackSHAHash(),
-        
+
         // optimization
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin({
-            name: "vendor",
-            filename: "vendor.[hash].bundle.js",
+            name: ["main", "vendor", "polyfills"],
             minChunks: Infinity
         }),
-        
+
         // static assets
-        new CopyWebpackPlugin([{
+        new CopyWebpackPlugin([ {
             from: "src/assets",
             to: "assets"
-        }]),
-        
+        } ]),
+
         // generating html
         // Reference: https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
-            template: helpers.root("src/index.html")
+            template: helpers.root("src/index.html"),
+            chunksSortMode: "none"
         }),
 
         // Environment helpers (when adding more properties make sure you include them in environment.d.ts)
         new webpack.DefinePlugin({
             "ENV": JSON.stringify(metadata.ENV),
-            "NODE_ENV": JSON.stringify(metadata.ENV),
-            "HMR": HMR
+            "HMR": false
         })
     ],
+    node: {
+        global: "window",
+        //progress: false,
+        process: true,
+        crypto: "empty",
+        module: false,
+        clearImmediate: false,
+        setImmediate: false
+    },
+    tslint: {
+        emitErrors: false,
+        failOnHint: false,
+        resourcePath: "src"
+    },
+
+    /**
+     * PostCSS
+     * Reference: https://github.com/postcss/autoprefixer
+     * Add vendor prefixes to css
+     */
+    postcss: [
+        autoprefixer({
+            browsers: [ "last 2 versions" ]
+        })
+    ],
+
     // Other module loader config
     // our Webpack Development Server config
     devServer: {
         port: metadata.port,
-        host: metadata.host
+        host: metadata.host,
+        historyApiFallback: true,
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000
+        }
     }
-});
+};

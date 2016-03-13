@@ -36,15 +36,15 @@ module.exports = {
 
     // reference: https://webpack.github.io/docs/configuration.html#devtool
     devtool: "source-map",
-    
+
     // no debug in production
     debug: false,
 
-    stats: { 
+    stats: {
         colors: true,
         reasons: true
     },
-    
+
     entry: {
         "polyfills": helpers.root("src/polyfills.ts"),
         "vendor": helpers.root("src/vendor.ts"),
@@ -66,7 +66,7 @@ module.exports = {
     resolve: {
         cache: false,
         // ensure loader extensions match
-        extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"]
+        extensions: [ "", ".ts", ".js", ".json", ".css", ".scss", ".html" ]
     },
 
     module: {
@@ -90,10 +90,10 @@ module.exports = {
             }
         ],
         loaders: [
-            // Support for .ts files.
+            // Support for .ts files
             {
                 test: /\.ts$/,
-                loader: "awesome-typescript-loader",
+                loader: "awesome-typescript",
                 query: {
                     "compilerOptions": {
                         "removeComments": true
@@ -105,7 +105,7 @@ module.exports = {
                 ]
             },
 
-            // Support for *.json files.
+            // Support for *.json files
             {
                 test: /\.json$/,
                 loader: "json"
@@ -117,18 +117,20 @@ module.exports = {
                 loader: "raw"
             },
 
-            // Use style in development for hot-loading
+            // Support for SASS
+            // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
             {
                 test: /\.scss$/,
-                loader: ExtractTextWebpackPlugin.extract("style", "css!postcss!sass")
+                //loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss!sass")
+                loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"]
             },
 
-            // support for .html as raw text
+            // Support for .html with ngTemplate loader to use the Angular's $templateCache service
             {
                 test: /\.html$/,
-                loader: "raw",
-                exclude: [ 
-                    helpers.root("src/index.html") 
+                loaders: [ "ngtemplate", "html" ],
+                exclude: [
+                    helpers.root("src/index.html")
                 ]
             },
 
@@ -144,21 +146,21 @@ module.exports = {
         // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
         // Only emit files when there are no errors
         new webpack.NoErrorsPlugin(),
-        
+
         new ForkCheckerPlugin(),
-        
+
         // content hashes
         new WebpackSHAHash(),
-        
+
         // optimization
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ["main", "vendor", "polyfills"],
+            name: [ "main", "vendor", "polyfills" ],
             filename: "[name].[hash].bundle.js",
             chunks: Infinity
         }),
-        
+
         // static assets
         new CopyWebpackPlugin([
             {
@@ -176,7 +178,7 @@ module.exports = {
                 ]
             }
         ]),
-        
+
         // generating html
         new HtmlWebpackPlugin({
             template: helpers.root("src/index.html"),
@@ -186,9 +188,10 @@ module.exports = {
         // Extract css files
         // Reference: https://github.com/webpack/extract-text-webpack-plugin
         new ExtractTextWebpackPlugin("[name].[hash].css", {
-            disable: false}
+                disable: false
+            }
         ),
-        
+
         // define vars
         new webpack.DefinePlugin({
             // Environment helpers
@@ -220,7 +223,7 @@ module.exports = {
             },
             comments: false // set to true for debugging
         }),
-        
+
         // include uglify in production
         new CompressionPlugin({
             algorithm: helpers.gzipMaxLevel,
@@ -237,7 +240,7 @@ module.exports = {
         clearImmediate: false,
         setImmediate: false
     },
-    
+
     // Other module loader config
     tslint: {
         emitErrors: true,
@@ -252,16 +255,16 @@ module.exports = {
      */
     postcss: [
         autoprefixer({
-            browsers: ["last 2 versions"]
+            browsers: [ "last 2 versions" ]
         })
     ],
-    
+
     // HTML minification
     htmlLoader: {
         minimize: true,
         removeAttributeQuotes: false,
         caseSensitive: true,
-        customAttrSurround: [ [/#/, /(?:)/], [/\*/, /(?:)/], [/\[?\(?/, /(?:)/] ],
+        customAttrSurround: [ [ /#/, /(?:)/ ], [ /\*/, /(?:)/ ], [ /\[?\(?/, /(?:)/ ] ],
         customAttrAssign: [ /\)?\]?=/ ]
     }
 };

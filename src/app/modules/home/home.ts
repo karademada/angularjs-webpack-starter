@@ -15,6 +15,9 @@ export const homeModule:IModule = angular.module("homeModule", []);
 // import all elements of the module
 import "./components/foo/foo";
 
+// Pre-loading the html templates into the Angular's $templateCache
+let templateHomeUrl:any = require("./home.template.html");
+
 homeModule.config(["$stateProvider", ($stateProvider:IStateProvider) => {
     $stateProvider
         .state("home", {
@@ -22,7 +25,7 @@ homeModule.config(["$stateProvider", ($stateProvider:IStateProvider) => {
             url: "/home",
             views: {
                 "home@": {
-                    template: require("./home.template.html"),
+                    templateUrl: templateHomeUrl,
                     controller: HomeController,
                     controllerAs: "vm"
                 }

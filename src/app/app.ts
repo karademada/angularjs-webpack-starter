@@ -23,6 +23,9 @@ const moduleRegistry:ModuleRegistry = require("./modules/modules").moduleRegistr
 // application controller
 import {AppController} from "./app.controller";
 
+// Pre-loading the html templates into the Angular's $templateCache
+let templateAppUrl:any = require("./app.template.html");
+
 /**
  * The application
  */
@@ -43,7 +46,7 @@ export class App {
         appModule.component("app", {
             controller: AppController,
             controllerAs: "vm",
-            template: require("./app.template.html")
+            templateUrl: templateAppUrl
         });
 
         appModule.config(["$urlRouterProvider", "$stateProvider", "$translateProvider", function ($urlRouterProvider:IUrlRouterProvider, $stateProvider:IStateProvider, $translateProvider:ITranslateProvider) {

@@ -1,3 +1,5 @@
+* 0.1.2
+  * added ng template cache support (see #67)
 * 0.1.1
   * separated base assets and other assets
   * fixed issues with TS helpers

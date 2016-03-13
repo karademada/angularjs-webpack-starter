@@ -48,6 +48,7 @@ module.exports = {
             }
         ],
         loaders: [
+            // Support for .ts files
             {
                 test: /\.ts$/,
                 loader: "awesome-typescript-loader",
@@ -60,22 +61,34 @@ module.exports = {
                     /\.e2e\.ts$/
                 ]
             },
+
+            // Support for .json files
             {
                 test: /\.json$/,
-                loader: "json-loader"
+                loader: "json"
             },
-            {
-                test: /\.html$/,
-                loader: "raw-loader"
-            },
+            
             // Support for CSS as raw text
             {
                 test: /\.css$/,
-                loader: "raw-loader"
+                loader: "raw"
             },
+
+            // Support for SASS
+            // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
             {
                 test: /\.scss$/,
-                loaders: [ "style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap" ]
+                //loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss!sass")
+                loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"]
+            },
+
+            // Support for .html with ngTemplate loader to use the Angular's $templateCache service
+            {
+                test: /\.html$/,
+                loaders: ["ngtemplate", "html"],
+                exclude: [
+                    helpers.root("src/index.html")
+                ]
             },
 
             // Sinon.js

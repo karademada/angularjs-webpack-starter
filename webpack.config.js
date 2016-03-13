@@ -138,7 +138,7 @@ module.exports = {
         // static assets
         new CopyWebpackPlugin([ {
             from: "src/assets",
-            to: "assets"
+            to: ""
         } ]),
 
         // generating html

@@ -149,7 +149,7 @@ module.exports = {
         new CopyWebpackPlugin([
             {
                 from: helpers.root("src/assets"),
-                to: helpers.root("assets")
+                to: helpers.root("")
             }
         ]),
         

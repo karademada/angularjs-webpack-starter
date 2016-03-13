@@ -14,8 +14,13 @@ let ENV = process.env.ENV = process.env.NODE_ENV = "test";
  */
 module.exports = {
     devtool: "inline-source-map",
+    
     debug: true,
-    stats: { colors: true, reasons: true },
+    
+    stats: {
+        colors: true,
+        reasons: true
+    },
 
     resolve: {
         cache: false,

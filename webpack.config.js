@@ -33,10 +33,16 @@ module.exports = {
     metadata: metadata,
 
     // reference: https://webpack.github.io/docs/configuration.html#devtool
-    devtool: "cheap-module-eval-source-map", 
+    devtool: "cheap-module-eval-source-map",
+    
     //cache: true,
+    
     debug: true,
-    stats: {colors: true, reasons: true},
+    
+    stats: {
+        colors: true,
+        reasons: true
+    },
 
     // our angular app
     entry: {

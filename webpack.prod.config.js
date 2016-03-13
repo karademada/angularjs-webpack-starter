@@ -40,7 +40,10 @@ module.exports = {
     // no debug in production
     debug: false,
 
-    stats: { colors: true, reasons: true },
+    stats: { 
+        colors: true,
+        reasons: true
+    },
     
     entry: {
         "polyfills": helpers.root("src/polyfills.ts"),

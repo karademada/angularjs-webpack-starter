@@ -50,3 +50,5 @@ Icon?
 pids
 *.pid
 *.seed
+
+stats.json

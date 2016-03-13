@@ -34,6 +34,7 @@ module.exports = {
     // static data for index.html
     metadata: metadata,
 
+    // reference: https://webpack.github.io/docs/configuration.html#devtool
     devtool: "source-map",
     
     // no debug in production
@@ -50,6 +51,10 @@ module.exports = {
     // Config for our build files
     output: {
         path: helpers.root("dist"),
+        // We need to tell Webpack to serve our bundled application
+        // from the build path. When proxying:
+        // http://localhost:3000/ -> http://localhost:8080/
+        publicPath: '/',
         filename: "[name].[chunkhash].bundle.js",
         sourceMapFilename: "[name].[chunkhash].bundle.map",
         chunkFilename: "[id].[chunkhash].chunk.js"

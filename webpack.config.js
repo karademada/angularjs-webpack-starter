@@ -32,7 +32,8 @@ module.exports = {
     // static data for index.html
     metadata: metadata,
 
-    devtool: "cheap-module-eval-source-map", // source-map
+    // reference: https://webpack.github.io/docs/configuration.html#devtool
+    devtool: "cheap-module-eval-source-map", 
     //cache: true,
     debug: true,
     stats: {colors: true, reasons: true},
@@ -47,7 +48,12 @@ module.exports = {
     // Config for our build files
     // Adding hashes to files for cache busting
     output: {
+        // Mandatory but not actually useful since everything remains in memory with webpack-dev-server
         path: helpers.root("dist"),
+        // We need to tell Webpack to serve our bundled application
+        // from the build path. When proxying:
+        // http://localhost:3000/ -> http://localhost:8080/
+        publicPath: '/',
         filename: "[name].[hash].bundle.js",
         sourceMapFilename: "[name].[hash].map",
         chunkFilename: "[id].[hash].chunk.js"

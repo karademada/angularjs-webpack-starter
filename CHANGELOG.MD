@@ -1,3 +1,13 @@
+* 0.1.1
+  * separated base assets and other assets
+  * fixed issues with TS helpers
+  * improved npm scripts
+  * add sinon.js
+  * added webpack profiling task
+  * improved tslint support
+  * switched to a different TypeScript loader (awesome-typescript-loader)
+  * updated dependencies
+  * improved environment configuration
 * 0.1.0
   * added a module registry
   * added basic i18n support

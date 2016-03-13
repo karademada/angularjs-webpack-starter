@@ -1,3 +1,12 @@
+// Extra variables that live on Global that will be replaced by webpack DefinePlugin
+declare let ENV: string;
+declare let HMR: boolean;
+
+interface GlobalEnvironment {
+    ENV: string;
+    HMR: boolean;
+}
+
 interface WebpackModule {
     hot: {
         data?: any,
@@ -11,9 +20,18 @@ interface WebpackModule {
         apply(options?: any, callback?: (err?: Error, outdatedModules?: any[]) => void): void;
         status(callback?: (status?: string) => void): void | string;
         removeStatusHandler(callback?: (status?: string) => void): void;
-    }
+    };
+}
+interface WebpackRequire extends NodeRequireFunction {
+    context(file: string, flag?: boolean, exp?: RegExp): any;
 }
 
-interface NodeModule extends WebpackModule {
-
+interface ErrorStackTraceLimit {
+    stackTraceLimit: number;
 }
+
+// Extend typings
+interface NodeRequire extends WebpackRequire {}
+interface ErrorConstructor extends ErrorStackTraceLimit {}
+interface NodeModule extends WebpackModule {}
+interface Global extends GlobalEnvironment  {}

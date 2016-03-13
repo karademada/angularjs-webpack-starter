@@ -170,10 +170,8 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
         // define vars
         new webpack.DefinePlugin({
             // Environment helpers
-            "process.env": {
-                "ENV": JSON.stringify(metadata.ENV),
-                "NODE_ENV": JSON.stringify(metadata.ENV)
-            }
+            "ENV": JSON.stringify(metadata.ENV),
+            "NODE_ENV": JSON.stringify(metadata.ENV)
         }),
 
         // Uglify

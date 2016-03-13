@@ -23,9 +23,9 @@ function bootstrapDomReady() {
     return document.addEventListener("DOMContentLoaded", main);
 }
 
-if("development" === process.env.ENV) {
+if("development" === ENV) {
     // activate Hot Module Replacement (HMR)
-    if(process.env.HMR) {
+    if(HMR) {
         if(document.readyState === "complete") {
             main();
         }else {

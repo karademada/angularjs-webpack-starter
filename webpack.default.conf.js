@@ -4,8 +4,7 @@ const path = require("path");
 const autoprefixer = require("autoprefixer");
 
 module.exports = {
-    // for faster builds use "eval"
-    devtool: "source-map",
+    devtool: "cheap-module-eval-source-map", // source-map
     stats: { colors: true, reasons: true },
     resolve: {
         extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"]
@@ -24,6 +23,7 @@ module.exports = {
     node: {
         global: "window",
         progress: false,
+        process: HMR? true: false,
         crypto: "empty",
         module: false,
         clearImmediate: false,

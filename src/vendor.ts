@@ -1,19 +1,16 @@
 "use strict";
 
 // Load all third party dependencies
-
-declare const process:any;
-
-if ("production" !== process.env.ENV) {
-    console.log("Development mode");
+if ("production" !== ENV) {
+    console.log("Development environment");
 
     // Ensure that we get detailed stack trackes during development (useful with node & Webpack)
     // Reference: http://stackoverflow.com/questions/7697038/more-than-10-lines-in-a-node-js-stack-error
-    Error["stackTraceLimit"] = Infinity;
-} else if ("production" === process.env.ENV) {
+    Error.stackTraceLimit = Infinity;
+} else if ("production" === ENV) {
     // ...
 } else {
-    console.log("Unknown mode: ", process.env.ENV);
+    console.log("Unknown environment: ", ENV);
 }
 
 // Polyfills

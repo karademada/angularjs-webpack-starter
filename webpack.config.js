@@ -122,14 +122,12 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
         new HtmlWebpackPlugin({
             template: helpers.root("src/index.html")
         }),
-        
-        // replace
+
+        // Environment helpers (when adding more properties make sure you include them in environment.d.ts)
         new webpack.DefinePlugin({
-            "process.env": {
-                "ENV": JSON.stringify(metadata.ENV),
-                "NODE_ENV": JSON.stringify(metadata.ENV),
-                "HMR": HMR
-            }
+            "ENV": JSON.stringify(metadata.ENV),
+            "NODE_ENV": JSON.stringify(metadata.ENV),
+            "HMR": HMR
         })
     ],
     // Other module loader config

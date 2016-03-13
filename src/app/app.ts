@@ -1,7 +1,5 @@
 "use strict";
 
-declare const require:any;
-
 // Angular
 const angular = require("angular");
 

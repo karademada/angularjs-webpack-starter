@@ -29,6 +29,6 @@
  *
  */
 
+/// <reference path="custom/environment.d.ts" />
 /// <reference path="custom/jquery.d.ts" />
 /// <reference path="custom/require.d.ts" />
-/// <reference path="custom/webpack.d.ts" />

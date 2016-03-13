@@ -178,20 +178,26 @@ module.exports = helpers.defaults({ // notice that we start with the defaults an
 
         // Uglify
         new UglifyJsPlugin({
-            // to debug prod builds uncomment //debug lines and comment //prod lines
-
-            // beautify: true,//debug
-            // mangle: false,//debug
-            // dead_code: false,//debug
-            // unused: false,//debug
-            // deadCode: false,//debug
-            // compress : { screw_ie8 : true, keep_fnames: true, drop_debugger: false, dead_code: false, unused: false, }, // debug
-            // comments: true,//debug
-
-            beautify: false,//prod
-            mangle: {screw_ie8: true},//prod
-            compress: {screw_ie8: true}, //prod
-            comments: false//prod
+            // reference: https://github.com/mishoo/UglifyJS2#usage
+            beautify: false, // set to true for debugging
+            //dead_code: false, // uncomment for debugging
+            //unused: false, // uncomment for debugging
+            mangle: {
+                screw_ie8: true,
+                except: [
+                    // list strings that should not be mangled here
+                ]
+            },
+            compress: {
+                screw_ie8: true
+                // uncomment for debugging
+                //,
+                //keep_fnames: true,
+                //drop_debugger: false,
+                //dead_code: false,
+                //unused: false
+            },
+            comments: false // set to true for debugging
 
         }),
         

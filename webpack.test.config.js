@@ -13,7 +13,7 @@ let ENV = process.env.ENV = process.env.NODE_ENV = "test";
  */
 module.exports = helpers.defaults({ // notice that we start with the defaults and work upon that
     resolve: {
-        cache: false,
+        cache: false
     },
     devtool: "inline-source-map",
     module: {

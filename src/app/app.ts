@@ -57,7 +57,7 @@ export class App {
 
             // i18n
             $translateProvider.useStaticFilesLoader({
-                prefix: "translations/",
+                prefix: "assets/translations/",
                 suffix: ".json"
             });
 

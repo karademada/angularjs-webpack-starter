@@ -148,8 +148,12 @@ module.exports = {
         // static assets
         new CopyWebpackPlugin([
             {
-                from: helpers.root("src/assets"),
-                to: helpers.root("")
+                from: "src/assets",
+                to: "assets"
+            },
+            {
+                from: "src/assets-base",
+                to: ""
             }
         ]),
         

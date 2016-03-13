@@ -131,15 +131,21 @@ module.exports = {
         // optimization
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ["main", "vendor", "polyfills"],
+            name: [ "main", "vendor", "polyfills" ],
             minChunks: Infinity
         }),
 
         // static assets
-        new CopyWebpackPlugin([ {
-            from: "src/assets",
-            to: ""
-        } ]),
+        new CopyWebpackPlugin([
+            {
+                from: "src/assets",
+                to: "assets"
+            },
+            {
+                from: "src/assets-base",
+                to: ""
+            }
+        ]),
 
         // generating html
         // Reference: https://github.com/ampedandwired/html-webpack-plugin

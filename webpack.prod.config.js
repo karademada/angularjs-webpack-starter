@@ -7,10 +7,6 @@ const autoprefixer = require("autoprefixer");
 const helpers = require("./helpers");
 
 // Webpack Plugins
-const OccurenceOrderPlugin = require("webpack/lib/optimize/OccurenceOrderPlugin");
-const DedupePlugin = require("webpack/lib/optimize/DedupePlugin");
-const UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
-const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -44,12 +40,11 @@ module.exports = {
     debug: false,
 
     stats: { colors: true, reasons: true },
-
-    // our angular app
+    
     entry: {
         "polyfills": helpers.root("src/polyfills.ts"),
         "vendor": helpers.root("src/vendor.ts"),
-        "main": helpers.root("src/main.ts")
+        "main": helpers.root("src/main.ts") // our angular app
     },
 
     // Config for our build files
@@ -61,6 +56,7 @@ module.exports = {
     },
 
     resolve: {
+        cache: false,
         // ensure loader extensions match
         extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"]
     },
@@ -126,34 +122,50 @@ module.exports = {
                 exclude: [ 
                     helpers.root("src/index.html") 
                 ]
+            },
+
+            // Sinon.js
+            {
+                test: /sinon\.js$/,
+                loader: "imports?define=>false,require=>false"
             }
         ]
     },
 
     plugins: [
+        // Reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
+        // Only emit files when there are no errors
+        new webpack.NoErrorsPlugin(),
+        
         new ForkCheckerPlugin(),
         
         // content hashes
         new WebpackSHAHash(),
         
         // optimization
-        new DedupePlugin(),
-        new OccurenceOrderPlugin(true),
-        new CommonsChunkPlugin({
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(true),
+        new webpack.optimize.CommonsChunkPlugin({
             name: ["main", "vendor", "polyfills"],
-            filename: "[name].[chunkhash].bundle.js",
+            filename: "[name].[hash].bundle.js",
             chunks: Infinity
         }),
         
         // static assets
         new CopyWebpackPlugin([
             {
-                from: "src/assets",
-                to: "assets"
+                from: helpers.root("src/app/assets"),
+                to: "assets",
+                ignore: [
+                    "README.md"
+                ]
             },
             {
-                from: "src/assets-base",
-                to: ""
+                from: helpers.root("src/app/assets-base"),
+                to: "",
+                ignore: [
+                    "README.md"
+                ]
             }
         ]),
         
@@ -173,11 +185,12 @@ module.exports = {
         new webpack.DefinePlugin({
             // Environment helpers
             "ENV": JSON.stringify(metadata.ENV),
-            "NODE_ENV": JSON.stringify(metadata.ENV)
+            "NODE_ENV": JSON.stringify(metadata.ENV),
+            "HMR": false
         }),
 
         // Uglify
-        new UglifyJsPlugin({
+        new webpack.optimize.UglifyJsPlugin({
             // reference: https://github.com/mishoo/UglifyJS2#usage
             beautify: false, // set to true for debugging
             //dead_code: false, // uncomment for debugging
@@ -198,7 +211,6 @@ module.exports = {
                 //unused: false
             },
             comments: false // set to true for debugging
-
         }),
         
         // include uglify in production

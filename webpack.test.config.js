@@ -18,6 +18,7 @@ module.exports = {
     stats: { colors: true, reasons: true },
 
     resolve: {
+        cache: false,
         extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"]
     },
     
@@ -65,7 +66,7 @@ module.exports = {
             // Support for CSS as raw text
             {
                 test: /\.css$/,
-                loader: "raw"
+                loader: "raw-loader"
             },
             {
                 test: /\.scss$/,
@@ -99,6 +100,7 @@ module.exports = {
             "NODE_ENV": JSON.stringify(ENV)
         })
     ],
+    
     node: {
         global: "window",
         progress: false,
@@ -107,11 +109,13 @@ module.exports = {
         clearImmediate: false,
         setImmediate: false
     },
+    
     tslint: {
         emitErrors: false,
         failOnHint: false,
         resourcePath: "src"
     },
+    
     /**
      * PostCSS
      * Reference: https://github.com/postcss/autoprefixer

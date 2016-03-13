@@ -14,13 +14,15 @@ const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin
 
 // Metadata
 const ENV = process.env.ENV = process.env.NODE_ENV = "development";
+const HMR = helpers.hasProcessFlag("hot");
 
 const metadata = {
     title: "AngularJS Webpack Starter",
     baseUrl: "/",
     host: "localhost",
     port: 3000,
-    ENV: ENV
+    ENV: ENV,
+    HMR: HMR
 };
 
 /*
@@ -132,18 +134,25 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin({
             name: [ "main", "vendor", "polyfills" ],
+            filename: "[name].[hash].bundle.js",
             minChunks: Infinity
         }),
 
         // static assets
         new CopyWebpackPlugin([
             {
-                from: "src/assets",
-                to: "assets"
+                from: helpers.root("src/app/assets"),
+                to: "assets",
+                ignore: [
+                    "README.md"
+                ]
             },
             {
-                from: "src/assets-base",
-                to: ""
+                from: helpers.root("src/app/assets-base"),
+                to: "",
+                ignore: [
+                    "README.md"
+                ]
             }
         ]),
 
@@ -157,7 +166,7 @@ module.exports = {
         // Environment helpers (when adding more properties make sure you include them in environment.d.ts)
         new webpack.DefinePlugin({
             "ENV": JSON.stringify(metadata.ENV),
-            "HMR": false
+            "HMR": HMR
         })
     ],
     node: {
@@ -195,6 +204,7 @@ module.exports = {
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000
-        }
+        },
+        contentBase: helpers.root("src/app") // necessary so that assets are accessible
     }
 };

@@ -4,6 +4,7 @@ build/
 __build__/
 src/*/__build__/
 .tmp/
+stats.json
 
 # Sourcemaps
 *.map
@@ -50,5 +51,3 @@ Icon?
 pids
 *.pid
 *.seed
-
-stats.json

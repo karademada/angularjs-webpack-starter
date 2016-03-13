@@ -123,7 +123,7 @@
         "protractor": "protractor",
         "clean": "rimraf doc coverage dist stats.json",
         "preclean:all": "npm run clean",
-        "clean:all": "rimraf node_modules typings && npm cache clean",
+        "clean:all": "rimraf typings && npm cache clean",
         "preclean:install": "npm run clean:all",
         "clean:install": "npm install --no-optional",
         "clean:dist": "rimraf dist",

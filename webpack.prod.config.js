@@ -167,14 +167,16 @@ module.exports = {
                 from: helpers.root("src/app/assets"),
                 to: "assets",
                 ignore: [
-                    "README.md"
+                    "*.md",
+                    "*.txt"
                 ]
             },
             {
                 from: helpers.root("src/app/assets-base"),
                 to: "",
                 ignore: [
-                    "README.md"
+                    "*.md",
+                    "*.txt"
                 ]
             }
         ]),

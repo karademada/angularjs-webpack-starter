@@ -8,7 +8,7 @@ function hasProcessFlag(flag) {
 }
 
 function gzipMaxLevel(buffer, callback) {
-    return zlib["gzip"](buffer, {level: 9}, callback)
+    return zlib["gzip"](buffer, {level: 9}, callback);
 }
 
 function root(args) {
@@ -26,7 +26,7 @@ function prependExt(extensions, args) {
     if (!Array.isArray(args)) { args = [args] }
     return extensions.reduce(function(memo, val) {
         return memo.concat(val, args.map(function(prefix) {
-            return prefix + val
+            return prefix + val;
         }));
     }, [""]);
 }

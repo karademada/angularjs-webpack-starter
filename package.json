@@ -166,7 +166,7 @@
         "preversion": "npm test",
         "version": "npm run build",
         "outdated": "npm outdated",
-        "setup": "npm install --no-optional",
+        "setup": "npm install -g rimraf && npm install --no-optional",
         "postinstall": "npm run typings-install"
     }
 }

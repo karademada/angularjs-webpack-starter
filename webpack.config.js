@@ -27,12 +27,13 @@ const METADATA = {
 
 /*
  * Config
- * See: http://webpack.github.io/docs/configuration.html#cli
+ * reference: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = {
     // static data for index.html
     metadata: METADATA,
     
+    // Developer tool to enhance debugging
     // reference: https://webpack.github.io/docs/configuration.html#devtool
     // reference: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
     devtool: "cheap-module-eval-source-map",
@@ -43,6 +44,7 @@ module.exports = {
     // reference: http://webpack.github.io/docs/configuration.html#cache
     //cache: true,
     
+    // Switch loaders to debug mode
     // reference: http://webpack.github.io/docs/configuration.html#debug
     debug: true,
     
@@ -61,7 +63,6 @@ module.exports = {
 
     // Options affecting the output of the compilation
     // reference: http://webpack.github.io/docs/configuration.html#output
-    
     output: {
         // Mandatory but not actually useful since everything remains in memory with webpack-dev-server
         // reference: http://webpack.github.io/docs/configuration.html#output-path
@@ -76,12 +77,10 @@ module.exports = {
         filename: "[name].[hash].bundle.js",
         // The filename of the SourceMaps for the JavaScript files.
         // They are inside the output.path directory.
-        //
         // reference: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
         sourceMapFilename: "[name].[hash].map",
         // The filename of non-entry chunks as relative path
         // inside the output.path directory.
-        //
         // reference: http://webpack.github.io/docs/configuration.html#output-chunkfilename
         chunkFilename: "[id].[hash].chunk.js"
     },
@@ -96,7 +95,6 @@ module.exports = {
     },
 
     // Options affecting the normal modules.
-    //
     // reference: http://webpack.github.io/docs/configuration.html#module
     module: {
         noParse: [
@@ -104,9 +102,10 @@ module.exports = {
         ],
         
         // An array of applied pre and post loaders.
-        //
         // reference: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
         preLoaders: [
+            // TsLint loader support for *.ts files
+            // reference: https://github.com/wbuchwalter/tslint-loader
             {
                 test: /\.ts$/,
                 loader: "tslint",
@@ -114,6 +113,10 @@ module.exports = {
                     helpers.root("node_modules")
                 ]
             },
+
+            // Source map loader support for *.js files
+            // Extracts SourceMaps for source files that as added as sourceMappingURL comment.
+            // reference: https://github.com/webpack/source-map-loader
             {
                 test: /\.js$/,
                 loader: "source-map",
@@ -180,7 +183,6 @@ module.exports = {
     },
 
     // Add additional plugins to the compiler.
-    //
     // reference: http://webpack.github.io/docs/configuration.html#plugins
     plugins: [
         // Plugin: ForkCheckerPlugin
@@ -188,10 +190,10 @@ module.exports = {
         // reference: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
         new ForkCheckerPlugin(),
 
-        // content hashes
+        // Plugin: WebpackSHAHash
+        // Description: Generate SHA content hashes
         new WebpackSHAHash(),
-
-        // optimization
+        
         // Plugin: OccurenceOrderPlugin
         // Description: Varies the distribution of the ids to get the smallest id length
         // for often used ids.
@@ -210,7 +212,6 @@ module.exports = {
             minChunks: Infinity
         }),
 
-        // static assets
         // Plugin: CopyWebpackPlugin
         // Description: Copy files and directories in webpack.
         // Copies project static assets.

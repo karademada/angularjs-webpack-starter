@@ -1,8 +1,7 @@
 "use strict";
 
 // Polyfills
-import "es6-shim";
-import "es7-reflect-metadata";
+require("core-js");
 
 if ("development" === ENV) {
     // Ensure that we get detailed stack trackes during development (useful with node & Webpack)

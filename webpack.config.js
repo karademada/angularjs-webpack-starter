@@ -16,11 +16,11 @@ const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin
 const ENV = process.env.ENV = process.env.NODE_ENV = "development";
 const HMR = helpers.hasProcessFlag("hot");
 
-const metadata = {
+const METADATA = {
     title: "AngularJS Webpack Starter",
     baseUrl: "/",
-    host: "localhost",
-    port: 3000,
+    HOST: "localhost",
+    PORT: 3000,
     ENV: ENV,
     HMR: HMR
 };
@@ -30,7 +30,7 @@ const metadata = {
  */
 module.exports = {
     // static data for index.html
-    metadata: metadata,
+    metadata: METADATA,
 
     // reference: https://webpack.github.io/docs/configuration.html#devtool
     devtool: "cheap-module-eval-source-map",
@@ -180,7 +180,7 @@ module.exports = {
 
         // Environment helpers (when adding more properties make sure you include them in environment.d.ts)
         new webpack.DefinePlugin({
-            "ENV": JSON.stringify(metadata.ENV),
+            "ENV": JSON.stringify(METADATA.ENV),
             "HMR": HMR
         })
     ],
@@ -213,8 +213,8 @@ module.exports = {
     // Other module loader config
     // our Webpack Development Server config
     devServer: {
-        port: metadata.port,
-        host: metadata.host,
+        port: METADATA.PORT,
+        host: METADATA.HOST,
         historyApiFallback: true,
         watchOptions: {
             aggregateTimeout: 300,

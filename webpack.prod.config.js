@@ -15,11 +15,11 @@ const WebpackSHAHash = require("webpack-sha-hash");
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 // Metadata
-var ENV = process.env.NODE_ENV = process.env.ENV = "production";
-var HOST = process.env.HOST || "localhost";
-var PORT = process.env.PORT || 8080;
+const ENV = process.env.NODE_ENV = process.env.ENV = "production";
+const HOST = process.env.HOST || "localhost";
+const PORT = process.env.PORT || 8080;
 
-const metadata = {
+const METADATA = {
     title: "AngularJS Webpack Starter",
     baseUrl: "/",
     host: HOST,
@@ -32,7 +32,7 @@ const metadata = {
  */
 module.exports = {
     // static data for index.html
-    metadata: metadata,
+    metadata: METADATA,
 
     // reference: https://webpack.github.io/docs/configuration.html#devtool
     devtool: "source-map",
@@ -157,7 +157,8 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(true),
         new webpack.optimize.CommonsChunkPlugin({
             name: [ "main", "vendor", "polyfills" ],
-            filename: "[name].[hash].bundle.js",
+            // the filename configured in the output section is reused
+            //filename: "[name].[hash].bundle.js",
             chunks: Infinity
         }),
 
@@ -197,8 +198,8 @@ module.exports = {
         // define vars
         new webpack.DefinePlugin({
             // Environment helpers
-            "ENV": JSON.stringify(metadata.ENV),
-            "NODE_ENV": JSON.stringify(metadata.ENV),
+            "ENV": JSON.stringify(METADATA.ENV),
+            "NODE_ENV": JSON.stringify(METADATA.ENV),
             "HMR": false
         }),
 

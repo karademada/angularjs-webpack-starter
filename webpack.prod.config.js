@@ -236,7 +236,7 @@ module.exports = {
 
     node: {
         global: "window",
-        progress: false,
+        process: false,
         crypto: "empty",
         module: false,
         clearImmediate: false,

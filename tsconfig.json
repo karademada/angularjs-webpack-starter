@@ -12,6 +12,7 @@
         "noEmitOnError": false,
         "preserveConstEnums": true,
         "inlineSources": false,
+        "pretty": true,
         "sourceMap": true,
         "outDir": "./.tmp",
         "rootDir": "./src",

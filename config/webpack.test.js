@@ -49,7 +49,10 @@ module.exports = {
         cache: false,
         // an array of extensions that should be used to resolve modules.
         // reference: http://webpack.github.io/docs/configuration.html#resolve-extensions
-        extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"]
+        extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"],
+
+        // Make sure that the root is src
+        root: helpers.root("src")
     },
 
     // Options affecting the normal modules.

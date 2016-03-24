@@ -7,26 +7,25 @@ const autoprefixer = require("autoprefixer");
 const helpers = require("./helpers");
 
 // Webpack Plugins
-const CompressionPlugin = require("compression-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const WebpackSHAHash = require("webpack-sha-hash");
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 
 // Metadata
-const ENV = process.env.NODE_ENV = process.env.ENV = "production";
-const HOST = process.env.HOST || "localhost";
-const PORT = process.env.PORT || 8080;
-const PRODUCTION = true;
-const DEVELOPMENT = false;
+const ENV = process.env.ENV = process.env.NODE_ENV = "development";
+const HMR = helpers.hasProcessFlag("hot");
+const PRODUCTION = false;
+const DEVELOPMENT = true;
 
 const METADATA = {
     title: "AngularJS Webpack Starter",
     baseUrl: "/",
-    host: HOST,
-    port: PORT,
+    HOST: "localhost",
+    PORT: 3000,
     ENV: ENV,
+    HMR: HMR,
     PRODUCTION: PRODUCTION,
     DEVELOPMENT: DEVELOPMENT
 };
@@ -38,7 +37,7 @@ const METADATA = {
 module.exports = {
     // static data for index.html
     metadata: METADATA,
-
+    
     // Developer tool to enhance debugging
     // reference: https://webpack.github.io/docs/configuration.html#devtool
     // reference: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
@@ -49,11 +48,11 @@ module.exports = {
     // You can pass false to disable it
     // reference: http://webpack.github.io/docs/configuration.html#cache
     //cache: true,
-
+    
     // Switch loaders to debug mode
     // reference: http://webpack.github.io/docs/configuration.html#debug
-    debug: false,
-
+    debug: true,
+    
     stats: {
         colors: true,
         reasons: true
@@ -64,7 +63,7 @@ module.exports = {
     entry: {
         "polyfills": helpers.root("src/polyfills.ts"),
         "vendor": helpers.root("src/vendor.ts"),
-        "main": helpers.root("src/main.ts") // our angular app
+        "main": helpers.root("src/main.ts")
     },
 
     // Options affecting the output of the compilation
@@ -80,24 +79,26 @@ module.exports = {
         // Adding hashes to files for cache busting
         // IMPORTANT: You must not specify an absolute path here!
         // reference: http://webpack.github.io/docs/configuration.html#output-filename
-        filename: "[name].[chunkhash].bundle.js",
+        filename: "[name].[hash].bundle.js",
         // The filename of the SourceMaps for the JavaScript files.
         // They are inside the output.path directory.
         // reference: http://webpack.github.io/docs/configuration.html#output-sourcemapfilename
-        sourceMapFilename: "[name].[chunkhash].bundle.map",
+        sourceMapFilename: "[name].[hash].map",
         // The filename of non-entry chunks as relative path
         // inside the output.path directory.
         // reference: http://webpack.github.io/docs/configuration.html#output-chunkfilename
-        chunkFilename: "[id].[chunkhash].chunk.js"
+        chunkFilename: "[id].[hash].chunk.js"
     },
 
     // Options affecting the resolving of modules.
     // reference: http://webpack.github.io/docs/configuration.html#resolve
     resolve: {
-        cache: false,
         // an array of extensions that should be used to resolve modules.
         // reference: http://webpack.github.io/docs/configuration.html#resolve-extensions
-        extensions: [ "", ".ts", ".js", ".json", ".css", ".scss", ".html" ]
+        extensions: [ "", ".ts", ".js", ".json", ".css", ".scss", ".html" ],
+
+        // Make sure that the root is src
+        root: helpers.root("src")
     },
 
     // Options affecting the normal modules.
@@ -106,7 +107,7 @@ module.exports = {
         noParse: [
             // things that should not be parsed
         ],
-
+        
         // An array of applied pre and post loaders.
         // reference: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
         preLoaders: [
@@ -139,23 +140,18 @@ module.exports = {
         //
         // reference: http://webpack.github.io/docs/configuration.html#module-loaders
         loaders: [
-            // Support for .ts files
+            // Support for .ts files.
             // reference: https://github.com/s-panferov/awesome-typescript-loader
             {
                 test: /\.ts$/,
                 loader: "awesome-typescript",
-                query: {
-                    "compilerOptions": {
-                        "removeComments": true
-                    }
-                },
                 exclude: [
                     /\.e2e\.ts$/,
                     /\.spec\.ts$/
                 ]
             },
-
-            // Support for *.json files
+            
+            // Support for .json files.
             {
                 test: /\.json$/,
                 loader: "json"
@@ -182,7 +178,7 @@ module.exports = {
             // Support for .html with ngTemplate loader to use the Angular's $templateCache service
             {
                 test: /\.html$/,
-                loaders: [ "ngtemplate", "html" ],
+                loaders: ["ngtemplate", "html"],
                 exclude: [
                     helpers.root("src/index.html")
                 ]
@@ -199,11 +195,6 @@ module.exports = {
     // Add additional plugins to the compiler.
     // reference: http://webpack.github.io/docs/configuration.html#plugins
     plugins: [
-        // Plugin: NoErrorsPlugin
-        // Description: Only emit files when there are no errors.
-        // reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
-        new webpack.NoErrorsPlugin(),
-
         // Plugin: ForkCheckerPlugin
         // Description: Do type checking in a separate process, so webpack don't need to wait.
         // reference: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
@@ -212,14 +203,7 @@ module.exports = {
         // Plugin: WebpackSHAHash
         // Description: Generate SHA content hashes
         new WebpackSHAHash(),
-
-        // Plugin: DedupePlugin
-        // Description: Prevents the inclusion of duplicate code into your bundle
-        // and instead applies a copy of the function at runtime.
-        // reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-        // reference: https://github.com/webpack/docs/wiki/optimization#deduplication
-        new webpack.optimize.DedupePlugin(),
-
+        
         // Plugin: OccurenceOrderPlugin
         // Description: Varies the distribution of the ids to get the smallest id length
         // for often used ids.
@@ -234,9 +218,8 @@ module.exports = {
         // reference: https://github.com/webpack/docs/wiki/optimization#multi-page-app
         new webpack.optimize.CommonsChunkPlugin({
             name: [ "main", "vendor", "polyfills" ],
-            // the filename configured in the output section is reused
-            //filename: "[name].[hash].bundle.js",
-            chunks: Infinity
+            filename: "[name].[hash].bundle.js",
+            minChunks: Infinity
         }),
 
         // Plugin: CopyWebpackPlugin
@@ -261,7 +244,7 @@ module.exports = {
                 ]
             }
         ]),
-
+        
         // Plugin: HtmlWebpackPlugin
         // Description: Simplifies creation of HTML files to serve your webpack bundles.
         // This is especially useful for webpack bundles that include a hash in the filename
@@ -276,9 +259,8 @@ module.exports = {
         // Description: Extract css file contents
         // reference: https://github.com/webpack/extract-text-webpack-plugin
         new ExtractTextWebpackPlugin("[name].[hash].css", {
-                disable: false
-            }
-        ),
+            disable: false
+        }),
 
         // Environment helpers (when adding more properties make sure you include them in environment.d.ts)
         // Plugin: DefinePlugin
@@ -287,68 +269,32 @@ module.exports = {
         // reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
         // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
         new webpack.DefinePlugin({
-            // Environment helpers
             "ENV": JSON.stringify(METADATA.ENV),
-            "NODE_ENV": JSON.stringify(METADATA.ENV),
-            "HMR": false,
+            "HMR": METADATA.HMR,
             "PRODUCTION": METADATA.PRODUCTION,
             "DEVELOPMENT": METADATA.DEVELOPMENT
-        }),
-
-        // Plugin: Uglify
-        // Description: minify code, compress, ...
-        // reference: https://github.com/mishoo/UglifyJS2#usage
-        new webpack.optimize.UglifyJsPlugin({
-            beautify: false, // set to true for debugging
-            //dead_code: false, // uncomment for debugging
-            //unused: false, // uncomment for debugging
-            mangle: {
-                screw_ie8: true,
-                except: [
-                    // list strings that should not be mangled here
-                ]
-            },
-            compress: {
-                screw_ie8: true
-                // uncomment for debugging
-                //,
-                //keep_fnames: true,
-                //drop_debugger: false,
-                //dead_code: false,
-                //unused: false
-            },
-            comments: false // set to true for debugging
-        }),
-
-        // Plugin: CompressionPlugin
-        // Description: Prepares compressed versions of assets to serve
-        // them with Content-Encoding
-        // reference: https://github.com/webpack/compression-webpack-plugin
-        new CompressionPlugin({
-            algorithm: helpers.gzipMaxLevel,
-            regExp: /\.css$|\.html$|\.js$|\.map$/,
-            threshold: 2 * 1024
         })
     ],
-
+    
     // Include polyfills or mocks for various node stuff
     // Description: Node configuration
     // reference: https://webpack.github.io/docs/configuration.html#node
     node: {
         global: "window",
-        process: false,
+        //progress: false,
+        process: true,
         crypto: "empty",
         module: false,
         clearImmediate: false,
         setImmediate: false
     },
-
+        
     // Static analysis linter for TypeScript advanced options configuration
     // Description: An extensible linter for the TypeScript language.
     // reference: https://github.com/wbuchwalter/tslint-loader
     tslint: {
-        emitErrors: true,
-        failOnHint: true,
+        emitErrors: false,
+        failOnHint: false,
         resourcePath: "src"
     },
 
@@ -361,14 +307,31 @@ module.exports = {
             browsers: [ "last 2 versions" ]
         })
     ],
+    
+    // Webpack Development Server configuration
+    // Description: The webpack-dev-server is a little node.js Express server.
+    // The server emits information about the compilation state to the client,
+    // which reacts to those events.
+    // reference: https://webpack.github.io/docs/webpack-dev-server.html
+    devServer: {
+        port: METADATA.PORT,
+        host: METADATA.HOST,
+
+        // HTML5 History API support: no need for # in URLs
+        // automatically redirect 404 errors to the index.html page
+        historyApiFallback: true,
+
+        // file watch configuration
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000
+        },
+        contentBase: helpers.root("src/app"), // necessary so that assets are accessible
         
-    // Html loader for HTML minification (advanced options)
-    // reference: https://github.com/webpack/html-loader#advanced-options
-    htmlLoader: {
-        minimize: true,
-        removeAttributeQuotes: false,
-        caseSensitive: true,
-        customAttrSurround: [ [ /#/, /(?:)/ ], [ /\*/, /(?:)/ ], [ /\[?\(?/, /(?:)/ ] ],
-        customAttrAssign: [ /\)?\]?=/ ]
+        // Can be used to add specific headers
+        headers: {
+            // enable CORS
+            "Access-Control-Allow-Origin": "*"
+        }
     }
 };

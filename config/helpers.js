@@ -1,7 +1,10 @@
-var path = require("path");
-var zlib = require("zlib");
+"use strict";
+
+const path = require("path");
+const zlib = require("zlib");
 
 // Helper functions
+const _root = path.resolve(__dirname, ".."); // project root folder
 
 function hasProcessFlag(flag) {
     return process.argv.join("").indexOf(flag) > -1;
@@ -13,7 +16,7 @@ function gzipMaxLevel(buffer, callback) {
 
 function root(args) {
     args = Array.prototype.slice.call(arguments, 0);
-    return path.join.apply(path, [__dirname].concat(args));
+    return path.join.apply(path, [_root].concat(args));
 }
 
 function rootNode(args) {

@@ -1,3 +1,5 @@
+"use strict";
+
 /*
  * When testing with webpack and ES6, we have to do some extra
  * things get testing to work right. Because we are gonna write test
@@ -12,6 +14,8 @@ Error.stackTraceLimit = Infinity;
 //require("phantomjs-polyfill");
 require("core-js");
 
+// WARNING: this file MUST be written using ES5
+
 /*
  Ok, this is kinda crazy. We can use the the context method on
  require that webpack created in order to tell webpack
@@ -21,7 +25,7 @@ require("core-js");
  any file that ends with spec.js and get its path. By passing in true
  we say do this recursively
  */
-const testContext = require.context("./src", true, /\.spec\.ts/);
+var testContext = require.context("../src", true, /\.spec\.ts/);
 
 // get all the files, for each file, call the context function
 // that will require the file and load it up here. Context will
@@ -30,5 +34,5 @@ function requireAll(requireContext) {
     return requireContext.keys().map(requireContext);
 }
 
-const modules = requireAll(testContext);
+var modules = requireAll(testContext);
 // requires and returns all modules that match

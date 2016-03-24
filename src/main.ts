@@ -23,7 +23,7 @@ function bootstrapDomReady() {
     return document.addEventListener("DOMContentLoaded", main);
 }
 
-if("development" === ENV) {
+if(DEVELOPMENT) {
     console.log("Development environment");
 
     // activate Hot Module Replacement (HMR)

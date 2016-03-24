@@ -1,10 +1,14 @@
-// Extra variables that live on Global that will be replaced by webpack DefinePlugin
-declare let ENV: string;
-declare let HMR: boolean;
+// Extra variables that live on Global that will be replaced by Webpack's DefinePlugin
+declare const ENV: string;
+declare const HMR: boolean;
+declare const PRODUCTION: boolean;
+declare const DEVELOPMENT: boolean;
 
 interface GlobalEnvironment {
     ENV: string;
     HMR: boolean;
+    PRODUCTION: boolean;
+    DEVELOPMENT: boolean;
 }
 
 interface WebpackModule {
@@ -22,7 +26,7 @@ interface WebpackModule {
         removeStatusHandler(callback?: (status?: string) => void): void;
     };
 }
-interface WebpackRequire extends NodeRequireFunction {
+interface WebpackRequire {
     context(file: string, flag?: boolean, exp?: RegExp): any;
 }
 
@@ -35,3 +39,13 @@ interface NodeRequire extends WebpackRequire {}
 interface ErrorConstructor extends ErrorStackTraceLimit {}
 interface NodeModule extends WebpackModule {}
 interface Global extends GlobalEnvironment  {}
+
+interface Thenable<T> {
+    then<U>(
+        onFulfilled?: (value: T) => U | Thenable<U>,
+        onRejected?: (error: any) => U | Thenable<U>): Thenable<U>;
+    then<U>(
+        onFulfilled?: (value: T) => U | Thenable<U>,
+        onRejected?: (error: any) => void): Thenable<U>;
+    catch<U>(onRejected?: (error: any) => U | Thenable<U>): Thenable<U>;
+}

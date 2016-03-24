@@ -9,9 +9,13 @@ const helpers = require("./helpers");
 
 // Metadata
 const ENV = process.env.ENV = process.env.NODE_ENV = "test";
+const PRODUCTION = false;
+const DEVELOPMENT = true;
 
 const METADATA = {
-    ENV: ENV
+    ENV: ENV,
+    PRODUCTION: PRODUCTION,
+    DEVELOPMENT: DEVELOPMENT
 };
 
 /*
@@ -169,7 +173,10 @@ module.exports = {
         new webpack.DefinePlugin({
             // Environment helpers
             "ENV": JSON.stringify(METADATA.ENV),
-            "NODE_ENV": JSON.stringify(METADATA.ENV)
+            "NODE_ENV": JSON.stringify(METADATA.ENV),
+            "HMR": false,
+            "PRODUCTION": METADATA.PRODUCTION,
+            "DEVELOPMENT": METADATA.DEVELOPMENT
         }),
 
         // Plugin: ExtractTextWebpackPlugin

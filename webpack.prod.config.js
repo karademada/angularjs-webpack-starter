@@ -18,13 +18,17 @@ const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin
 const ENV = process.env.NODE_ENV = process.env.ENV = "production";
 const HOST = process.env.HOST || "localhost";
 const PORT = process.env.PORT || 8080;
+const PRODUCTION = true;
+const DEVELOPMENT = false;
 
 const METADATA = {
     title: "AngularJS Webpack Starter",
     baseUrl: "/",
     host: HOST,
     port: PORT,
-    ENV: ENV
+    ENV: ENV,
+    PRODUCTION: PRODUCTION,
+    DEVELOPMENT: DEVELOPMENT
 };
 
 /*
@@ -286,7 +290,9 @@ module.exports = {
             // Environment helpers
             "ENV": JSON.stringify(METADATA.ENV),
             "NODE_ENV": JSON.stringify(METADATA.ENV),
-            "HMR": false
+            "HMR": false,
+            "PRODUCTION": METADATA.PRODUCTION,
+            "DEVELOPMENT": METADATA.DEVELOPMENT
         }),
 
         // Plugin: Uglify

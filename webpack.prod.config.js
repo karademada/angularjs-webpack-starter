@@ -72,7 +72,7 @@ module.exports = {
         // We need to tell Webpack to serve our bundled application
         // from the build path. When proxying:
         // http://localhost:3000/ -> http://localhost:8080/
-        publicPath: '/',
+        publicPath: "/",
         // Adding hashes to files for cache busting
         // IMPORTANT: You must not specify an absolute path here!
         // reference: http://webpack.github.io/docs/configuration.html#output-filename
@@ -88,7 +88,6 @@ module.exports = {
     },
 
     // Options affecting the resolving of modules.
-    //
     // reference: http://webpack.github.io/docs/configuration.html#resolve
     resolve: {
         cache: false,
@@ -169,8 +168,11 @@ module.exports = {
             // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
             {
                 test: /\.scss$/,
-                //loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss!sass")
-                loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"]
+                loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss?sourceMap!sass?sourceMap")
+                // Alternative: avoid using extract-text-webpack-plugin
+                // with the alternative, the stylesheets MUST be imported in code (e.g., require('...'))
+                // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
+                // loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"]
             },
 
             // Support for .html with ngTemplate loader to use the Angular's $templateCache service
@@ -287,9 +289,10 @@ module.exports = {
             "HMR": false
         }),
 
-        // Uglify
+        // Plugin: Uglify
+        // Description: minify code, compress, ...
+        // reference: https://github.com/mishoo/UglifyJS2#usage
         new webpack.optimize.UglifyJsPlugin({
-            // reference: https://github.com/mishoo/UglifyJS2#usage
             beautify: false, // set to true for debugging
             //dead_code: false, // uncomment for debugging
             //unused: false, // uncomment for debugging
@@ -343,12 +346,11 @@ module.exports = {
         resourcePath: "src"
     },
 
-    /**
-     * PostCSS
-     * Reference: https://github.com/postcss/autoprefixer
-     * Add vendor prefixes to css
-     */
+    // PostCSS plugins configuration
+    // Reference: https://github.com/postcss/postcss
     postcss: [
+        // Autoprefixing
+        // Reference: https://github.com/postcss/autoprefixer
         autoprefixer({
             browsers: [ "last 2 versions" ]
         })

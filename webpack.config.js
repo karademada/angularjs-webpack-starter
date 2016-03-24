@@ -11,6 +11,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackSHAHash = require("webpack-sha-hash");
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 
 // Metadata
 const ENV = process.env.ENV = process.env.NODE_ENV = "development";
@@ -36,7 +37,7 @@ module.exports = {
     // Developer tool to enhance debugging
     // reference: https://webpack.github.io/docs/configuration.html#devtool
     // reference: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-    devtool: "cheap-module-eval-source-map",
+    devtool: "source-map",
 
     // Cache generated modules and chunks to improve performance for multiple incremental builds.
     // Enabled by default in watch mode.
@@ -70,7 +71,7 @@ module.exports = {
         // We need to tell Webpack to serve our bundled application
         // from the build path. When proxying:
         // http://localhost:3000/ -> http://localhost:8080/
-        publicPath: '/',
+        publicPath: "/",
         // Adding hashes to files for cache busting
         // IMPORTANT: You must not specify an absolute path here!
         // reference: http://webpack.github.io/docs/configuration.html#output-filename
@@ -86,7 +87,6 @@ module.exports = {
     },
 
     // Options affecting the resolving of modules.
-    //
     // reference: http://webpack.github.io/docs/configuration.html#resolve
     resolve: {
         // an array of extensions that should be used to resolve modules.
@@ -161,8 +161,11 @@ module.exports = {
             // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
             {
                 test: /\.scss$/,
-                //loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss!sass")
-                loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"]
+                loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss?sourceMap!sass?sourceMap")
+                // Alternative: avoid using extract-text-webpack-plugin
+                // with the alternative, the stylesheets MUST be imported in code (e.g., require('...'))
+                // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
+                // loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"]
             },
 
             // Support for .html with ngTemplate loader to use the Angular's $templateCache service
@@ -245,6 +248,13 @@ module.exports = {
             chunksSortMode: "none"
         }),
 
+        // Plugin: ExtractTextWebpackPlugin
+        // Description: Extract css file contents
+        // reference: https://github.com/webpack/extract-text-webpack-plugin
+        new ExtractTextWebpackPlugin("[name].[hash].css", {
+            disable: false
+        }),
+
         // Environment helpers (when adding more properties make sure you include them in environment.d.ts)
         // Plugin: DefinePlugin
         // Description: Define free variables.
@@ -279,12 +289,11 @@ module.exports = {
         resourcePath: "src"
     },
 
-    /**
-     * PostCSS
-     * Reference: https://github.com/postcss/autoprefixer
-     * Add vendor prefixes to css
-     */
+    // PostCSS plugins configuration
+    // Reference: https://github.com/postcss/postcss
     postcss: [
+        // Autoprefixing
+        // Reference: https://github.com/postcss/autoprefixer
         autoprefixer({
             browsers: [ "last 2 versions" ]
         })
@@ -298,11 +307,22 @@ module.exports = {
     devServer: {
         port: METADATA.PORT,
         host: METADATA.HOST,
+
+        // HTML5 History API support: no need for # in URLs
+        // automatically redirect 404 errors to the index.html page
         historyApiFallback: true,
+
+        // file watch configuration
         watchOptions: {
             aggregateTimeout: 300,
             poll: 1000
         },
-        contentBase: helpers.root("src/app") // necessary so that assets are accessible
+        contentBase: helpers.root("src/app"), // necessary so that assets are accessible
+        
+        // Can be used to add specific headers
+        headers: {
+            // enable CORS
+            "Access-Control-Allow-Origin": "*"
+        }
     }
 };

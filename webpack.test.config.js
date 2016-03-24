@@ -2,12 +2,17 @@
 
 const webpack = require("webpack");
 const autoprefixer = require("autoprefixer");
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 
 // Helpers
 const helpers = require("./helpers");
 
 // Metadata
-let ENV = process.env.ENV = process.env.NODE_ENV = "test";
+const ENV = process.env.ENV = process.env.NODE_ENV = "test";
+
+const METADATA = {
+    ENV: ENV
+};
 
 /*
  * Config
@@ -35,10 +40,11 @@ module.exports = {
     },
 
     // Options affecting the resolving of modules.
-    //
     // reference: http://webpack.github.io/docs/configuration.html#resolve
     resolve: {
         cache: false,
+        // an array of extensions that should be used to resolve modules.
+        // reference: http://webpack.github.io/docs/configuration.html#resolve-extensions
         extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"]
     },
 
@@ -88,7 +94,7 @@ module.exports = {
                 loader: "awesome-typescript-loader",
                 query: {
                     "compilerOptions": {
-                        "removeComments": true,
+                        "removeComments": true
                     }
                 },
                 exclude: [
@@ -113,8 +119,11 @@ module.exports = {
             // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
             {
                 test: /\.scss$/,
-                //loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss!sass")
-                loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"]
+                loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss?sourceMap!sass?sourceMap")
+                // Alternative: avoid using extract-text-webpack-plugin
+                // with the alternative, the stylesheets MUST be imported in code (e.g., require('...'))
+                // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
+                // loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"]
             },
 
             // Support for .html with ngTemplate loader to use the Angular's $templateCache service
@@ -159,8 +168,15 @@ module.exports = {
         // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
         new webpack.DefinePlugin({
             // Environment helpers
-            "ENV": JSON.stringify(ENV),
-            "NODE_ENV": JSON.stringify(ENV)
+            "ENV": JSON.stringify(METADATA.ENV),
+            "NODE_ENV": JSON.stringify(METADATA.ENV)
+        }),
+
+        // Plugin: ExtractTextWebpackPlugin
+        // Description: Extract css file contents
+        // reference: https://github.com/webpack/extract-text-webpack-plugin
+        new ExtractTextWebpackPlugin("[name].[hash].css", {
+            disable: false
         })
     ],
 
@@ -184,13 +200,12 @@ module.exports = {
         failOnHint: false,
         resourcePath: "src"
     },
-    
-    /**
-     * PostCSS
-     * Reference: https://github.com/postcss/autoprefixer
-     * Add vendor prefixes to css
-     */
+
+    // PostCSS plugins configuration
+    // Reference: https://github.com/postcss/postcss
     postcss: [
+        // Autoprefixing
+        // Reference: https://github.com/postcss/autoprefixer
         autoprefixer({
             browsers: ["last 2 versions"]
         })

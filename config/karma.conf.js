@@ -81,10 +81,10 @@ module.exports = (config) => {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
-            "PhantomJS"
-            //"Chrome",
-            //"Firefox",
-            //"IE"
+            "PhantomJS",
+            "Chrome",
+            "Firefox",
+            "IE"
         ],
 
         // enable / disable watching file and executing tests whenever any file changes

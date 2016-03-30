@@ -24,7 +24,7 @@ module.exports = (config) => {
         // list of files / patterns to load in the browser
         files: [
             {
-                pattern: "./config/spec-bundle.js",
+                pattern: helpers.root("config/spec-bundle.js"),
                 watched: false
             }
         ],
@@ -49,7 +49,7 @@ module.exports = (config) => {
 
         // test coverage
         coverageReporter: {
-            dir: helpers.root("coverage"),
+            dir: helpers.root("reports/coverage"),
             reporters: [
                 {type: "text-summary"},
                 {type: "json"},
@@ -94,7 +94,7 @@ module.exports = (config) => {
         singleRun: false,
 
         junitReporter: {
-            outputDir: helpers.root("coverage/"),
+            outputDir: helpers.root("reports/coverage/"),
             outputFile: "tests-unit/unit.xml",
             suite: "unit"
         }

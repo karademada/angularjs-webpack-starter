@@ -76,6 +76,9 @@ If the above does not work in your case, then check to make sure that the user a
 * git/
 * typings/
 
+## Build tasks
+* profiling: generate Webpack profiling information under `reports/profiling`. The stats.json file can be uploaded to http://webpack.github.io/analyse/ for analysis
+
 ## Links
 * https://github.com/karma-runner/karma-junit-reporter
 * https://www.npmjs.com/package/karma-istanbul-reporter

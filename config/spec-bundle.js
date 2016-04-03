@@ -14,6 +14,9 @@ Error.stackTraceLimit = Infinity;
 //require("phantomjs-polyfill");
 require("core-js");
 
+// load the RxJS operators
+require("../src/rxjs-operators");
+
 // WARNING: this file MUST be written using ES5
 
 /*
@@ -21,8 +24,8 @@ require("core-js");
  require that webpack created in order to tell webpack
  what files we actually want to require or import.
  Below, context will be an function/object with file names as keys.
- using that regex we are saying look in ./src/app and ./test then find
- any file that ends with spec.js and get its path. By passing in true
+ using that regex we are saying look in ../src then find
+ any file that ends with spec.ts and get its path. By passing in true
  we say do this recursively
  */
 var testContext = require.context("../src", true, /\.spec\.ts/);

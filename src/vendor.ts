@@ -23,8 +23,7 @@ import "immutable-angular";
 import "rxjs";
 
 // RxJS operators
-// Add any additional required operators here 
-require("rxjs/add/operator/map");
+import "./rxjs-operators";
 
 // 3rd party styles
 import "./app/css/vendor.scss";

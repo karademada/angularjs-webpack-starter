@@ -130,12 +130,12 @@ exports.config = {
     // ----- What tests to run ---------------------------------------------------
     // ---------------------------------------------------------------------------
 
-    // Use default globals: 'protractor', 'brower', '$', '$$', 'element', 'by'.
+    // Use default globals: "protractor", "brower", "$", "$$", "element", "by".
     // These also exist as properties of the protractor namespace:
-    // 'protractor.browser', 'protractor.$', 'protractor.$$', 'protractor.element',
-    // 'protractor.by', and 'protractor.By'.
+    // "protractor.browser", "protractor.$", "protractor.$$", "protractor.element",
+    // "protractor.by", and "protractor.By".
     // When no globals is set to true, the only available global variable will be
-    // 'protractor'.
+    // "protractor".
     //noGlobals: false,
 
     // Spec patterns are relative to the location of this config.
@@ -184,25 +184,22 @@ exports.config = {
             "version": "11",
             logName: "Internet Explorer " // the space is necessary because the version is added directly after
         },
-
-        // NOT implemented see https://jira.prd.nbb/browse/NG-476
+        
         // the configuration below works if a Firefox version is available locally
-        //{
-        //	"browserName": "firefox",
-        //	logName: "Mozilla Firefox"
-        //},
-
-        // NOT implemented, see https://jira.prd.nbb/browse/NG-480
+        {
+        	"browserName": "firefox",
+        	logName: "Mozilla Firefox"
+        },
+        
         //{
         //	"browserName": "MicrosoftEdge",
         //	logName: "Microsoft Edge"
         //},
-
-        // NOT implemented, see https://jira.prd.nbb/browse/NG-481
+        
         //{
         //	"browserName": "safari",
         //  logName: "Safari"
-        //}
+        //},
 
         {
             "browserName": "chrome",
@@ -210,20 +207,20 @@ exports.config = {
             "chromeOptions": {
                 "args": [
                     "show-fps-counter=true",
-                    // TODO remove once the following issue is fixed: https://jira.prd.nbb/browse/NG-468
+                    // needed if your machine policy does not allow for Chrome extensions to be installed
                     // note that this probably removes the ability to create screenshots during tests
-                    "disable-extensions"
+                    //"disable-extensions"
                 ]
             },
 
             // Name of the process executing this capability.  Not used directly by
             // protractor or the browser, but instead pass directly to third parties
             // like BrowserStack and SauceLabs as the name of the job running this test
-            //name: 'Stark e2e Job',
+            //name: "e2e Job",
 
             // User defined name for the capability that will display in the results log
             // Defaults to the browser name
-            logName: 'Google Chrome',
+            logName: "Google Chrome",
 
             // Number of times to run this set of capabilities (in parallel, unless
             // limited by maxSessions). Default is 1.
@@ -240,10 +237,10 @@ exports.config = {
             //maxInstances: 1,
 
             // Additional spec files to be run on this capability only.
-            //specs: ['spec/chromeOnlySpec.js'],
+            //specs: ["spec/chromeOnlySpec.js"],
 
             // Spec files to be excluded on this capability only.
-            //exclude: ['spec/doNotRunInChromeSpec.js'],
+            //exclude: ["spec/doNotRunInChromeSpec.js"],
 
             // Optional: override global seleniumAddress on this capability only.
             //seleniumAddress: null
@@ -280,7 +277,7 @@ exports.config = {
 
     // CSS Selector for the element housing the angular app - this defaults to
     // body, but is necessary if ng-app is on a descendant of <body>.
-    //rootElement: 'body',
+    //rootElement: "body",
 
     // The timeout in milliseconds for each script run on the browser. This should
     // be longer than the maximum time your application needs to stabilize between
@@ -295,7 +292,7 @@ exports.config = {
     // You can specify a file containing code to run by setting beforeLaunch to
     // the filename string.
     beforeLaunch: function () {
-        // At this point, global variable 'protractor' object will NOT be set up,
+        // At this point, global variable "protractor" object will NOT be set up,
         // and globals from the test framework will NOT be available. The main
         // purpose of this function should be to bring up test dependencies.
     },
@@ -312,18 +309,18 @@ exports.config = {
     // Protractor cannot guarantee order of execution and may start the tests
     // before preparation finishes.
     onPrepare: function () {
-        // At this point, global variable 'protractor' object will be set up, and
+        // At this point, global variable "protractor" object will be set up, and
         // globals from the test framework will be available. For example, if you
         // are using Jasmine, you can add a reporter with:
         //     jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter(
-        //         'outputdir/', true, true));
+        //         "outputdir/", true, true));
         //
         // If you need access back to the current configuration object,
         // use a pattern like the following:
         //     return browser.getProcessedConfig().then(function(config) {
         //       // config.capabilities is the CURRENT capability being run, if
         //       // you are using multiCapabilities.
-        //       console.log('Executing capability', config.capabilities);
+        //       console.log("Executing capability", config.capabilities);
         //     });
         browser.ignoreSynchronization = true;
     },
@@ -384,8 +381,8 @@ exports.config = {
     //
     // When the framework is set to "custom" you'll need to additionally
     // set frameworkPath with the path relative to the config file or absolute
-    //  framework: 'custom',
-    //  frameworkPath: './frameworks/my_custom_jasmine.js',
+    //  framework: "custom",
+    //  frameworkPath: "./frameworks/my_custom_jasmine.js",
     // See github.com/angular/protractor/blob/master/lib/frameworks/README.md
     // to comply with the interface details of your custom implementation.
     //
@@ -421,9 +418,9 @@ exports.config = {
 
         // If set, only execute specs whose names match the pattern, which is
         // internally compiled to a RegExp.
-        //grep: 'pattern',
+        //grep: "pattern",
 
-        // Inverts 'grep' matches
+        // Inverts "grep" matches
         //invertGrep: false
     }
 

@@ -73,7 +73,10 @@ module.exports = {
         extensions: [ "", ".ts", ".js", ".json", ".css", ".scss", ".html" ],
 
         // Make sure that the root is src
-        root: helpers.root("src")
+        root: helpers.root("src"),
+        
+        // Remove other default values
+        modulesDirectories: ["node_modules"]
     },
 
     // Options affecting the normal modules.
@@ -189,7 +192,7 @@ module.exports = {
         // reference: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
         // reference: https://github.com/webpack/docs/wiki/optimization#multi-page-app
         new webpack.optimize.CommonsChunkPlugin({
-            name: [ "main", "vendor", "polyfills" ],
+            name: helpers.reverse([ "polyfills", "vendor", "main" ]),
             // the filename configured in the output section is reused
             //filename: "[name].[hash].bundle.js",
             chunks: Infinity
@@ -225,7 +228,7 @@ module.exports = {
         // reference: https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             template: helpers.root("src/index.html"),
-            chunksSortMode: "none"
+            chunksSortMode: helpers.packageSort(["polyfills", "vendor", "main"])
         }),
 
         // Plugin: WebpackSHAHash

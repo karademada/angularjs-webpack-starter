@@ -1,7 +1,6 @@
 "use strict";
 
 const path = require("path");
-const zlib = require("zlib");
 
 // Helper functions
 const _root = path.resolve(__dirname, ".."); // project root folder
@@ -30,8 +29,38 @@ function prependExt(extensions, args) {
     }, [""]);
 }
 
+function packageSort(packages) {
+    const len = packages.length - 1;
+    const first = packages[0];
+    const last = packages[len];
+    return function sort(a, b) {
+        // polyfills always first
+        if (a.names[0] === first) {
+            return -1;
+        }
+        // main always last
+        if (a.names[0] === last) {
+            return 1;
+        }
+        // vendor before app
+        if (a.names[0] !== first && b.names[0] === last) {
+            return -1;
+        } else {
+            return 1;
+        }
+        // a must be equal to b
+        return 0;
+    }
+}
+
+function reverse(arr) {
+    return arr.reverse();
+}
+
+exports.reverse = reverse;
 exports.hasProcessFlag = hasProcessFlag;
 exports.root = root;
 exports.rootNode = rootNode;
 exports.prependExt = prependExt;
 exports.prepend = prependExt;
+exports.packageSort = packageSort;

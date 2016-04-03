@@ -54,9 +54,17 @@ module.exports = webpackMerge(commonConfig, {
         // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
         new webpack.DefinePlugin({
             "ENV": JSON.stringify(METADATA.ENV),
+            "NODE_ENV": JSON.stringify(METADATA.ENV),
             "HMR": METADATA.HMR,
             "PRODUCTION": METADATA.PRODUCTION,
-            "DEVELOPMENT": METADATA.DEVELOPMENT
+            "DEVELOPMENT": METADATA.DEVELOPMENT,
+            "process.env": {
+                "ENV": JSON.stringify(METADATA.ENV),
+                "NODE_ENV": JSON.stringify(METADATA.ENV),
+                "HMR": METADATA.HMR,
+                "PRODUCTION": METADATA.PRODUCTION,
+                "DEVELOPMENT": METADATA.DEVELOPMENT
+            }
         })
     ],
         

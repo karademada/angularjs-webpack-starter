@@ -96,12 +96,18 @@ module.exports = {
         // reference: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
         // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
         new webpack.DefinePlugin({
-            // Environment helpers
             "ENV": JSON.stringify(METADATA.ENV),
             "NODE_ENV": JSON.stringify(METADATA.ENV),
             "HMR": false,
             "PRODUCTION": METADATA.PRODUCTION,
-            "DEVELOPMENT": METADATA.DEVELOPMENT
+            "DEVELOPMENT": METADATA.DEVELOPMENT,
+            "process.env": {
+                "ENV": JSON.stringify(METADATA.ENV),
+                "NODE_ENV": JSON.stringify(METADATA.ENV),
+                "HMR": false,
+                "PRODUCTION": METADATA.PRODUCTION,
+                "DEVELOPMENT": METADATA.DEVELOPMENT
+            }
         }),
 
         // Plugin: ExtractTextWebpackPlugin

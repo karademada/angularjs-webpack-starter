@@ -77,7 +77,32 @@ If the above does not work in your case, then check to make sure that the user a
 * typings/
 
 ## Build tasks
-* profiling: generate Webpack profiling information under `reports/profiling`. The stats.json file can be uploaded to http://webpack.github.io/analyse/ for analysis
+* `npm run setup`: install typings and project dependencies
+* `npm start`: start the development server
+* `npm run start:hmr`: start the development server with Hot Module Replacement enabled
+* `npm run build:prod`: build the production version (in /dist)
+* `npm run start:prod`: build and serve the production version
+* `npm run watch`: start the development webpack build in watch mode
+* `npm run watch:prod`: start the production webpack build in watch mode
+* `npm run watch:test`: start the test webpack build in watch mode
+* `npm run watch:testd`: start the test webpack build in watch mode with debugging enabled
+* `npm run profiling`: generate Webpack profiling information under `reports/profiling`. The stats.json file can be uploaded to http://webpack.github.io/analyse/ for analysis
+* `npm test`: run unit tests
+* `npm run e2e`: run end to end tests
+* `npm run e2e:live`: run end to end tests in debug mode: https://github.com/angular/protractor/blob/master/docs/debugging.md
+* `npm run ci`: run unit tests and integration tests
+* `npm run clean`: clean generated folders and files
+* `npm run clean:all`: clean + remove installed TypeScript type definitions + npm clean
+* `npm run clean:dist`: only clean the dist folder
+* `npm run clean:install`: clean all + remove installed node_modules + install
+* `npm run clean:start`: clean + start the development server
+* `npm run docs`: generate documentation
+* `npm run lint`: lint TypeScript code
+* `npm run outdated`: check for outdated dependencies
+* `npm run tsc`: run the TypeScript compiler
+* `npm run typings-install`: install TypeScript type definitions using typings
+* `npm run webdriver:start`: start the Webdriver Manager
+* `npm run webdriver:update`: update Webdriver
 
 ## Links
 * https://github.com/karma-runner/karma-junit-reporter

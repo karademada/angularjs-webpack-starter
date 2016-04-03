@@ -15,6 +15,8 @@ const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 
 // Metadata
 const ENV = process.env.ENV = process.env.NODE_ENV = "development";
+const HOST = process.env.HOST || "localhost";
+const PORT = process.env.PORT || 3000;
 const HMR = helpers.hasProcessFlag("hot");
 const PRODUCTION = false;
 const DEVELOPMENT = true;
@@ -22,8 +24,8 @@ const DEVELOPMENT = true;
 const METADATA = {
     title: "AngularJS Webpack Starter",
     baseUrl: "/",
-    HOST: "localhost",
-    PORT: 3000,
+    HOST: HOST,
+    PORT: PORT,
     ENV: ENV,
     HMR: HMR,
     PRODUCTION: PRODUCTION,

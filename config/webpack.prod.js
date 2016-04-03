@@ -82,6 +82,7 @@ module.exports = webpackMerge(commonConfig, {
             //unused: false, // uncomment for debugging
             mangle: {
                 screw_ie8: true,
+                keep_fnames: true,
                 except: [
                     // list strings that should not be mangled here
                 ]
@@ -123,7 +124,11 @@ module.exports = webpackMerge(commonConfig, {
         minimize: true,
         removeAttributeQuotes: false,
         caseSensitive: true,
-        customAttrSurround: [ [ /#/, /(?:)/ ], [ /\*/, /(?:)/ ], [ /\[?\(?/, /(?:)/ ] ],
+        customAttrSurround: [
+            [ /#/, /(?:)/ ],
+            [ /\*/, /(?:)/ ],
+            [ /\[?\(?/, /(?:)/ ]
+        ],
         customAttrAssign: [ /\)?\]?=/ ]
     }
 });

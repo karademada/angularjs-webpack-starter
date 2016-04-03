@@ -131,6 +131,7 @@
         "docs": "typedoc --options typedoc.json --exclude '*.spec.ts' ./src/",
         "e2e": "protractor",
         "e2e:live": "npm run e2e -- --elementExplorer",
+        "karma": "karma",
         "lint": "tsconfig-lint .",
         "outdated": "npm outdated",
         "postinstall": "npm run typings-install",

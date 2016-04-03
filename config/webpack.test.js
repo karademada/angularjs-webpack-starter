@@ -1,21 +1,21 @@
 "use strict";
 
 const webpack = require("webpack");
-const autoprefixer = require("autoprefixer");
+
+const webpackMerge = require("webpack-merge"); // Used to merge webpack configs
+const commonConfig = require("./webpack.common.js"); // common configuration between environments
+
+// Webpack Plugins
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 
 // Helpers
 const helpers = require("./helpers");
 
 // Metadata
-const ENV = process.env.ENV = process.env.NODE_ENV = "test";
-const PRODUCTION = false;
-const DEVELOPMENT = true;
-
 const METADATA = {
-    ENV: ENV,
-    PRODUCTION: PRODUCTION,
-    DEVELOPMENT: DEVELOPMENT
+    ENV: process.env.ENV = process.env.NODE_ENV = "test",
+    PRODUCTION: false,
+    DEVELOPMENT: true
 };
 
 /*
@@ -38,53 +38,28 @@ module.exports = {
     // reference: http://webpack.github.io/docs/configuration.html#debug
     debug: true,
     
-    stats: {
-        colors: true,
-        reasons: true
-    },
+    stats: webpackMerge(commonConfig.stats, {
+        // ...
+    }),
 
     // Options affecting the resolving of modules.
     // reference: http://webpack.github.io/docs/configuration.html#resolve
-    resolve: {
-        cache: false,
-        // an array of extensions that should be used to resolve modules.
-        // reference: http://webpack.github.io/docs/configuration.html#resolve-extensions
-        extensions: ["", ".ts", ".js", ".json", ".css", ".scss", ".html"],
-
-        // Make sure that the root is src
-        root: helpers.root("src")
-    },
+    resolve: webpackMerge(commonConfig.resolve, {
+        // ...
+    }),
 
     // Options affecting the normal modules.
     // reference: http://webpack.github.io/docs/configuration.html#module
-    module: {
+    module: webpackMerge(commonConfig.module, {
+        // things that should not be parsed
         noParse: [
-            // things that should not be parsed
+            // ...
         ],
 
         // An array of applied pre and post loaders.
         // reference: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
         preLoaders: [
-            // TsLint loader support for *.ts files
-            // reference: https://github.com/wbuchwalter/tslint-loader
-            {
-                test: /\.ts$/,
-                loader: "tslint",
-                exclude: [
-                    helpers.root("node_modules")
-                ]
-            },
-
-            // Source map loader support for *.js files
-            // Extracts SourceMaps for source files that as added as sourceMappingURL comment.
-            // reference: https://github.com/webpack/source-map-loader
-            {
-                test: /\.js$/,
-                loader: "source-map",
-                exclude: [
-                    helpers.root("node_modules/rxjs")
-                ]
-            }
+            // ...
         ],
 
         // An array of automatically applied loaders.
@@ -94,59 +69,7 @@ module.exports = {
         //
         // reference: http://webpack.github.io/docs/configuration.html#module-loaders
         loaders: [
-            // Support for .ts files
-            // reference: https://github.com/s-panferov/awesome-typescript-loader
-            {
-                test: /\.ts$/,
-                loader: "awesome-typescript-loader",
-                query: {
-                    "compilerOptions": {
-                        "removeComments": true
-                    }
-                },
-                exclude: [
-                    /\.e2e\.ts$/
-                ]
-            },
-
-            // Support for .json files
-            {
-                test: /\.json$/,
-                loader: "json"
-            },
-            
-            // Support for CSS as raw text
-            // reference: https://github.com/webpack/raw-loader
-            {
-                test: /\.css$/,
-                loader: "raw"
-            },
-
-            // Support for SASS
-            // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
-            {
-                test: /\.scss$/,
-                loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss?sourceMap!sass?sourceMap")
-                // Alternative: avoid using extract-text-webpack-plugin
-                // with the alternative, the stylesheets MUST be imported in code (e.g., require('...'))
-                // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
-                // loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"]
-            },
-
-            // Support for .html with ngTemplate loader to use the Angular's $templateCache service
-            {
-                test: /\.html$/,
-                loaders: ["ngtemplate", "html"],
-                exclude: [
-                    helpers.root("src/index.html")
-                ]
-            },
-
-            // Sinon.js
-            {
-                test: /sinon\.js$/,
-                loader: "imports?define=>false,require=>false"
-            }
+            // ...
         ],
         postLoaders: [
             // instrument only testing sources with Istanbul
@@ -161,12 +84,11 @@ module.exports = {
                 ]
             }
         ]
-    },
+    }),
 
     // Add additional plugins to the compiler.
     // reference: http://webpack.github.io/docs/configuration.html#plugins
     plugins: [
-
         // Environment helpers (when adding more properties make sure you include them in environment.d.ts)
         // Plugin: DefinePlugin
         // Description: Define free variables.
@@ -193,31 +115,16 @@ module.exports = {
     // Include polyfills or mocks for various node stuff
     // Description: Node configuration
     // reference: https://webpack.github.io/docs/configuration.html#node
-    node: {
-        global: "window",
-        process: false,
-        crypto: "empty",
-        module: false,
-        clearImmediate: false,
-        setImmediate: false
-    },
+    node: webpackMerge(commonConfig.node, {
+        
+    }),
 
     // Static analysis linter for TypeScript advanced options configuration
     // Description: An extensible linter for the TypeScript language.
     // reference: https://github.com/wbuchwalter/tslint-loader
-    tslint: {
-        emitErrors: false,
-        failOnHint: false,
-        resourcePath: "src"
-    },
+    tslint: commonConfig.tslint,
 
     // PostCSS plugins configuration
     // Reference: https://github.com/postcss/postcss
-    postcss: [
-        // Autoprefixing
-        // Reference: https://github.com/postcss/autoprefixer
-        autoprefixer({
-            browsers: ["last 2 versions"]
-        })
-    ]
+    postcss: commonConfig.postcss
 };

@@ -10,6 +10,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noEmitOnError": false,
+        "noEmitHelpers": false,
         "preserveConstEnums": true,
         "inlineSources": false,
         "pretty": true,

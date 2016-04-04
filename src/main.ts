@@ -13,14 +13,16 @@ import "./app/css/main.scss";
  * Bootstrap our Angular app with a top level component `App` and inject
  * our Services and Providers into Angular's dependency injection system
  */
-export function main() {
+export function main():void {
+    "use strict";
     console.log("Bootstrapping the App");
     App.bootstrap();
-};
+}
 
-function bootstrapDomReady() {
+function bootstrapDomReady():void {
+    "use strict";
     // bootstrap after document is ready
-    return document.addEventListener("DOMContentLoaded", main);
+    document.addEventListener("DOMContentLoaded", main);
 }
 
 if(DEVELOPMENT) {

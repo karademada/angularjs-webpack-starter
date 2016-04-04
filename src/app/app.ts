@@ -1,9 +1,9 @@
 "use strict";
 
 // Angular
-const angular = require("angular");
+import {IAngularStatic} from "angular";
+const angular:IAngularStatic = require("angular");
 
-import IRootScopeService = ng.IRootScopeService;
 import IModule = ng.IModule;
 import ILogService = ng.ILogService;
 
@@ -24,13 +24,13 @@ const moduleRegistry:ModuleRegistry = require("./modules/modules").moduleRegistr
 import {AppController} from "./app.controller";
 
 // Pre-loading the html templates into the Angular's $templateCache
-let templateAppUrl:any = require("./app.template.html");
+const templateAppUrl:any = require("./app.template.html");
 
 /**
  * The application
  */
 export class App {
-    static bootstrap():void {
+    public static bootstrap():void {
         const modules:any = [];
         modules.push("ui.router");
         modules.push("pascalprecht.translate");
@@ -49,7 +49,7 @@ export class App {
             templateUrl: templateAppUrl
         });
 
-        appModule.config(["$urlRouterProvider", "$stateProvider", "$translateProvider", function ($urlRouterProvider:IUrlRouterProvider, $stateProvider:IStateProvider, $translateProvider:ITranslateProvider) {
+        appModule.config(["$urlRouterProvider", "$stateProvider", "$translateProvider", function ($urlRouterProvider:IUrlRouterProvider, $stateProvider:IStateProvider, $translateProvider:ITranslateProvider):any {
             $urlRouterProvider.otherwise("/home");
 
             $stateProvider

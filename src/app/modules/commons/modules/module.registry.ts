@@ -22,7 +22,7 @@ export class ModuleRegistry {
     /**
      * Create a module registry.
      */
-    constructor() {
+    public constructor() {
         this.modules = [];
         this.moduleNames = [];
     }
@@ -30,7 +30,7 @@ export class ModuleRegistry {
     /**
      * Clear the registry.
      */
-    clear():void {
+    public clear():void {
         this.modules = [];
         this.moduleNames = [];
     }
@@ -39,7 +39,7 @@ export class ModuleRegistry {
      * Register a module
      * @param module the module to register
      */
-    registerModule(module:IModule):void {
+    public registerModule(module:IModule):void {
         this.modules.push(module);
         this.moduleNames.push(module.name);
     }
@@ -48,7 +48,7 @@ export class ModuleRegistry {
      * Get the registered modules.
      * @returns {Array<IModule>}
      */
-    getModules():Array<IModule> {
+    public getModules():Array<IModule> {
         return this.modules;
     }
 
@@ -56,7 +56,7 @@ export class ModuleRegistry {
      * Get the names of the registered modules.
      * @returns {Array<string>}
      */
-    getModuleNames():Array<string> {
+    public getModuleNames():Array<string> {
         return this.moduleNames;
     }
 }

@@ -7,9 +7,9 @@ import {AbstractController} from "../commons/controllers/abstract.controller";
 
 export class HomeController extends AbstractController {
 
-    static $inject = ["$log", "$state"];
+    public static $inject: Array<string> = ["$log", "$state"];
 
-    constructor(logger:ILogService, $state:IStateService) {
+    public constructor(logger:ILogService, $state:IStateService) {
         super(logger, $state);
         logger.debug("Home controller loaded...");
     }

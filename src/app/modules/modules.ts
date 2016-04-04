@@ -1,5 +1,3 @@
-import IModule = ng.IModule;
-
 import {ModuleRegistry} from "./commons/modules/module.registry";
 
 import {commonsModule} from "./commons/commons";

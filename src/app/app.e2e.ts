@@ -6,10 +6,9 @@ describe("App", () => {
         browser.get("/");
     });
 
-
     it("should have a title", () => {
-        const subject = browser.getTitle();
-        const expectedResult = "AngularJS Webpack Starter";
+        const subject:webdriver.promise.Promise<string> = browser.getTitle();
+        const expectedResult:string = "AngularJS Webpack Starter";
         expect(subject).toEqual(expectedResult);
     });
 

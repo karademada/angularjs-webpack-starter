@@ -37,11 +37,10 @@ A Webpack Starter kit featuring:
 * test coverage reports (Istanbul)
   * html, lcov, junit
 * TS to ES5 transpilation (TypeScript)
-* SASS to CSS transpilation
+* SASS to CSS transpilation (SASS)
 * TS quality/style checks (TSLint)
 * TS code documentation generation (TSDoc)
 * development and production configurations
-*
 * ...
 
 Check out the [change log](CHANGELOG.MD)
@@ -105,9 +104,12 @@ If the above does not work in your case, then check to make sure that the user a
 * `npm run webdriver:update`: update Webdriver
 
 ## Links
-* https://github.com/karma-runner/karma-junit-reporter
-* https://www.npmjs.com/package/karma-istanbul-reporter
-* https://www.npmjs.com/package/karma-mocha-reporter
+* Code quality rules (tslint)
+  * Rules: http://palantir.github.io/tslint/rules/
+* Unit tests (karma, jasmine, ...)
+  * Karma JUnit reporter: https://github.com/karma-runner/karma-junit-reporter
+  * Karma Istanbul reporter: https://www.npmjs.com/package/karma-istanbul-reporter
+  * Karma Mocha reporter: https://www.npmjs.com/package/karma-mocha-reporter
 
 ## Contributing
 * Fork the project
@@ -117,7 +119,6 @@ If the above does not work in your case, then check to make sure that the user a
 * Try and flood me with pull requests :)
 
 ## Releasing a version
-
 * commit all changes to include in the release
 * edit the version in package.json
 * respect semver

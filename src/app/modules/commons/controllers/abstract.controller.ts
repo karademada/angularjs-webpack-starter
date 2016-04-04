@@ -4,25 +4,25 @@ import IStateService = angular.ui.IStateService;
 import ILogService = angular.ILogService;
 
 export abstract class AbstractController {
-    logger:ILogService;
-    $state:IStateService;
+    private logger:ILogService;
+    private $state:IStateService;
 
-    static $inject = ["$log", "$state"];
+    public static $inject:Array<string> = ["$log", "$state"];
 
-    constructor(logger:ILogService, $state:IStateService) {
+    public constructor(logger:ILogService, $state:IStateService) {
         this.logger = logger;
         this.$state = $state;
     }
 
-    isCurrentState(stateName:string):boolean {
-        //const currentIncludes = this.$state.includes(stateName);
-        //const currentIs = this.$state.is(stateName);
-        const currentName = this.$state.current.name;
+    public isCurrentState(stateName:string):boolean {
+        // const currentIncludes = this.$state.includes(stateName);
+        // const currentIs = this.$state.is(stateName);
+        const currentName:string = this.$state.current.name;
 
         return currentName === stateName;
     }
 
-    checkCurrentState() {
+    public checkCurrentState():string {
         return this.$state.current.name;
     }
 }

@@ -1,10 +1,9 @@
 "use strict";
 
-const angular = require("angular");
+import {IAngularStatic} from "angular";
+const angular:IAngularStatic = require("angular");
 
-import IStateService = angular.ui.IStateService;
 import IStateProvider = angular.ui.IStateProvider;
-import IStateParamsService = angular.ui.IStateParamsService;
 import IModule = angular.IModule;
 import ILogService = angular.ILogService;
 
@@ -16,7 +15,7 @@ export const homeModule:IModule = angular.module("homeModule", []);
 import "./components/foo/foo";
 
 // Pre-loading the html templates into the Angular's $templateCache
-let templateHomeUrl:any = require("./home.template.html");
+const templateHomeUrl:any = require("./home.template.html");
 
 homeModule.config(["$stateProvider", ($stateProvider:IStateProvider) => {
     $stateProvider
@@ -25,9 +24,9 @@ homeModule.config(["$stateProvider", ($stateProvider:IStateProvider) => {
             url: "/home",
             views: {
                 "home@": {
-                    templateUrl: templateHomeUrl,
                     controller: HomeController,
-                    controllerAs: "vm"
+                    controllerAs: "vm",
+                    templateUrl: templateHomeUrl
                 }
             }
         });

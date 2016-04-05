@@ -61,7 +61,7 @@ exports.config = {
 
     seleniumArgs: [ // options (-help for details)
         // the version below MUST be aligned with the version a
-        "-Dwebdriver.ie.driver=./node_modules/protractor/selenium/IEDriverServer_Win32_2.52.0"
+        "-Dwebdriver.ie.driver=./node_modules/protractor/selenium/IEDriverServer_Win32_2.52.0",
     ],
 
     // Can be an object which will be passed to the SeleniumServer class as args.
@@ -141,7 +141,7 @@ exports.config = {
     // Spec patterns are relative to the location of this config.
     specs: [
         helpers.root("src") + "/**/**.e2e.ts",
-        helpers.root("src") + "/**/*.e2e.ts"
+        helpers.root("src") + "/**/*.e2e.ts",
     ],
 
     // Patterns to exclude.
@@ -178,27 +178,27 @@ exports.config = {
     // tests, use multiCapabilities, which takes an array of capabilities.
     // If this is specified, capabilities will be ignored.
     multiCapabilities: [
-        {
-            "browserName": "internet explorer",
-            "platform": "ANY",
-            "version": "11",
-            logName: "Internet Explorer " // the space is necessary because the version is added directly after
-        },
+        //{
+        //    "browserName": "internet explorer",
+        //    "platform": "ANY",
+        //    "version": "11",
+        //    logName: "Internet Explorer ", // the space is necessary because the version is added directly after
+        //},
         
         // the configuration below works if a Firefox version is available locally
         {
         	"browserName": "firefox",
-        	logName: "Mozilla Firefox"
+        	logName: "Mozilla Firefox",
         },
         
         //{
         //	"browserName": "MicrosoftEdge",
-        //	logName: "Microsoft Edge"
+        //	logName: "Microsoft Edge",
         //},
         
         //{
         //	"browserName": "safari",
-        //  logName: "Safari"
+        //  logName: "Safari",
         //},
 
         {
@@ -209,14 +209,14 @@ exports.config = {
                     "show-fps-counter=true",
                     // needed if your machine policy does not allow for Chrome extensions to be installed
                     // note that this probably removes the ability to create screenshots during tests
-                    //"disable-extensions"
+                    //"disable-extensions",
                 ]
             },
 
             // Name of the process executing this capability.  Not used directly by
             // protractor or the browser, but instead pass directly to third parties
             // like BrowserStack and SauceLabs as the name of the job running this test
-            //name: "e2e Job",
+            //name: "End-to-end tests",
 
             // User defined name for the capability that will display in the results log
             // Defaults to the browser name
@@ -243,13 +243,13 @@ exports.config = {
             //exclude: ["spec/doNotRunInChromeSpec.js"],
 
             // Optional: override global seleniumAddress on this capability only.
-            //seleniumAddress: null
+            //seleniumAddress: null,
 
             // Optional: Additional third-party specific capabilities can be
             // specified here.
             // For a list of BrowserStack specific capabilities, visit 
             // https://www.browserstack.com/automate/capabilities
-        }
+        },
     ],
 
     // If you need to resolve multiCapabilities asynchronously (i.e. wait for
@@ -414,14 +414,14 @@ exports.config = {
         // Function called to print jasmine results.
         print: function () {
             // ...
-        }
+        },
 
         // If set, only execute specs whose names match the pattern, which is
         // internally compiled to a RegExp.
         //grep: "pattern",
 
         // Inverts "grep" matches
-        //invertGrep: false
+        //invertGrep: false,
     }
 
     // See docs/plugins.md
@@ -434,5 +434,5 @@ exports.config = {
     // Turns off WebDriver's environment variables overrides to ignore any
     // environment variable and to only use the configuration in this file.
     // Defaults to `false`
-    //disableEnvironmentOverrides: false
+    //disableEnvironmentOverrides: false,
 };

@@ -12,4 +12,4 @@ export const commonsModule:IModule = angular.module("commonsModule", []);
 
 commonsModule.run(["$log", (logger:ILogService) => {
     logger.debug("Commons module loaded...");
-}]);
+},]);

@@ -46,7 +46,7 @@ export class App {
         appModule.component("app", {
             controller: AppController,
             controllerAs: "vm",
-            templateUrl: templateAppUrl
+            templateUrl: templateAppUrl,
         });
 
         appModule.config(["$urlRouterProvider", "$stateProvider", "$translateProvider", function ($urlRouterProvider:IUrlRouterProvider, $stateProvider:IStateProvider, $translateProvider:ITranslateProvider):any {
@@ -55,13 +55,13 @@ export class App {
             $stateProvider
                 .state("appMain", {
                     abstract: true, // means that this state will never be directly activated (user can never navigate to it)
-                    url: ""
+                    url: "",
                 });
 
             // i18n
             $translateProvider.useStaticFilesLoader({
                 prefix: "assets/translations/",
-                suffix: ".json"
+                suffix: ".json",
             });
 
             // Preferred language to be used when there is no language set or there is an error while downloading the translations files
@@ -70,7 +70,7 @@ export class App {
             $translateProvider.fallbackLanguage("en");
             // Enable escaping of HTML
             $translateProvider.useSanitizeValueStrategy("escaped");
-        }]);
+        },]);
 
         appModule.run(["$state", "$log", ($state:IStateService, logger:ILogService) => {
             logger.debug("Bootstrapped the application...");
@@ -84,10 +84,10 @@ export class App {
                 const stateUrl:IState = $state.get()[index].url;
                 logger.debug(`State : ${stateName} [parent: ${stateParent}, url: ${stateUrl}]`);
             }
-        }]);
+        },]);
 
         angular.bootstrap(document, ["appModule"], {
-            "strictDi": true
+            "strictDi": true,
         });
     }
 }

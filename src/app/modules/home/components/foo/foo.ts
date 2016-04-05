@@ -9,5 +9,5 @@ let templateFooUrl:any = require("./foo.template.html");
 homeModule.component("foo", {
     controller: FooController,
     controllerAs: "vm",
-    templateUrl: templateFooUrl
+    templateUrl: templateFooUrl,
 });

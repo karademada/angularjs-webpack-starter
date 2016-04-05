@@ -26,12 +26,12 @@ homeModule.config(["$stateProvider", ($stateProvider:IStateProvider) => {
                 "home@": {
                     controller: HomeController,
                     controllerAs: "vm",
-                    templateUrl: templateHomeUrl
-                }
-            }
+                    templateUrl: templateHomeUrl,
+                },
+            },
         });
-}]);
+},]);
 
 homeModule.run(["$log", (logger:ILogService) => {
     logger.debug("Home module loaded...");
-}]);
+},]);

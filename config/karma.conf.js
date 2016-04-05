@@ -15,7 +15,7 @@ module.exports = (config) => {
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: [
-            "jasmine"
+            "jasmine",
         ],
 
         // list of files to exclude
@@ -25,7 +25,7 @@ module.exports = (config) => {
         files: [
             {
                 pattern: helpers.root("config/spec-bundle.js"),
-                watched: false
+                watched: false,
             }
         ],
         
@@ -40,7 +40,7 @@ module.exports = (config) => {
             "./config/spec-bundle.js": [
                 "coverage",
                 "webpack",
-                "sourcemap"
+                "sourcemap",
             ]
         },
 
@@ -54,19 +54,26 @@ module.exports = (config) => {
                 {type: "text-summary"},
                 {type: "json"},
                 {type: "html"},
-                {type: "lcov"} // format supported by Sonar
+                {type: "lcov"}, // format supported by Sonar
             ]
         },
 
         // Webpack please don"t spam the console when running in karma!
-        webpackServer: {noInfo: true},
+        webpackServer: {
+            noInfo: true,
+        },
 
         // test results reporter to use
         // possible values: "dots", "progress", "spec", "junit", "mocha", "coverage" (others if you import reporters)
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         // https://www.npmjs.com/package/karma-junit-reporter
         // https://www.npmjs.com/package/karma-spec-reporter
-        reporters: ["mocha", "progress", "coverage", "junit"],
+        reporters: [
+            "mocha",
+            "progress",
+            "coverage",
+            "junit",
+        ],
 
         // web server port
         port: 9876,
@@ -84,7 +91,7 @@ module.exports = (config) => {
             "PhantomJS",
             "Chrome",
             "Firefox",
-            "IE"
+            //"IE",
         ],
 
         // enable / disable watching file and executing tests whenever any file changes
@@ -96,7 +103,10 @@ module.exports = (config) => {
         junitReporter: {
             outputDir: helpers.root("reports/coverage/"),
             outputFile: "tests-unit/unit.xml",
-            suite: "unit"
-        }
+            suite: "unit",
+        },
+        
+        // How many browsers should be started simultaneously
+        //concurrency: Infinity,
     });
 };

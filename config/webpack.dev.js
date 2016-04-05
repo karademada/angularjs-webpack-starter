@@ -17,11 +17,12 @@ const METADATA = webpackMerge(commonConfig.metadata, {
     ENV: process.env.ENV = process.env.NODE_ENV = "development",
     HMR: helpers.hasProcessFlag("hot"),
     PRODUCTION: false,
-    DEVELOPMENT: true
+    DEVELOPMENT: true,
 });
 
 /*
  * Config
+ * IMPORTANT: notice that the configuration below is MERGED with the common configuration (commonConfig)
  * reference: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = webpackMerge(commonConfig, {
@@ -43,6 +44,29 @@ module.exports = webpackMerge(commonConfig, {
     // reference: http://webpack.github.io/docs/configuration.html#debug
     debug: true,
 
+    // Options affecting the normal modules.
+    // reference: http://webpack.github.io/docs/configuration.html#module
+    module: {
+        // An array of automatically applied loaders.
+        //
+        // IMPORTANT: The loaders here are resolved relative to the resource which they are applied to.
+        // This means they are not resolved relative to the configuration file.
+        //
+        // reference: http://webpack.github.io/docs/configuration.html#module-loaders
+        loaders: [
+            // Support for .ts files.
+            // reference: https://github.com/s-panferov/awesome-typescript-loader
+            {
+                test: /\.ts$/,
+                loader: "awesome-typescript",
+                exclude: [
+                    /\.e2e\.ts$/, // exclude end-to-end tests
+                    /\.spec\.ts$/, // exclude unit tests
+                ],
+            },
+        ],
+    },
+
     // Add additional plugins to the compiler.
     // reference: http://webpack.github.io/docs/configuration.html#plugins
     plugins: [
@@ -63,9 +87,9 @@ module.exports = webpackMerge(commonConfig, {
                 "NODE_ENV": JSON.stringify(METADATA.ENV),
                 "HMR": METADATA.HMR,
                 "PRODUCTION": METADATA.PRODUCTION,
-                "DEVELOPMENT": METADATA.DEVELOPMENT
-            }
-        })
+                "DEVELOPMENT": METADATA.DEVELOPMENT,
+            },
+        }),
     ],
         
     // Static analysis linter for TypeScript advanced options configuration
@@ -74,7 +98,7 @@ module.exports = webpackMerge(commonConfig, {
     tslint: {
         emitErrors: false,
         failOnHint: false,
-        resourcePath: "src"
+        resourcePath: "src",
     },
     
     // Webpack Development Server configuration
@@ -93,14 +117,14 @@ module.exports = webpackMerge(commonConfig, {
         // file watch configuration
         watchOptions: {
             aggregateTimeout: 300,
-            poll: 1000
+            poll: 1000,
         },
         contentBase: helpers.root("src/app"), // necessary so that assets are accessible
         
         // Can be used to add specific headers
         headers: {
             // enable CORS
-            "Access-Control-Allow-Origin": "*"
-        }
-    }
+            "Access-Control-Allow-Origin": "*",
+        },
+    },
 });

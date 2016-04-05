@@ -16,7 +16,7 @@ const WebpackSHAHash = require("webpack-sha-hash");
 // Metadata
 const METADATA = {
     title: "AngularJS Webpack Starter",
-    baseUrl: "/"
+    baseUrl: "/",
 };
 
 /*
@@ -29,7 +29,7 @@ module.exports = {
 
     stats: {
         colors: true,
-        reasons: true
+        reasons: true,
     },
 
     // the entry point for the bundles
@@ -37,7 +37,7 @@ module.exports = {
     entry: {
         "polyfills": helpers.root("src/polyfills.ts"),
         "vendor": helpers.root("src/vendor.ts"),
-        "main": helpers.root("src/main.ts") // our angular app
+        "main": helpers.root("src/main.ts"), // our angular app
     },
 
     // Options affecting the output of the compilation
@@ -61,7 +61,7 @@ module.exports = {
         // The filename of non-entry chunks as relative path
         // inside the output.path directory.
         // reference: http://webpack.github.io/docs/configuration.html#output-chunkfilename
-        chunkFilename: "[id].[hash].chunk.js"
+        chunkFilename: "[id].[hash].chunk.js",
     },
 
     // Options affecting the resolving of modules.
@@ -76,7 +76,7 @@ module.exports = {
         root: helpers.root("src"),
         
         // Remove other default values
-        modulesDirectories: ["node_modules"]
+        modulesDirectories: ["node_modules"],
     },
 
     // Options affecting the normal modules.
@@ -96,7 +96,7 @@ module.exports = {
                 test: /\.ts$/,
                 loader: "tslint",
                 exclude: [
-                    helpers.root("node_modules")
+                    helpers.root("node_modules"),
                 ]
             },
 
@@ -107,9 +107,9 @@ module.exports = {
                 test: /\.js$/,
                 loader: "source-map",
                 exclude: [
-                    helpers.root("node_modules/rxjs")
-                ]
-            }
+                    helpers.root("node_modules/rxjs"),
+                ],
+            },
         ],
 
         // An array of automatically applied loaders.
@@ -119,39 +119,28 @@ module.exports = {
         //
         // reference: http://webpack.github.io/docs/configuration.html#module-loaders
         loaders: [
-            // Support for .ts files.
-            // reference: https://github.com/s-panferov/awesome-typescript-loader
-            {
-                test: /\.ts$/,
-                loader: "awesome-typescript",
-                exclude: [
-                    /\.e2e\.ts$/,
-                    /\.spec\.ts$/
-                ]
-            },
-
             // Support for *.json files
             {
                 test: /\.json$/,
-                loader: "json"
+                loader: "json",
             },
 
             // Support for CSS as raw text
             // reference: https://github.com/webpack/raw-loader
             {
                 test: /\.css$/,
-                loader: "raw"
+                loader: "raw",
             },
 
             // Support for SASS
             // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
             {
                 test: /\.scss$/,
-                loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss?sourceMap!sass?sourceMap")
+                loader: ExtractTextWebpackPlugin.extract("style", "css?sourceMap!postcss?sourceMap!sass?sourceMap"),
                 // Alternative: avoid using extract-text-webpack-plugin
                 // with the alternative, the stylesheets MUST be imported in code (e.g., require("..."))
                 // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
-                // loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"]
+                // loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"],
             },
 
             // Support for .html with ngTemplate loader to use the Angular's $templateCache service
@@ -159,16 +148,21 @@ module.exports = {
                 test: /\.html$/,
                 loaders: [ "ngtemplate", "html" ],
                 exclude: [
-                    helpers.root("src/index.html")
-                ]
+                    helpers.root("src/index.html"),
+                ],
             },
 
             // Sinon.js
             {
                 test: /sinon\.js$/,
-                loader: "imports?define=>false,require=>false"
-            }
-        ]
+                loader: "imports?define=>false,require=>false",
+            },
+        ],
+        
+        // Post processors
+        postLoaders: [
+            // ...
+        ],
     },
 
     // Add additional plugins to the compiler.
@@ -192,10 +186,14 @@ module.exports = {
         // reference: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
         // reference: https://github.com/webpack/docs/wiki/optimization#multi-page-app
         new webpack.optimize.CommonsChunkPlugin({
-            name: helpers.reverse([ "polyfills", "vendor", "main" ]),
+            name: helpers.reverse([
+                "polyfills",
+                "vendor",
+                "main",
+            ]),
             // the filename configured in the output section is reused
             //filename: "[name].[hash].bundle.js",
-            chunks: Infinity
+            chunks: Infinity,
         }),
 
         // Plugin: CopyWebpackPlugin
@@ -208,17 +206,17 @@ module.exports = {
                 to: "assets",
                 ignore: [
                     "*.md",
-                    "*.txt"
-                ]
+                    "*.txt",
+                ],
             },
             {
                 from: helpers.root("src/app/assets-base"),
                 to: "",
                 ignore: [
                     "*.md",
-                    "*.txt"
-                ]
-            }
+                    "*.txt",
+                ],
+            },
         ]),
 
         // Plugin: HtmlWebpackPlugin
@@ -228,7 +226,11 @@ module.exports = {
         // reference: https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             template: helpers.root("src/index.html"),
-            chunksSortMode: helpers.packageSort(["polyfills", "vendor", "main"])
+            chunksSortMode: helpers.packageSort([
+                "polyfills",
+                "vendor",
+                "main",
+            ]),
         }),
 
         // Plugin: WebpackSHAHash
@@ -239,8 +241,8 @@ module.exports = {
         // Description: Extract css file contents
         // reference: https://github.com/webpack/extract-text-webpack-plugin
         new ExtractTextWebpackPlugin("[name].[hash].css", {
-            disable: false
-        })
+            disable: false,
+        }),
     ],
 
     // Include polyfills or mocks for various node stuff
@@ -252,7 +254,7 @@ module.exports = {
         crypto: "empty",
         module: false,
         clearImmediate: false,
-        setImmediate: false
+        setImmediate: false,
     },
 
     // PostCSS plugins configuration
@@ -261,7 +263,7 @@ module.exports = {
         // Autoprefixing
         // Reference: https://github.com/postcss/autoprefixer
         autoprefixer({
-            browsers: [ "last 2 versions" ]
-        })
+            browsers: [ "last 2 versions" ],
+        }),
     ],
 };

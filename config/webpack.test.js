@@ -15,7 +15,7 @@ const helpers = require("./helpers");
 const METADATA = {
     ENV: process.env.ENV = process.env.NODE_ENV = "test",
     PRODUCTION: false,
-    DEVELOPMENT: true
+    DEVELOPMENT: true,
 };
 
 /*
@@ -38,29 +38,21 @@ module.exports = {
     // reference: http://webpack.github.io/docs/configuration.html#debug
     debug: true,
     
-    stats: webpackMerge(commonConfig.stats, {
-        // ...
-    }),
+    stats: commonConfig.stats,
 
     // Options affecting the resolving of modules.
     // reference: http://webpack.github.io/docs/configuration.html#resolve
-    resolve: webpackMerge(commonConfig.resolve, {
-        // ...
-    }),
+    resolve: commonConfig.resolve,
 
     // Options affecting the normal modules.
     // reference: http://webpack.github.io/docs/configuration.html#module
-    module: webpackMerge(commonConfig.module, {
+    module: {
         // things that should not be parsed
-        noParse: [
-            // ...
-        ],
+        noParse: commonConfig.module.noParse,
 
         // An array of applied pre and post loaders.
         // reference: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
-        preLoaders: [
-            // ...
-        ],
+        preLoaders: commonConfig.module.preLoaders,
 
         // An array of automatically applied loaders.
         //
@@ -68,9 +60,19 @@ module.exports = {
         // This means they are not resolved relative to the configuration file.
         //
         // reference: http://webpack.github.io/docs/configuration.html#module-loaders
-        loaders: [
-            // ...
-        ],
+        loaders: commonConfig.module.loaders.concat([
+            // Support for .ts files.
+            // reference: https://github.com/s-panferov/awesome-typescript-loader
+            {
+                test: /\.ts$/,
+                loader: "awesome-typescript",
+                exclude: [
+                    /\.e2e\.ts$/, // exclude end-to-end tests
+                ],
+            },
+        ]),
+
+        // Post processors
         postLoaders: [
             // instrument only testing sources with Istanbul
             {
@@ -80,11 +82,11 @@ module.exports = {
                 exclude: [
                     /\.e2e\.ts$/,
                     /\.spec\.ts$/,
-                    helpers.root("node_modules")
-                ]
-            }
-        ]
-    }),
+                    helpers.root("node_modules"),
+                ],
+            },
+        ],
+    },
 
     // Add additional plugins to the compiler.
     // reference: http://webpack.github.io/docs/configuration.html#plugins
@@ -106,24 +108,22 @@ module.exports = {
                 "NODE_ENV": JSON.stringify(METADATA.ENV),
                 "HMR": false,
                 "PRODUCTION": METADATA.PRODUCTION,
-                "DEVELOPMENT": METADATA.DEVELOPMENT
-            }
+                "DEVELOPMENT": METADATA.DEVELOPMENT,
+            },
         }),
 
         // Plugin: ExtractTextWebpackPlugin
         // Description: Extract css file contents
         // reference: https://github.com/webpack/extract-text-webpack-plugin
         new ExtractTextWebpackPlugin("[name].[hash].css", {
-            disable: false
+            disable: false,
         })
     ],
 
     // Include polyfills or mocks for various node stuff
     // Description: Node configuration
     // reference: https://webpack.github.io/docs/configuration.html#node
-    node: webpackMerge(commonConfig.node, {
-        
-    }),
+    node: commonConfig.node,
 
     // Static analysis linter for TypeScript advanced options configuration
     // Description: An extensible linter for the TypeScript language.
@@ -132,5 +132,5 @@ module.exports = {
 
     // PostCSS plugins configuration
     // Reference: https://github.com/postcss/postcss
-    postcss: commonConfig.postcss
+    postcss: commonConfig.postcss,
 };

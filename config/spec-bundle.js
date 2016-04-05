@@ -37,5 +37,6 @@ function requireAll(requireContext) {
     return requireContext.keys().map(requireContext);
 }
 
+// do NOT delete this, it is necessary to load the tests
 var modules = requireAll(testContext);
 // requires and returns all modules that match

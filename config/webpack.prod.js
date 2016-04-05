@@ -17,11 +17,12 @@ const METADATA = webpackMerge(commonConfig.metadata, {
     port: process.env.PORT || 8080,
     ENV: process.env.NODE_ENV = process.env.ENV = "production",
     PRODUCTION: true,
-    DEVELOPMENT: false
+    DEVELOPMENT: false,
 });
 
 /*
  * Config
+ * IMPORTANT: notice that the configuration below is MERGED with the common configuration (commonConfig)
  * reference: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = webpackMerge(commonConfig, {
@@ -42,6 +43,29 @@ module.exports = webpackMerge(commonConfig, {
     // Switch loaders to debug mode
     // reference: http://webpack.github.io/docs/configuration.html#debug
     debug: false,
+
+    // Options affecting the normal modules.
+    // reference: http://webpack.github.io/docs/configuration.html#module
+    module: {
+        // An array of automatically applied loaders.
+        //
+        // IMPORTANT: The loaders here are resolved relative to the resource which they are applied to.
+        // This means they are not resolved relative to the configuration file.
+        //
+        // reference: http://webpack.github.io/docs/configuration.html#module-loaders
+        loaders: [
+            // Support for .ts files.
+            // reference: https://github.com/s-panferov/awesome-typescript-loader
+            {
+                test: /\.ts$/,
+                loader: "awesome-typescript",
+                exclude: [
+                    /\.e2e\.ts$/, // exclude end-to-end tests
+                    /\.spec\.ts$/, // exclude unit tests
+                ],
+            },
+        ],
+    },
 
     // Add additional plugins to the compiler.
     // reference: http://webpack.github.io/docs/configuration.html#plugins
@@ -112,7 +136,7 @@ module.exports = webpackMerge(commonConfig, {
         new CompressionPlugin({
             regExp: /\.css$|\.html$|\.js$|\.map$/,
             threshold: 2 * 1024
-        })
+        }),
     ],
 
     // Static analysis linter for TypeScript advanced options configuration
@@ -121,7 +145,7 @@ module.exports = webpackMerge(commonConfig, {
     tslint: {
         emitErrors: true,
         failOnHint: true,
-        resourcePath: "src"
+        resourcePath: "src",
     },
         
     // Html loader for HTML minification (advanced options)
@@ -135,6 +159,6 @@ module.exports = webpackMerge(commonConfig, {
             [ /\*/, /(?:)/ ],
             [ /\[?\(?/, /(?:)/ ]
         ],
-        customAttrAssign: [ /\)?\]?=/ ]
+        customAttrAssign: [ /\)?\]?=/ ],
     }
 });

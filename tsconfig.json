@@ -16,7 +16,6 @@
         "pretty": true,
         "sourceMap": true,
         "outDir": "./.tmp",
-        "rootDir": "./src",
         "moduleResolution": "node",
         "listFiles": false
     },

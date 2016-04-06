@@ -20,11 +20,22 @@ module.exports = (config) => {
 
         // list of files to exclude
         exclude: [],
+        
+        client: {
+            // can be used to pass arguments to tests (see spec-bundle.ts)
+            args: [{
+                // path to the subset of the tests to consider (used to filter the unit tests to execute (see spec-bundle.ts)
+                testPath: helpers.getTestPath(process.argv),
+            }],
+            
+            // other client-side config
+            captureConsole: true,
+        },
 
         // list of files / patterns to load in the browser
         files: [
             {
-                pattern: helpers.root("config/spec-bundle.js"),
+                pattern: helpers.root("config/spec-bundle.ts"),
                 watched: false,
             }
         ],
@@ -37,10 +48,10 @@ module.exports = (config) => {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            "./config/spec-bundle.js": [
-                "coverage",
+            "./config/spec-bundle.ts": [
                 "webpack",
                 "sourcemap",
+                "coverage",
             ]
         },
 
@@ -96,10 +107,12 @@ module.exports = (config) => {
 
         // enable / disable watching file and executing tests whenever any file changes
         autoWatch: true,
+        
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
         singleRun: false,
 
+        // JUnit reporter configuration
         junitReporter: {
             outputDir: helpers.root("reports/coverage/"),
             outputFile: "tests-unit/unit.xml",

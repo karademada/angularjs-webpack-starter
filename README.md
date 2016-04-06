@@ -81,12 +81,10 @@ If the above does not work in your case, then check to make sure that the user a
 * `npm run start:hmr`: start the development server with Hot Module Replacement enabled
 * `npm run build:prod`: build the production version (in /dist)
 * `npm run start:prod`: build and serve the production version
-* `npm run watch`: start the development webpack build in watch mode
-* `npm run watch:prod`: start the production webpack build in watch mode
-* `npm run watch:test`: start the test webpack build in watch mode
-* `npm run watch:testd`: start the test webpack build in watch mode with debugging enabled
 * `npm run profiling`: generate Webpack profiling information under `reports/profiling`. The stats.json file can be uploaded to http://webpack.github.io/analyse/ for analysis
 * `npm test`: run unit tests
+* `npm run test-subset src/?`: run a subset of the unit tests where ? is either a specific file or a folder. Only tests matching the given path will be executed. The given path MUST start with src/. The file name (if any specified) MUST contain the file extension
+  * example: `npm run test-subset src/app/tests/sanity_test_spec.ts`
 * `npm run e2e`: run end to end tests
 * `npm run e2e:live`: run end to end tests in debug mode: https://github.com/angular/protractor/blob/master/docs/debugging.md
 * `npm run ci`: run unit tests and integration tests
@@ -100,6 +98,11 @@ If the above does not work in your case, then check to make sure that the user a
 * `npm run outdated`: check for outdated dependencies
 * `npm run tsc`: run the TypeScript compiler
 * `npm run typings-install`: install TypeScript type definitions using typings
+* `npm run watch`: start the development webpack build in watch mode
+* `npm run watch:prod`: start the production webpack build in watch mode
+* `npm run watch:test`: start the test webpack build in watch mode
+* `npm run watch:test-subset`: start the test webpack build in watch mode and filter the tests to execute (see npm test)
+* `npm run watch:testd`: start the test webpack build in watch mode with debugging enabled
 * `npm run webdriver:start`: start the Webdriver Manager
 * `npm run webdriver:update`: update Webdriver
 

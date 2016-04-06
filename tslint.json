@@ -97,7 +97,7 @@
         ],
         "class-name": true,
         "comment-format": [
-            true,
+            false,
             "check-space"
         ],
         "interface-name": [

@@ -112,6 +112,8 @@ module.exports = webpackMerge(commonConfig, {
 
         // HTML5 History API support: no need for # in URLs
         // automatically redirect 404 errors to the index.html page
+        // uses connect-history-api-fallback behind the scenes: https://github.com/bripkens/connect-history-api-fallback
+        // reference: http://jaketrent.com/post/pushstate-webpack-dev-server/
         historyApiFallback: true,
 
         // file watch configuration

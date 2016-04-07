@@ -125,7 +125,7 @@
         "clean:dist": "rimraf dist",
         "clean:install": "npm install --no-optional",
         "clean:start": "npm start",
-        "docs": "typedoc --options typedoc.json --exclude '*.spec.ts' ./src/",
+        "docs": "typedoc --options typedoc.json --exclude \"*.spec.ts\" ./src/",
         "e2e": "protractor",
         "e2e:live": "npm run e2e -- --elementExplorer",
         "karma": "karma",

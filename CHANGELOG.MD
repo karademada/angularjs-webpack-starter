@@ -1,6 +1,11 @@
 * 0.1.2
   * added ng template cache support (see #67)
   * configured commons module
+  * enabled HTML5 mode
+  * support for executing a subset of the unit tests (or a specific one)
+  * enhanced TSLint configuration
+  * support for executing unit tests against multiple Web browsers
+  * centralized reports
 * 0.1.1
   * separated base assets and other assets
   * fixed issues with TS helpers

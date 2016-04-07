@@ -61,9 +61,7 @@
         "radix": true,
         "switch-default": true,
         "triple-equals": [
-            true,
-            "allow-null-check",
-            "allow-undefined-check"
+            true
         ],
         "use-strict": [
             true,
@@ -76,14 +74,14 @@
             "spaces"
         ],
         "max-line-length": [
-            false,
-            120
+            true,
+            140
         ],
         "no-require-imports": false,
         "no-trailing-whitespace": true,
         "object-literal-sort-keys": true,
         "trailing-comma": [
-            true,
+            false,
             {
                 "multiline": "always",
                 "singleline": "never"
@@ -101,7 +99,7 @@
             "check-space"
         ],
         "interface-name": [
-            true,
+            false,
             "never-prefix"
         ],
         "jsdoc-format": true,
@@ -129,6 +127,7 @@
             true,
             "check-format",
             "allow-leading-underscore",
+            "allow-trailing-underscore",
             "ban-keywords"
         ],
         "whitespace": [

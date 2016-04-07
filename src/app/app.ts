@@ -49,7 +49,8 @@ export class App {
             templateUrl: templateAppUrl,
         });
 
-        appModule.config(["$urlRouterProvider", "$stateProvider", "$translateProvider", function ($urlRouterProvider:IUrlRouterProvider, $stateProvider:IStateProvider, $translateProvider:ITranslateProvider):any {
+        appModule.config(["$urlRouterProvider", "$stateProvider", "$translateProvider",
+        ($urlRouterProvider:IUrlRouterProvider, $stateProvider:IStateProvider, $translateProvider:ITranslateProvider):any => {
             $urlRouterProvider.otherwise("/home");
 
             $stateProvider

@@ -21,6 +21,7 @@ module.exports = (config) => {
         // list of files to exclude
         exclude: [],
         
+        // client configuration
         client: {
             // can be used to pass arguments to tests (see spec-bundle.ts)
             args: [{
@@ -99,7 +100,6 @@ module.exports = (config) => {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
-            "PhantomJS",
             "Chrome",
             "Firefox",
             //"IE",

@@ -13,9 +13,6 @@ stats.json
 typings/
 !src/typings/
 
-# Docs
-doc/
-
 # Reports directory
 reports/
 
@@ -26,7 +23,6 @@ reports/
 # Node
 node_modules/
 jspm_packages/
-bower_components/
 
 # OS generated files #
 Desktop.ini

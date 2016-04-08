@@ -120,7 +120,7 @@
         "build:dev": "node --max-old-space-size=4096 ./node_modules/webpack/bin/webpack --config config/webpack.dev.js --progress --profile --colors --display-error-details --display-cached",
         "build:prod": "node --max-old-space-size=4096 ./node_modules/webpack/bin/webpack --config config/webpack.prod.js --progress --profile --colors --display-error-details --display-cached --bail",
         "ci": "npm run e2e && npm run test",
-        "clean": "rimraf doc reports dist",
+        "clean": "rimraf reports dist",
         "clean:all": "rimraf typings && npm cache clean",
         "clean:dist": "rimraf dist",
         "clean:install": "npm install --no-optional",

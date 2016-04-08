@@ -13,9 +13,6 @@ stats.json
 typings/
 !src/typings/
 
-# Docs
-doc/
-
 # Reports directory
 reports/
 

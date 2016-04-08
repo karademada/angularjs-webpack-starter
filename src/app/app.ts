@@ -53,7 +53,8 @@ export class App {
         });
 
         appModule.config(["$urlRouterProvider", "$stateProvider", "$translateProvider", "$locationProvider",
-        ($urlRouterProvider:IUrlRouterProvider, $stateProvider:IStateProvider, $translateProvider:ITranslateProvider, $locationProvider: ILocationProvider):any => {
+        ($urlRouterProvider:IUrlRouterProvider, $stateProvider:IStateProvider, $translateProvider:ITranslateProvider,
+         $locationProvider: ILocationProvider):any => {
             $urlRouterProvider.otherwise("/home");
 
             $stateProvider
@@ -70,13 +71,13 @@ export class App {
 
             // Preferred language to be used when there is no language set or there is an error while downloading the translations files
             $translateProvider.preferredLanguage("en");
-            
+
             // Language to be used for those translation keys that are not defined in another language
             $translateProvider.fallbackLanguage("en");
-            
+
             // Enable escaping of HTML
             $translateProvider.useSanitizeValueStrategy("escaped");
-            
+
             // Enable HTML5 History API: adds support for pretty URLs
             // requires server configuration (URL rewriting)
             $locationProvider.html5Mode(true);

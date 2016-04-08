@@ -14,13 +14,11 @@ import "./app/css/main.scss";
  * our Services and Providers into Angular's dependency injection system
  */
 export function main():void {
-    "use strict";
     console.log("Bootstrapping the App");
     App.bootstrap();
 }
 
 function bootstrapDomReady():void {
-    "use strict";
     // bootstrap after document is ready
     document.addEventListener("DOMContentLoaded", main);
 }

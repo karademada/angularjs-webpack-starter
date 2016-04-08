@@ -55,7 +55,11 @@
         "no-switch-case-fall-through": true,
         "no-unreachable": true,
         "no-unused-expression": true,
-        "no-unused-variable": true,
+        "no-unused-variable": [
+            true, {
+                "ignore-pattern": "[$](onInit|onDestroy|onChanges|postLink)"
+            }
+        ],
         "no-use-before-declare": true,
         "no-var-keyword": true,
         "radix": true,
@@ -65,8 +69,7 @@
         ],
         "use-strict": [
             true,
-            "check-module",
-            "check-function"
+            "check-module"
         ],
         "eofline": true,
         "indent": [

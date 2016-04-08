@@ -51,9 +51,9 @@ A complete build based on Webpack/npm scripts and tons of features:
 * TS code documentation generation (TSDoc)
 * development and production configurations
   * optimizations for production (minification, compression, ...)
-* security best practices
+* security best practices applied to dev server configuration
   * Content Security Policy (CSP)
-  * ...
+  * Other security headers
 * ...
 
 Check out the [change log](CHANGELOG.MD)

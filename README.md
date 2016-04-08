@@ -103,6 +103,7 @@ Check out the [upgrade](UPGRADE.MD) page
 * `npm run docs`: generate documentation
 * `npm run lint`: lint TypeScript code
 * `npm run outdated`: check for outdated dependencies
+* `npm run superstatic`: starts the production server (assumes that you've executed `npm run build:prod` before)
 * `npm run tsc`: run the TypeScript compiler
 * `npm run typings-install`: install TypeScript type definitions using typings
 * `npm run watch`: start the development webpack build in watch mode
@@ -128,6 +129,10 @@ If the above does not work in your case, then check to make sure that the user a
 * node/
 * git/
 * typings/
+
+### Production server
+The production server that you can start via `npm run server:prod` uses Superstatic (https://github.com/firebase/superstatic).
+It is configured via `superstatic.json` to enable support for push-state (HTML 5 mode)
 
 ## Links
 * Code quality rules (tslint)

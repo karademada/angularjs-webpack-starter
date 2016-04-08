@@ -32,14 +32,6 @@ module.exports = {
         reasons: true,
     },
 
-    // the entry point for the bundles
-    // reference: http://webpack.github.io/docs/configuration.html#entry
-    entry: {
-        "polyfills": helpers.root("src/polyfills.ts"),
-        "vendor": helpers.root("src/vendor.ts"),
-        "main": helpers.root("src/main.ts"), // our angular app
-    },
-
     // Options affecting the output of the compilation
     // reference: http://webpack.github.io/docs/configuration.html#output
     output: {

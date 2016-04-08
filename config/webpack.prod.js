@@ -44,6 +44,14 @@ module.exports = webpackMerge(commonConfig, {
     // reference: http://webpack.github.io/docs/configuration.html#debug
     debug: false,
 
+    // the entry point for the bundles
+    // reference: http://webpack.github.io/docs/configuration.html#entry
+    entry: {
+        "polyfills": helpers.root("src/polyfills.ts"),
+        "vendor": helpers.root("src/vendor.ts"),
+        "main": helpers.root("src/main.ts"), // our angular app
+    },
+
     // Options affecting the normal modules.
     // reference: http://webpack.github.io/docs/configuration.html#module
     module: {

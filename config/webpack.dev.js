@@ -64,6 +64,15 @@ module.exports = webpackMerge(commonConfig, {
     // reference: http://webpack.github.io/docs/configuration.html#debug
     debug: true,
 
+    // the entry point for the bundles
+    // reference: http://webpack.github.io/docs/configuration.html#entry
+    entry: {
+        "polyfills": helpers.root("src/polyfills.ts"),
+        "vendor": helpers.root("src/vendor.ts"),
+        "main": helpers.root("src/main.ts"), // our angular app
+        "main-styles": helpers.root("src/main-styles.ts"), // our angular app's styles. Useful only changing the styles bundle while working on styling
+    },
+
     // Options affecting the normal modules.
     // reference: http://webpack.github.io/docs/configuration.html#module
     module: {

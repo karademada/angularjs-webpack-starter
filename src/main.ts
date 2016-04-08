@@ -6,8 +6,11 @@
  */
 import {App} from "./app/app";
 
-// Import application styles
-import "./app/css/main.scss";
+if(PRODUCTION) {
+    // We only import the application styles here for the production build
+    // In development, main-styles.ts takes care of that (separate bundle)
+    require("./app/css/main.scss");
+}
 
 /*
  * Bootstrap our Angular app with a top level component `App` and inject

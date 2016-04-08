@@ -60,7 +60,7 @@ exports.config = {
     //seleniumPort: 4444 // default
 
     seleniumArgs: [ // options (-help for details)
-        // the version below MUST be aligned with the version a
+        // the version below MUST be aligned with the version defined in the npm script
         "-Dwebdriver.ie.driver=./node_modules/protractor/selenium/IEDriverServer_Win32_2.52.0",
     ],
 

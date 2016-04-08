@@ -20,9 +20,16 @@ const opts:any = args[0];
 Error.stackTraceLimit = Infinity;
 
 const path:any = require("path");
-// require("phantomjs-polyfill");
 // require("ts-node");
 require("core-js");
+require("angular");
+require("angular-mocks");
+require("angular-ui-router");
+require("angular-translate");
+require("angular-material");
+require("immutable");
+require("moment");
+require("rxjs");
 
 // load the RxJS operators
 require("../src/rxjs-operators");

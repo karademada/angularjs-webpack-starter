@@ -25,13 +25,12 @@ import "rxjs";
 // RxJS operators
 import "./rxjs-operators";
 
-// 3rd party styles
-import "./app/css/vendor.scss";
+// MomentJS
+import "moment";
 
-if ("development" === ENV) {
-    // ...
-} else if ("production" === ENV) {
-    // ...
-} else {
-    // ...
+// 3rd party styles
+if(PRODUCTION) {
+    // We only import the vendor styles here for the production build
+    // In development, vendor-styles.ts takes care of that (separate bundle)
+    require("./app/css/vendor.scss");
 }

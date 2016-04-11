@@ -9,6 +9,7 @@ const commonConfig = require("./webpack.common.js"); // common configuration bet
 const helpers = require("./helpers");
 
 // Webpack Plugins
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 
 // Metadata
 const METADATA = webpackMerge(commonConfig.metadata, {
@@ -68,9 +69,10 @@ module.exports = webpackMerge(commonConfig, {
     // reference: http://webpack.github.io/docs/configuration.html#entry
     entry: {
         "polyfills": helpers.root("src/polyfills.ts"),
+        "vendor-styles": helpers.root("src/vendor-styles.ts"),
+        "main-styles": helpers.root("src/main-styles.ts"), // our angular app's styles. Useful only changing the styles bundle while working on styling
         "vendor": helpers.root("src/vendor.ts"),
         "main": helpers.root("src/main.ts"), // our angular app
-        "main-styles": helpers.root("src/main-styles.ts"), // our angular app's styles. Useful only changing the styles bundle while working on styling
     },
 
     // Options affecting the normal modules.
@@ -118,6 +120,32 @@ module.exports = webpackMerge(commonConfig, {
                 "PRODUCTION": METADATA.PRODUCTION,
                 "DEVELOPMENT": METADATA.DEVELOPMENT,
             },
+        }),
+
+        // Plugin: CommonsChunkPlugin
+        // Description: Shares common code between the pages.
+        // It identifies common modules and put them into a commons chunk.
+        // reference: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
+        // reference: https://github.com/webpack/docs/wiki/optimization#multi-page-app
+        new webpack.optimize.CommonsChunkPlugin({
+            name: helpers.reverse([
+                "polyfills",
+                "vendor",
+                "main",
+                "vendor-styles",
+                "main-styles"
+            ]),
+            // the filename configured in the output section is reused
+            //filename: "[name].[hash].bundle.js",
+            chunks: Infinity,
+        }),
+
+        // Plugin: ExtractTextWebpackPlugin
+        // Description: Extract css file contents
+        // reference: https://github.com/webpack/extract-text-webpack-plugin
+        // notice that we don't use [hash] for the stylesheet filenames in DEV: that way plugins that reload stylesheets work as expected
+        new ExtractTextWebpackPlugin("[name].css", {
+            disable: false,
         }),
     ],
         
@@ -178,3 +206,10 @@ module.exports = webpackMerge(commonConfig, {
         },
     },
 });
+
+// If Hot Module Replacement (HMR) is enabled but the inline option has not been specified
+// then we make sure that live reloading is not enabled
+// reference: https://github.com/webpack/webpack/issues/418
+if(helpers.hasProcessFlag("hot") && !helpers.hasProcessFlag("inline")) {
+    module.exports.entry["webpack-dev-server"] = "webpack/hot/only-dev-server";
+}

@@ -1,3 +1,6 @@
+* 0.1.3
+  * added missing core-js typings (fixes #97)
+  * added a way to have HMR but disable page reload for HMR failures (closes #96 )
 * 0.1.2
   * added ng template cache support (see #67)
   * configured commons module

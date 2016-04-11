@@ -10,6 +10,7 @@ const helpers = require("./helpers");
 
 // Webpack Plugins
 const CompressionPlugin = require("compression-webpack-plugin");
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 
 // Metadata
 const METADATA = webpackMerge(commonConfig.metadata, {
@@ -98,12 +99,30 @@ module.exports = webpackMerge(commonConfig, {
                 "DEVELOPMENT": METADATA.DEVELOPMENT
             }
         }),
-        
-        // Plugin: NoErrorsPlugin
-        // Description: Only emit files when there are no errors.
-        // reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
-        new webpack.NoErrorsPlugin(),
 
+        // Plugin: OccurenceOrderPlugin
+        // Description: Varies the distribution of the ids to get the smallest id length
+        // for often used ids.
+        // reference: https://webpack.github.io/docs/list-of-plugins.html#occurrenceorderplugin
+        // reference: https://github.com/webpack/docs/wiki/optimization#minimize
+        new webpack.optimize.OccurenceOrderPlugin(true),
+
+        // Plugin: CommonsChunkPlugin
+        // Description: Shares common code between the pages.
+        // It identifies common modules and put them into a commons chunk.
+        // reference: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
+        // reference: https://github.com/webpack/docs/wiki/optimization#multi-page-app
+        new webpack.optimize.CommonsChunkPlugin({
+            name: helpers.reverse([
+                "polyfills",
+                "vendor",
+                "main",
+            ]),
+            // the filename configured in the output section is reused
+            //filename: "[name].[hash].bundle.js",
+            chunks: Infinity,
+        }),
+        
         // Plugin: DedupePlugin
         // Description: Prevents the inclusion of duplicate code into your bundle
         // and instead applies a copy of the function at runtime.
@@ -144,6 +163,14 @@ module.exports = webpackMerge(commonConfig, {
         new CompressionPlugin({
             regExp: /\.css$|\.html$|\.js$|\.map$/,
             threshold: 2 * 1024
+        }),
+
+
+        // Plugin: ExtractTextWebpackPlugin
+        // Description: Extract css file contents
+        // reference: https://github.com/webpack/extract-text-webpack-plugin
+        new ExtractTextWebpackPlugin("[name].[hash].css", {
+            disable: false,
         }),
     ],
 

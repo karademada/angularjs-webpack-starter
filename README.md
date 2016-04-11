@@ -84,8 +84,9 @@ Check out the [upgrade](UPGRADE.MD) page
 
 ## Scripts
 * `npm run setup`: install required global dependencies and project dependencies
-* `npm start`: start the development server
-* `npm run start:hmr`: start the development server with Hot Module Replacement enabled
+* `npm start`: start the development server with Hot Module Replacement (HMR) and live reloading
+* `npm run start:hmr`: start the development server with Hot Module Replacement enabled but without live reloading (e.g., no automatic reload when stylesheets change)
+* `npm run start:hmr:livereload`: start the development server with Hot Module Replacement (HMR) and live reloading
 * `npm run build:prod`: build the production version (in /dist)
 * `npm run start:prod`: build and serve the production version
 * `npm run profiling`: generate Webpack profiling information under `reports/profiling`. The stats.json file can be uploaded to http://webpack.github.io/analyse/ for analysis

@@ -164,29 +164,11 @@ module.exports = {
         // Description: Do type checking in a separate process, so webpack don't need to wait.
         // reference: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
         new ForkCheckerPlugin(),
-
-        // Plugin: OccurenceOrderPlugin
-        // Description: Varies the distribution of the ids to get the smallest id length
-        // for often used ids.
-        // reference: https://webpack.github.io/docs/list-of-plugins.html#occurrenceorderplugin
-        // reference: https://github.com/webpack/docs/wiki/optimization#minimize
-        new webpack.optimize.OccurenceOrderPlugin(true),
-
-        // Plugin: CommonsChunkPlugin
-        // Description: Shares common code between the pages.
-        // It identifies common modules and put them into a commons chunk.
-        // reference: https://webpack.github.io/docs/list-of-plugins.html#commonschunkplugin
-        // reference: https://github.com/webpack/docs/wiki/optimization#multi-page-app
-        new webpack.optimize.CommonsChunkPlugin({
-            name: helpers.reverse([
-                "polyfills",
-                "vendor",
-                "main",
-            ]),
-            // the filename configured in the output section is reused
-            //filename: "[name].[hash].bundle.js",
-            chunks: Infinity,
-        }),
+        
+        // Plugin: NoErrorsPlugin
+        // Description: Only emit files when there are no errors.
+        // reference: http://webpack.github.io/docs/list-of-plugins.html#noerrorsplugin
+        new webpack.NoErrorsPlugin(),
 
         // Plugin: CopyWebpackPlugin
         // Description: Copy files and directories in webpack.
@@ -228,13 +210,6 @@ module.exports = {
         // Plugin: WebpackSHAHash
         // Description: Generate SHA content hashes
         new WebpackSHAHash(),
-
-        // Plugin: ExtractTextWebpackPlugin
-        // Description: Extract css file contents
-        // reference: https://github.com/webpack/extract-text-webpack-plugin
-        new ExtractTextWebpackPlugin("[name].[hash].css", {
-            disable: false,
-        }),
     ],
 
     // Include polyfills or mocks for various node stuff

@@ -1,7 +1,5 @@
 {
-    "dependencies": {
-        "es6-promise": "github:typings/typed-es6-promise#94aac67ef7a14a8de8e9e1d3c1f9a26caa0d9fb1"
-    },
+    "dependencies": {},
     "devDependencies": {},
     "ambientDependencies": {
         "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#17ef40452039d19e06dc2a3815ea898c505860fa",
@@ -9,6 +7,7 @@
         "angular-protractor": "github:DefinitelyTyped/DefinitelyTyped/angular-protractor/angular-protractor.d.ts#7de6c3dd94feaeb21f20054b9f30d5dabc5efabd",
         "angular-translate": "github:DefinitelyTyped/DefinitelyTyped/angular-translate/angular-translate.d.ts#7de6c3dd94feaeb21f20054b9f30d5dabc5efabd",
         "angular-ui-router": "github:DefinitelyTyped/DefinitelyTyped/angular-ui-router/angular-ui-router.d.ts#7de6c3dd94feaeb21f20054b9f30d5dabc5efabd",
+        "core-js": "registry:dt/core-js#0.0.0+20160317120654",
         "immutable-js": "github:facebook/immutable-js/type-definitions/Immutable.d.ts#c3e72ae4a8ccd0ca6d3e3a4e9a1c0a50d1c4bd78",
         "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#7de6c3dd94feaeb21f20054b9f30d5dabc5efabd",
         "js-data": "github:DefinitelyTyped/DefinitelyTyped/js-data/js-data.d.ts#7de6c3dd94feaeb21f20054b9f30d5dabc5efabd",

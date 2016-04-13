@@ -26,7 +26,8 @@ module.exports = {
     // Developer tool to enhance debugging
     // reference: https://webpack.github.io/docs/configuration.html#devtool
     // reference: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-    devtool: "source-map",
+    // do not change for tests or step-through debugging won't work
+    devtool: "inline-source-map",
 
     // Cache generated modules and chunks to improve performance for multiple incremental builds.
     // Enabled by default in watch mode.

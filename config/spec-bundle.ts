@@ -20,8 +20,10 @@ const opts:any = args[0];
 Error.stackTraceLimit = Infinity;
 
 const path:any = require("path");
-// require("ts-node");
-require("core-js");
+
+//require("core-js");
+require("core-js/es6");
+require("core-js/es7/reflect");
 require("angular");
 require("angular-mocks");
 require("angular-ui-router");

@@ -1,8 +1,5 @@
 "use strict";
 
-import {IAngularStatic} from "angular";
-const angular:IAngularStatic = require("angular");
-
 import IModule = angular.IModule;
 import ILogService = angular.ILogService;
 

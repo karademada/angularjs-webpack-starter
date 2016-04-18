@@ -135,9 +135,6 @@ module.exports = webpackMerge(commonConfig, {
                 "vendor-styles",
                 "main-styles"
             ]),
-            // the filename configured in the output section is reused
-            //filename: "[name].[hash].bundle.js",
-            chunks: Infinity,
         }),
 
         // Plugin: ExtractTextWebpackPlugin
@@ -198,6 +195,7 @@ module.exports = webpackMerge(commonConfig, {
 
             // enable some protection against XSS
             // reference: https://www.owasp.org/index.php/List_of_useful_HTTP_headers
+            // other reference: http://blog.innerht.ml/the-misunderstood-x-xss-protection/
             "X-Xss-Protection": "1; mode=block",
 
             // protect against drive-by download attacks and user uploaded content that could be treated by Internet Explorer as executable or dynamic HTML files

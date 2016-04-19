@@ -174,13 +174,25 @@ module.exports = webpackMerge(commonConfig, {
         }),
     ],
 
+    // TSLint configuration
     // Static analysis linter for TypeScript advanced options configuration
     // Description: An extensible linter for the TypeScript language.
     // reference: https://github.com/wbuchwalter/tslint-loader
     tslint: {
-        emitErrors: true,
-        failOnHint: true,
-        resourcePath: "src",
+
+        // TSLint errors are displayed by default as warnings
+        // set emitErrors to true to display them as errors
+        emitErrors: false,
+
+        // TSLint does not interrupt the compilation by default
+        // if you want any file with tslint errors to fail
+        // set failOnHint to true
+        failOnHint: true, // (!) the production build will break if there are outstanding TSLint issues
+
+        resourcePath: helpers.root("src"),
+
+        // can be used to customize the path to the directory containing formatter (optional)
+        //formattersDirectory: helpers.root("node_modules/tslint-loader/formatters/"),
     },
         
     // Html loader for HTML minification (advanced options)

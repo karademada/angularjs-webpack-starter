@@ -68,7 +68,25 @@ module.exports = {
         root: helpers.root("src"),
         
         // Remove other default values
-        modulesDirectories: ["node_modules"],
+        // can be used to configure all locations where Webpack's module resolver will look for modules
+        modulesDirectories: [
+            helpers.root("node_modules")
+        ],
+    },
+
+    // Webpack's loader loading configuration
+    // reference: http://webpack.github.io/docs/configuration.html#resolveloader
+    resolveLoader: {
+        
+        // Where Webpack looks for loaders
+        // can be customized so that Webpack can find loaders in other locations 
+        modulesDirectories: [
+            helpers.root("node_modules"),
+        ],
+        
+        // default values kept
+        extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
+        packageMains: ["webpackLoader", "webLoader", "loader", "main"]
     },
 
     // Options affecting the normal modules.
@@ -82,7 +100,7 @@ module.exports = {
         // An array of applied pre and post loaders.
         // reference: http://webpack.github.io/docs/configuration.html#module-preloaders-module-postloaders
         preLoaders: [
-            // TsLint loader support for *.ts files
+            // TSLint loader support for *.ts files
             // reference: https://github.com/wbuchwalter/tslint-loader
             {
                 test: /\.ts$/,
@@ -211,6 +229,27 @@ module.exports = {
         // Description: Generate SHA content hashes
         new WebpackSHAHash(),
     ],
+
+    // TSLint configuration
+    // Static analysis linter for TypeScript advanced options configuration
+    // Description: An extensible linter for the TypeScript language.
+    // reference: https://github.com/wbuchwalter/tslint-loader
+    tslint: {
+
+        // TSLint errors are displayed by default as warnings
+        // set emitErrors to true to display them as errors
+        emitErrors: false,
+
+        // TSLint does not interrupt the compilation by default
+        // if you want any file with tslint errors to fail
+        // set failOnHint to true
+        failOnHint: false,
+
+        resourcePath: helpers.root("src"),
+
+        // can be used to customize the path to the directory containing formatter (optional)
+        //formattersDirectory: helpers.root("node_modules/tslint-loader/formatters/"),
+    },
 
     // Include polyfills or mocks for various node stuff
     // Description: Node configuration

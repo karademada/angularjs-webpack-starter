@@ -19,15 +19,15 @@
                 },
                 {
                     "key": "Content-Security-Policy",
-                    "value": "base-uri 'self'; default-src 'self'; child-src 'self'; connect-src 'self' http://my.awesome.api ws://localhost:3000; font-src 'self'; form-action 'self'; frame-src 'self'; frame-ancestors 'none'; img-src 'self' data: image/png; media-src 'self'; object-src 'self'; plugin-types application/pdf; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; report-uri http://localhost"
+                    "value": "base-uri 'self'; default-src 'self'; child-src 'self'; connect-src 'self' http://my.awesome.api ws://localhost:3000; font-src 'self'; form-action 'self'; frame-src 'self'; frame-ancestors 'none'; img-src 'self' data: image/png; media-src 'self'; object-src 'self'; plugin-types application/pdf; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; referrer no-referrer; reflected-xss block; block-all-mixed-content; report-uri http://localhost"
                 },
                 {
                     "key": "X-Content-Security-Policy",
-                    "value": "base-uri 'self'; default-src 'self'; child-src 'self'; connect-src 'self' http://my.awesome.api ws://localhost:3000; font-src 'self'; form-action 'self'; frame-src 'self'; frame-ancestors 'none'; img-src 'self' data: image/png; media-src 'self'; object-src 'self'; plugin-types application/pdf; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; report-uri http://localhost"
+                    "value": "base-uri 'self'; default-src 'self'; child-src 'self'; connect-src 'self' http://my.awesome.api ws://localhost:3000; font-src 'self'; form-action 'self'; frame-src 'self'; frame-ancestors 'none'; img-src 'self' data: image/png; media-src 'self'; object-src 'self'; plugin-types application/pdf; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; referrer no-referrer; reflected-xss block; block-all-mixed-content; report-uri http://localhost"
                 },
                 {
                     "key": "X-WebKit-CSP",
-                    "value": "base-uri 'self'; default-src 'self'; child-src 'self'; connect-src 'self' http://my.awesome.api ws://localhost:3000; font-src 'self'; form-action 'self'; frame-src 'self'; frame-ancestors 'none'; img-src 'self' data: image/png; media-src 'self'; object-src 'self'; plugin-types application/pdf; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; report-uri http://localhost"
+                    "value": "base-uri 'self'; default-src 'self'; child-src 'self'; connect-src 'self' http://my.awesome.api ws://localhost:3000; font-src 'self'; form-action 'self'; frame-src 'self'; frame-ancestors 'none'; img-src 'self' data: image/png; media-src 'self'; object-src 'self'; plugin-types application/pdf; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; referrer no-referrer; reflected-xss block; block-all-mixed-content; report-uri http://localhost"
                 },
                 {
                     "key": "X-Frame-Options",

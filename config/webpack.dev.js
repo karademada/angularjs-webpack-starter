@@ -22,6 +22,9 @@ const METADATA = webpackMerge(commonConfig.metadata, {
 });
 
 // Directives to be used in CSP header
+// References
+// https://developer.mozilla.org/en-US/docs/Web/Security/CSP
+// https://scotthelme.co.uk/csp-cheat-sheet
 const cspDirectives = [
     "base-uri 'self'",
     "default-src 'self'",
@@ -37,6 +40,10 @@ const cspDirectives = [
     "plugin-types application/pdf",  // valid mime-types for plugins invoked via <object> and <embed>  // TODO: not yet supported by Firefox
     "script-src 'self' 'unsafe-eval'",  // 'unsafe-eval' is due to Angular Material inline theming (see issue https://github.com/angular/material/issues/980)
     "style-src 'self' 'unsafe-inline'",  // 'unsafe-inline' is due to Angular Material inline theming (see issue https://github.com/angular/material/issues/980)
+    "referrer no-referrer",
+    "reflected-xss block",
+    "block-all-mixed-content",
+    //"upgrade-insecure-requests", // see https://github.com/dsebastien/angularjs-webpack-starter/issues/113
     "report-uri http://localhost"  // TODO: define an specific URL to POST the reports of policy failures
 ];
 

@@ -1,6 +1,13 @@
 * 0.1.3
-  * added missing core-js typings (fixes #97)
-  * added a way to have HMR but disable page reload for HMR failures (closes #96 )
+  * added missing core-js typings (#97)
+  * added a way to have HMR but disable page reload for HMR failures (#96)
+  * fixed stylesheets loading order (#95)
+  * added security headers to production server configuration (#94)
+  * added support for pushstate with the production build (#93)
+  * created separate build for application styles in development (#92)
+  * improved TSLint configuration for Angular 1.5 (#91)
+  * put generated documents in the reports folder (#90)
+  * added support for CSP (#72 and #114)
 * 0.1.2
   * added ng template cache support (see #67)
   * configured commons module

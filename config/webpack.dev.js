@@ -43,7 +43,6 @@ const cspDirectives = [
     "referrer no-referrer",
     "reflected-xss block",
     "block-all-mixed-content",
-    //"upgrade-insecure-requests", // see https://github.com/dsebastien/angularjs-webpack-starter/issues/113
     "report-uri http://localhost"  // TODO: define an specific URL to POST the reports of policy failures
 ];
 
@@ -56,7 +55,7 @@ const cspDirectives = [
 module.exports = webpackMerge(commonConfig, {
     // static data for index.html
     metadata: METADATA,
-    
+
     // Developer tool to enhance debugging
     // reference: https://webpack.github.io/docs/configuration.html#devtool
     // reference: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
@@ -67,7 +66,7 @@ module.exports = webpackMerge(commonConfig, {
     // You can pass false to disable it
     // reference: http://webpack.github.io/docs/configuration.html#cache
     //cache: true,
-    
+
     // Switch loaders to debug mode
     // reference: http://webpack.github.io/docs/configuration.html#debug
     debug: true,
@@ -152,7 +151,7 @@ module.exports = webpackMerge(commonConfig, {
             disable: false,
         }),
     ],
-    
+
     // Webpack Development Server configuration
     // Description: The webpack-dev-server is a little node.js Express server.
     // The server emits information about the compilation state to the client,
@@ -174,7 +173,7 @@ module.exports = webpackMerge(commonConfig, {
             poll: 1000,
         },
         contentBase: helpers.root("src/app"), // necessary so that assets are accessible
-        
+
         // Can be used to add specific headers
         headers: {
             // enable CORS
@@ -184,7 +183,7 @@ module.exports = webpackMerge(commonConfig, {
             "Content-Security-Policy": cspDirectives.join("; "),
             "X-Content-Security-Policy": cspDirectives.join("; "),
             "X-WebKit-CSP": cspDirectives.join("; "),
-            
+
             // Other security headers
 
             // protect against clickjacking: https://en.wikipedia.org/wiki/Clickjacking

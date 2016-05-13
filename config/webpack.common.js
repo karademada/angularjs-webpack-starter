@@ -64,8 +64,11 @@ module.exports = {
         // reference: http://webpack.github.io/docs/configuration.html#resolve-extensions
         extensions: [ "", ".ts", ".js", ".json", ".css", ".scss", ".html" ],
 
-        // Make sure that the root is src
-        root: helpers.root("src"),
+        // Add folders where modules are located (useful to avoid having to specify '../../../Foo/Bar' kind of imports
+        // reference: http://webpack.github.io/docs/configuration.html#resolve-root
+        root: [
+            helpers.root("src"),
+        ],
         
         // Remove other default values
         // can be used to configure all locations where Webpack's module resolver will look for modules

@@ -17,7 +17,15 @@
         "sourceMap": true,
         "outDir": "./.tmp",
         "moduleResolution": "node",
-        "listFiles": false
+        "listFiles": false,
+        "baseUrl": "./src",
+        "rootDirs": [
+            "./src",
+            "./config"
+        ],
+        "paths": {
+            
+        }
     },
     "exclude": [
         "node_modules",

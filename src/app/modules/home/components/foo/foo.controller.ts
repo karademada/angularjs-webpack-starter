@@ -3,7 +3,7 @@
 import IStateService = angular.ui.IStateService;
 import ILogService = angular.ILogService;
 
-import {AbstractController} from "../../../commons/controllers/abstract.controller";
+import {AbstractController} from "app/modules/commons/controllers/abstract.controller";
 
 export class FooController extends AbstractController {
 

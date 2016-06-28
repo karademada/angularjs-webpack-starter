@@ -28,8 +28,7 @@ module.exports = {
     metadata: METADATA,
 
     stats: {
-        colors: true,
-        reasons: true,
+
     },
 
     // Options affecting the output of the compilation
@@ -154,6 +153,17 @@ module.exports = {
                 // with the alternative, the stylesheets MUST be imported in code (e.g., require("..."))
                 // Reference: http://ihaveabackup.net/2015/08/17/sass-with-sourcemaps-webpack-and-live-reload/
                 // loaders: ["style", "css?sourceMap", "postcss?sourceMap", "sass?sourceMap"],
+            },
+
+            {
+                // ASSET LOADER
+                // Reference: https://github.com/webpack/file-loader
+                // Copy png, jpg, jpeg, gif, svg, woff, woff2, ttf, eot files to output
+                // Rename the file using the asset hash
+                // Pass along the updated reference to your code
+                // You can add here any file extension you want to get copied to your output
+                test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+                loader: 'file'
             },
 
             // Support for .html with ngTemplate loader to use the Angular's $templateCache service

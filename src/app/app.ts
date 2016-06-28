@@ -33,6 +33,7 @@ const templateAppUrl:any = require("./app.template.html");
 export class App {
     public static bootstrap():void {
         const modules:any = [];
+        // inject all module
         modules.push("ui.router");
         modules.push("pascalprecht.translate");
         modules.push("immutable-angular");
@@ -41,15 +42,15 @@ export class App {
         moduleRegistry.getModuleNames().forEach((entry:string) => {
            modules.push(entry);
         });
-
+        // bootstrapp all
         const appModule:IModule = angular.module("appModule", modules);
-
+        // declare component
         appModule.component("app", {
             controller: AppController,
             controllerAs: "vm",
             templateUrl: templateAppUrl,
         });
-
+        // set all routes
         appModule.config(["$urlRouterProvider", "$stateProvider", "$translateProvider", "$locationProvider",
         ($urlRouterProvider:IUrlRouterProvider, $stateProvider:IStateProvider, $translateProvider:ITranslateProvider,
          $locationProvider: ILocationProvider):any => {
